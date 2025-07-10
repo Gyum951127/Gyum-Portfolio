@@ -332,7 +332,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 0; /* 모서리 둥글게 하지 않음 (꽉 채우므로) */
-            cursor: pointer; /* 클릭 가능한 요소임을 나타냄 */
+            cursor: default; /* 기본 커서로 변경 (오버레이에서 pointer 처리) */
             transition: opacity 0.3s ease; /* 투명도 변화만 (크기 변화 없음) */
             display: flex;
             justify-content: center;
@@ -369,7 +369,7 @@
             color: var(--white-color);
             padding: 15px;
             text-align: center;
-            cursor: pointer; /* 오버레이도 클릭 가능하도록 */
+            cursor: pointer; /* 오버레이 클릭 가능 */
         }
         .portfolio-item:hover .portfolio-info-overlay {
             opacity: 1; 
@@ -379,6 +379,7 @@
             font-size: 1.3em;
             margin-bottom: 8px;
             font-weight: 700;
+            transition: color 0.2s ease; /* 색상 변화 트랜지션 */
         }
         .portfolio-info-overlay .overlay-text { /* 슬라이더 View Details 텍스트 스타일 */
             font-size: 0.9em;
@@ -386,6 +387,11 @@
             margin-bottom: 0; 
             transition: font-weight 0.2s ease, color 0.2s ease; /* 트랜지션 추가 */
             display: block; /* 텍스트가 inline이 아닌 블록 요소로 표시되도록 */
+            /* 텍스트 중앙 정렬 */
+            text-align: center; 
+        }
+        .portfolio-info-overlay:hover h3 { /* 호버 시 h3 색상 변경 */
+            color: var(--primary-color);
         }
         .portfolio-info-overlay:hover .overlay-text { /* 슬라이더 View Details 호버 스타일 */
             font-weight: bold; /* 마우스 오버 시 굵게 */
@@ -580,7 +586,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 은은한 그림자 */
             transition: transform 0.3s ease, opacity 0.4s ease;
             position: relative;
-            cursor: pointer;
+            cursor: pointer; /* 이미지 자체도 클릭 가능 */
         }
         .portfolio-item-grid:hover {
             transform: translateY(-5px);
@@ -621,6 +627,7 @@
             color: var(--white-color);
             padding: 15px;
             text-align: center;
+            cursor: pointer; /* 오버레이 클릭 가능하도록 */
         }
         .portfolio-item-grid:hover .portfolio-item-grid-overlay {
             opacity: 1;
@@ -630,14 +637,22 @@
             font-size: 1.3em;
             margin-bottom: 8px;
             font-weight: 700;
+            transition: color 0.2s ease; /* 색상 변화 트랜지션 */
         }
         .portfolio-item-grid-overlay .overlay-text { /* 갤러리 View Details 텍스트 스타일 */
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 15px;
             display: block; /* 텍스트가 inline이 아닌 블록 요소로 표시되도록 */
+            /* 텍스트 중앙 정렬 */
+            text-align: center; 
+            transition: font-weight 0.2s ease, color 0.2s ease; /* 트랜지션 추가 */
         }
-        /* 갤러리 오버레이의 "View Details"는 버튼이 아니므로 hover 시 변경 없음 */
+        .portfolio-item-grid-overlay:hover h3,
+        .portfolio-item-grid-overlay:hover .overlay-text { /* 갤러리 오버레이 호버 시 텍스트 강조 */
+            color: var(--primary-color);
+            font-weight: bold; /* 굵게 */
+        }
 
 
         /* 그리드 내 카테고리별 소제목 스타일 */
@@ -1274,7 +1289,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트에 대한 자세한 내용입니다." data-details-en="Detailed information about the fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1283,7 +1298,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 두 번째 작품입니다." data-details-en="Second piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1292,7 +1307,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 03" data-en="Swirl 03">Swirl 03</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 세 번째 작품입니다." data-details-en="Third piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1301,7 +1316,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 04" data-en="Swirl 04">Swirl 04</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 네 번째 작품입니다." data-details-en="Fourth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1310,7 +1325,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 05" data-en="Swirl 05">Swirl 05</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 다섯 번째 작품입니다." data-details-en="Fifth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1319,7 +1334,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 06" data-en="Swirl 06">Swirl 06</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 여섯 번째 작품입니다." data-details-en="Sixth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1328,7 +1343,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 07" data-en="Swirl 07">Swirl 07</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 일곱 번째 작품입니다." data-details-en="Seventh piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1346,7 +1361,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 09" data-en="Swirl 09">Swirl 09</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 아홉 번째 작품입니다." data-details-en="Ninth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1355,7 +1370,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 10" data-en="Swirl 10">Swirl 10</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열 번째 작품입니다." data-details-en="Tenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1364,7 +1379,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 11" data-en="Swirl 11">Swirl 11</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열한 번째 작품입니다." data-details-en="Eleventh piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1373,7 +1388,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 12" data-en="Swirl 12">Swirl 12</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열두 번째 작품입니다." data-details-en="Twelfth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1382,7 +1397,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 13" data-en="Swirl 13">Swirl 13</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열세 번째 작품입니다." data-details-en="Thirteenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1391,7 +1406,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 14" data-en="Swirl 14">Swirl 14</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열네 번째 작품입니다." data-details-en="Fourteenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1400,7 +1415,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 15" data-en="Swirl 15">Swirl 15</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열다섯 번째 작품입니다." data-details-en="Fifteenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1409,7 +1424,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 16" data-en="Swirl 16">Swirl 16</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열여섯 번째 작품입니다." data-details-en="Sixteenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1418,7 +1433,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 17" data-en="Swirl 17">Swirl 17</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열일곱 번째 작품입니다." data-details-en="Seventeenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1427,7 +1442,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 18" data-en="Swirl 18">Swirl 18</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열여덟 번째 작품입니다." data-details-en="Eighteenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1436,7 +1451,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 19" data-en="Swirl 19">Swirl 19</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 열아홉 번째 작품입니다." data-details-en="Nineteenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1445,7 +1460,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 20" data-en="Swirl 20">Swirl 20</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 스무 번째 작품입니다." data-details-en="Twentieth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                     </div>
@@ -1460,7 +1475,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트에 대한 상세 정보입니다." data-details-en="Detailed information about the roll art with flowing movements."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
@@ -1469,7 +1484,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트 두 번째 작품입니다." data-details-en="Second piece of roll art with flowing movements."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
@@ -1478,7 +1493,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 03" data-en="Flow Roll 03">Flow Roll 03</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트 세 번째 작품입니다." data-details-en="Third piece of roll art with flowing movements."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
@@ -1487,7 +1502,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 04" data-en="Flow Roll 04">Flow Roll 04</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트 네 번째 작품입니다." data-details-en="Fourth piece of roll art with flowing movements."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
@@ -1496,7 +1511,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 05" data-en="Flow Roll 05">Flow Roll 05</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트 다섯 번째 작품입니다." data-details-en="Fifth piece of roll art with flowing movements."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
@@ -1505,7 +1520,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 06" data-en="Flow Roll 06">Flow Roll 06</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트 여섯 번째 작품입니다." data-details-en="Sixth piece of roll art with flowing movements."></p>
                             </div>
                         </div>
                     </div>
@@ -1520,7 +1535,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기에 대한 설명입니다." data-details-en="Description of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1529,7 +1544,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 02" data-en="Pyeonggang 02">평강 02</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 두 번째 작품입니다." data-details-en="Second piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1538,7 +1553,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 03" data-en="Pyeonggang 03">평강 03</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 세 번째 작품입니다." data-details-en="Third piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1547,7 +1562,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 04" data-en="Pyeonggang 04">평강 04</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 네 번째 작품입니다." data-details-en="Fourth piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1556,7 +1571,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 05" data-en="Pyeonggang 05">평강 05</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 다섯 번째 작품입니다." data-details-en="Fifth piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1565,7 +1580,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 06" data-en="Pyeonggang 06">평강 06</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 여섯 번째 작품입니다." data-details-en="Sixth piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1574,7 +1589,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 07" data-en="Pyeonggang 07">평강 07</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 일곱 번째 작품입니다." data-details-en="Seventh piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1583,7 +1598,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 08" data-en="Pyeonggang 08">평강 08</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 여덟 번째 작품입니다." data-details-en="Eighth piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1592,7 +1607,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 09" data-en="Pyeonggang 09">평강 09</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 아홉 번째 작품입니다." data-details-en="Ninth piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
@@ -1601,7 +1616,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 10" data-en="Pyeonggang 10">평강 10</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 열 번째 작품입니다." data-details-en="Tenth piece of traditional atmosphere with a Pyeonggang theme."></p>
                             </div>
                         </div>
                     </div>
@@ -1616,7 +1631,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="의뢰받아 제작된 맞춤형 작품의 상세 내역입니다." data-details-en="Details of custom artwork created on commission."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Comission">
@@ -1625,7 +1640,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Comission 03" data-en="Comission 03">Comission 03</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="의뢰받아 제작된 맞춤형 작품의 세 번째 상세 내역입니다." data-details-en="Third detailed information about custom artwork created on commission."></p>
                             </div>
                         </div>
                     </div>
@@ -1640,7 +1655,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물이 담긴 아트의 상세 정보입니다." data-details-en="Detailed information about personal creations."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1649,7 +1664,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 02" data-en="Personal Art 02">Personal Art 02</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 두 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the second personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1658,7 +1673,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 03" data-en="Personal Art 03">Personal Art 03</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 세 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the third personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1667,7 +1682,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 04" data-en="Personal Art 04">Personal Art 04</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 네 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the fourth personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1676,7 +1691,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 05" data-en="Personal Art 05">Personal Art 05</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 다섯 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the fifth personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1685,7 +1700,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 06" data-en="Personal Art 06">Personal Art 06</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 여섯 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the sixth personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1694,7 +1709,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 07" data-en="Personal Art 07">Personal Art 07</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 일곱 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the seventh personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1703,7 +1718,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 08" data-en="Personal Art 08">Personal Art 08</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 여덟 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the eighth personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1712,7 +1727,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 09" data-en="Personal Art 09">Personal Art 09</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 아홉 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the ninth personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1721,7 +1736,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 10" data-en="Personal Art 10">Personal Art 10</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 열 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the tenth personal creation."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1730,7 +1745,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 11" data-en="Personal Art 11">Personal Art 11</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 열한 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the eleventh personal creation."></p>
                             </div>
                         </div>
                     </div>
@@ -1748,7 +1763,7 @@
                     </div>
                     <div class="about-text">
                         <h3 data-ko="김민겸" data-en="MINGYUM KIM">MINGYUM KIM</h3>
-                        <p data-ko="김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다." data-en="Kim Min-gyum is an illustrator who focuses on visualization and color.">김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.</p>
+                        <p data-ko="김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다." data-en="Kim Min-gyum is an illustrator who focuses on visualization and color.">김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다。</p>
                         <p data-ko="감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다." data-en="We are attracted to the work of capturing emotions and atmospheres concisely but delicately, and we continue to try various things in animation and illustration projects.">감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다。</p>
                         <p data-ko="현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다." data-en="Currently, he is active mainly in Seoul, Korea, and has participated in various fields such as tvN, Korea Business Corporation, and Seneca College in Canada.">현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.</p>
                     </div>
@@ -1893,7 +1908,7 @@
                 PersonalArt10Details: "개인적인 창작물 열 번째 작품에 대한 상세 정보입니다.",
                 PersonalArt11Details: "개인적인 창작물 열한 번째 작품에 대한 상세 정보입니다.",
                 
-                viewDetails: "View Details", /* View Details를 위한 공통 텍스트 */
+                viewDetails: "자세히 보기", /* View Details를 위한 공통 텍스트 */
 
                 // Formspree 관련 메시지 추가
                 sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
@@ -2033,8 +2048,8 @@
             document.querySelector('.portfolio-category-heading[data-ko="Personal Art 작품"]').innerHTML = translations[lang].PersonalArtworks;
 
             // overlay-text 업데이트 (슬라이더, 그리드 공통)
-            // 텍스트를 감싸는 p 태그의 data-details-ko/en 속성에서 가져오도록 변경
             document.querySelectorAll('.overlay-text').forEach(pElement => {
+                // p 요소에 직접 data-details 속성이 있을 경우 사용하고, 없으면 translations의 viewDetails 사용
                 pElement.innerHTML = pElement.getAttribute(`data-details-${currentLang}`) || translations[currentLang].viewDetails;
             });
             
@@ -2076,28 +2091,32 @@
             // 초기 slideIndex는 실제 첫 번째 원본 아이템 (프리클론 바로 다음)
             slideIndex = 1; // preClone (인덱스 0) 다음에 첫 번째 원본 아이템 (인덱스 1)
 
-            // 🌟 수정: 슬라이더 아이템 클릭 이벤트 리스너
+            // 🌟 수정: 슬라이더 이미지 클릭 이벤트 리스너를 오버레이에 직접 연결
             allPortfolioItems.forEach(item => {
-                // 이전 이벤트 리스너가 중복될 수 있으므로 제거 (선택적)
+                // 이전에 추가된 이벤트 리스너가 중복될 수 있으므로 제거 (선택적)
                 if (item.__clickHandler) {
                     item.removeEventListener('click', item.__clickHandler);
                 }
 
-                const newClickHandler = function() {
-                    const currentTargetImg = this.querySelector('img');
-                    const currentTargetSrc = currentTargetImg.src; 
-                    // 라이트박스에 보여줄 아이템 목록은 항상 원본 슬라이더 아이템이어야 합니다.
-                    currentLightboxItems = originalPortfolioItems; 
-                    
-                    // 클릭된 이미지의 src와 일치하는 원본 아이템의 인덱스를 찾습니다.
-                    const originalIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
-                    
-                    if (originalIndex !== -1) { 
-                        openModal(originalIndex);
-                    }
-                };
-                item.addEventListener('click', newClickHandler);
-                item.__clickHandler = newClickHandler; // 이벤트 핸들러 참조 저장
+                const overlay = item.querySelector('.portfolio-info-overlay');
+                if (overlay) {
+                    const newClickHandler = function() {
+                        const currentTargetImg = item.querySelector('img'); // 클릭된 오버레이의 부모 아이템에서 이미지 찾기
+                        const currentTargetSrc = currentTargetImg.src; 
+                        
+                        // 라이트박스에 보여줄 아이템 목록은 항상 원본 슬라이더 아이템이어야 합니다.
+                        currentLightboxItems = originalPortfolioItems; 
+                        
+                        // 클릭된 이미지의 src와 일치하는 원본 아이템의 인덱스를 찾습니다.
+                        const originalIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
+                        
+                        if (originalIndex !== -1) { 
+                            openModal(originalIndex);
+                        }
+                    };
+                    overlay.addEventListener('click', newClickHandler);
+                    item.__clickHandler = newClickHandler; // 이벤트 핸들러 참조 저장
+                }
             });
 
             // 슬라이더 오버레이 텍스트 업데이트 (initializeSlider가 실행될 때마다 호출)
@@ -2340,7 +2359,7 @@
                 }
 
                 const newClickHandler = function(e) {
-                    // e.preventDefault(); // 이미지를 포함하는 div에 이벤트를 달았으므로 <a> 태그의 기본 동작을 막을 필요 없음 (없어도 됨)
+                    e.preventDefault(); // 기본 <a> 태그 동작(페이지 상단 이동) 방지
 
                     // 현재 필터링되어 보이는 아이템만 가져옴
                     currentLightboxItems = allGridItems.filter(visibleItem => window.getComputedStyle(visibleItem).display !== 'none');
@@ -2390,7 +2409,7 @@
                 const imgSrc = imgElement.src;
                 const imgAlt = imgElement.alt;
                 
-                // 캡션 내용 가져오기 우선순위: data-details-lang (p태그) -> h3 data-lang -> h3 innerHTML -> alt 텍스트
+                // 캡션 내용 가져오기 우선순위: p태그의 data-details-lang 속성 -> h3 data-lang -> h3 innerHTML -> alt 텍스트
                 let captionContent = '';
                 if (pElement && pElement.hasAttribute(`data-details-${currentLang}`)) {
                     captionContent = pElement.getAttribute(`data-details-${currentLang}`);
