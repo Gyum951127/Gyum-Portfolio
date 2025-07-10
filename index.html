@@ -557,8 +557,10 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 20px;
+            justify-content: center; /* 그리드 아이템들을 중앙 정렬 */
         }
-        @media (min-width: 1200px) { /* 1200px 이상일 때 5열 */
+        /* 1200px 이상일 때 5열은 그대로 유지 */
+        @media (min-width: 1200px) { 
             .portfolio-grid {
                 grid-template-columns: repeat(5, 1fr);
             }
@@ -817,7 +819,7 @@
         }
 
         /* 반응형 디자인 */
-        /* PC (Desktop) styles - Base styles, 992px and above */
+        /* PC (Desktop) styles - Base styles, 993px and above */
         @media (min-width: 993px) {
             .header-container {
                 flex-direction: row;
@@ -882,6 +884,7 @@
             .portfolio-grid {
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
                 gap: 15px;
+                justify-content: center; /* 태블릿에서도 중앙 정렬 (추가) */
             }
             .portfolio-category-heading {
                 font-size: 1.8em;
@@ -1002,6 +1005,7 @@
             }
             .portfolio-grid {
                 grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                justify-content: center; /* 그리드 아이템들을 중앙 정렬 */
                 gap: 10px;
             }
             .portfolio-category-heading {
@@ -1113,6 +1117,7 @@
             }
             .portfolio-grid {
                 grid-template-columns: 1fr; /* 한 열로 변경 */
+                justify-content: center; /* 그리드 아이템들을 중앙 정렬 */
                 gap: 8px;
             }
             .portfolio-item-grid-overlay h3 {
@@ -1652,7 +1657,6 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Comission 03" data-en="Comission 03">Comission 03</h3>
- 
                                 <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
                             </div>
                         </div>
@@ -1934,7 +1938,7 @@
                 FlowRollArtworks: "Flow Roll Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
                 PyeonggangArtworks: "Pyeonggang Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
                 ComissionArtworks: "Comission Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
-                PersonalArtworks: "Personal Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
+                PersonalArtworks: "Personal Artworks", /* 새롭게 추가된 카테고리 소제목 번호 */
 
                 // 슬라이더 오버레이 텍스트
                 Swirl01Desc: "Fantastic swirl themed art.",
@@ -1958,6 +1962,7 @@
         let allPortfolioItems = []; // 클론 포함 모든 아이템 (DOM에 있는 실제 아이템들)
         let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
         let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
+        let allGridItems = []; // 모든 그리드 아이템을 저장할 배열
 
         function applyTranslations(lang) {
             currentLang = lang;
@@ -1998,19 +2003,8 @@
             document.getElementById('lang-en').classList.remove('active');
             document.getElementById(`lang-${lang}`).classList.add('active');
 
-            // 슬라이더 오버레이 텍스트 업데이트는 initializeSlider() 내에서, 
-            // 또는 개별 아이템 생성/업데이트 시점에 호출되도록 처리하는 것이 좋습니다.
-            // 여기서는 원본 아이템만 직접 업데이트합니다.
-            document.querySelectorAll('#portfolio .portfolio-item:not(.clone)').forEach(item => {
-                const category = item.dataset.category.replace(/\s/g, ''); 
-                const imgAlt = item.querySelector('img').alt; 
-                const descKey = `${category}${imgAlt.slice(-2)}Desc`; 
-
-                const overlayP = item.querySelector('.portfolio-info-overlay p');
-                if (overlayP && translations[lang][descKey]) {
-                    overlayP.innerHTML = translations[lang][descKey];
-                }
-            });
+            // 슬라이더 오버레이 텍스트 업데이트
+            // 이 부분은 initializeSlider()에서 처리되도록 변경했습니다.
         }
 
         // 슬라이더 초기화 함수 (DOM 조작 및 이벤트 리스너 설정)
@@ -2046,9 +2040,8 @@
             slideIndex = 1; // preClone (인덱스 0) 다음에 첫 번째 원본 아이템 (인덱스 1)
 
             // 모든 슬라이더 아이템에 클릭 이벤트 리스너 적용 (클론 포함)
+            // 기존 클릭 핸들러 제거 후 재등록 (중복 방지)
             allPortfolioItems.forEach(item => {
-                // 이전에 추가된 이벤트 리스너를 제거하고 다시 추가하여 중복을 방지
-                // (initializeSlider가 resize시 호출될 때 안전하게 하기 위함)
                 const oldClickHandler = item.__clickHandler; 
                 if (oldClickHandler) {
                     item.removeEventListener('click', oldClickHandler);
@@ -2059,12 +2052,25 @@
                     const originalIndex = originalPortfolioItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
                     
                     if (originalIndex !== -1) { 
+                        // 슬라이더 아이템 클릭 시에는 originalPortfolioItems를 라이트박스 아이템으로 사용
                         currentLightboxItems = originalPortfolioItems; 
                         openModal(originalIndex);
                     }
                 };
                 item.addEventListener('click', newClickHandler);
                 item.__clickHandler = newClickHandler; 
+            });
+
+            // 슬라이더 오버레이 텍스트 업데이트 로직 추가
+            document.querySelectorAll('#portfolio .portfolio-item').forEach(item => {
+                const category = item.dataset.category.replace(/\s/g, ''); 
+                const imgAlt = item.querySelector('img').alt; 
+                const descKey = `${category}${imgAlt.slice(-2)}Desc`; // e.g., Swirl01Desc
+
+                const overlayP = item.querySelector('.portfolio-info-overlay p');
+                if (overlayP && translations[currentLang][descKey]) {
+                    overlayP.innerHTML = translations[currentLang][descKey];
+                }
             });
 
             // 초기 위치 설정 (애니메이션 없이)
@@ -2123,6 +2129,8 @@
             function activateNavLink() {
                 let current = "";
                 sections.forEach(section => {
+                    // "home" 섹션이 존재하지 않으므로, 이 조건은 제거하거나 다른 ID로 변경해야 함.
+                    // 현재 HTML에는 id="home" 섹션이 없으므로, 이 줄은 무시해도 됩니다.
                     if (section.id === "home") return; 
 
                     const sectionTop = section.offsetTop - headerHeight - 30; 
@@ -2134,14 +2142,18 @@
 
                 navLinks.forEach(link => {
                     link.classList.remove("active");
-                    if (link.getAttribute("href").includes(current)) {
+                    // 현재 활성화된 섹션에 따라 네비게이션 링크 활성화
+                    if (current && link.getAttribute("href").includes(current)) {
+                        link.classList.add("active");
+                    } else if (!current && link.getAttribute("href") === "#portfolio") {
+                        // 페이지 로드 시 또는 스크롤이 맨 위에 있을 때 포트폴리오를 기본 활성화
                         link.classList.add("active");
                     }
                 });
             }
 
             window.addEventListener("scroll", activateNavLink);
-            activateNavLink();
+            activateNavLink(); // 초기 로드 시 한 번 호출하여 현재 섹션 활성화
 
             document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -2229,7 +2241,7 @@
 
             // --- 5열 그리드 포트폴리오의 필터링 기능 ---
             const filterButtons = document.querySelectorAll('#portfolio-grid-section .filter-btn');
-            const gridPortfolioItems = document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid');
+            allGridItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid')); // 모든 그리드 아이템 초기화
 
             filterButtons.forEach(button => {
                 button.addEventListener('click', function() {
@@ -2239,15 +2251,21 @@
                     const filter = this.dataset.filter;
 
                     document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                        // 모든 wrapper를 숨김 처리
                         wrapper.style.display = 'none';
+                        // wrapper 내부의 모든 아이템을 숨김 처리 (opacity 0으로 먼저 만든 후 display none)
+                        wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                            item.style.opacity = '0';
+                            item.style.display = 'none'; // 즉시 숨김
+                        });
                     });
 
                     if (filter === 'all') {
                         document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                            wrapper.style.display = 'block';
+                            wrapper.style.display = 'block'; // wrapper 다시 보여줌
                             wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                                item.style.display = 'block';
-                                setTimeout(() => item.style.opacity = '1', 50); 
+                                item.style.display = 'block'; // 아이템 다시 보여줌
+                                setTimeout(() => item.style.opacity = '1', 50); // 부드럽게 나타나도록
                             });
                         });
                     } else {
@@ -2255,14 +2273,14 @@
                         if (targetWrapper) {
                             const parentWrapper = targetWrapper.closest('.portfolio-category-wrapper');
                             if (parentWrapper) {
-                                parentWrapper.style.display = 'block';
+                                parentWrapper.style.display = 'block'; // 해당 wrapper만 보여줌
                                 parentWrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
                                     if (item.dataset.category === filter) {
-                                        item.style.display = 'block';
-                                        setTimeout(() => item.style.opacity = '1', 50); 
+                                        item.style.display = 'block'; // 필터링된 아이템만 보여줌
+                                        setTimeout(() => item.style.opacity = '1', 50); // 부드럽게 나타나도록
                                     } else {
                                         item.style.opacity = '0';
-                                        setTimeout(() => item.style.display = 'none', 400); 
+                                        item.style.display = 'none'; // 필터링되지 않은 아이템은 숨김
                                     }
                                 });
                             }
@@ -2279,19 +2297,24 @@
             const closeBtn = document.querySelector(".close-btn");
             const prevBtn = document.querySelector(".prev-btn");
             const nextBtn = document.querySelector(".next-btn");
-            let currentLightboxItems = [];
+            let currentLightboxItems = []; // 라이트박스에 표시될 현재 아이템 목록
             let currentIndex = 0; 
 
+            // 슬라이더 아이템 클릭 이벤트 (initializeSlider 내에서 이미 처리됨)
+            // 슬라이더 아이템 클릭 시, originalPortfolioItems (클론 제외 원본 슬라이더 아이템)을 사용하도록 이미 설정되어 있습니다.
+
             // 그리드 아이템 클릭 이벤트
+            // 그리드 아이템 클릭 시, 현재 화면에 '보이는' 그리드 아이템들만 라이트박스에 포함
             document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
                 item.addEventListener('click', function() {
-                    currentLightboxItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid'))
-                                            .filter(visibleItem => window.getComputedStyle(visibleItem).display !== 'none');
+                    // 현재 필터링되어 보이는 아이템만 가져옴
+                    currentLightboxItems = allGridItems.filter(visibleItem => window.getComputedStyle(visibleItem).display !== 'none');
                     
                     const clickedSrc = this.querySelector('img').src;
+                    // 클릭된 아이템의 src를 기반으로 현재 라이트박스 아이템 배열에서 인덱스 찾기
                     currentIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === clickedSrc);
 
-                    if (currentIndex === -1) return;
+                    if (currentIndex === -1) return; // 찾지 못하면 아무것도 하지 않음
                     openModal(currentIndex);
                 });
             });
@@ -2314,9 +2337,9 @@
 
             function showLightboxSlide(index) {
                 if (index >= currentLightboxItems.length) {
-                    currentIndex = 0;
+                    currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
                 } else if (index < 0) {
-                    currentIndex = currentLightboxItems.length - 1;
+                    currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
                 } else {
                     currentIndex = index;
                 }
@@ -2329,18 +2352,28 @@
                 let captionContent = '';
                 if (portfolioInfoOverlay) {
                     const h3 = portfolioInfoOverlay.querySelector('h3');
-                    const p = portfolioInfoOverlay.querySelector('p');
-                    if (h3) captionContent += (h3.getAttribute(`data-${currentLang}`) || h3.innerHTML);
-                    if (p) {
-                        if (captionContent) captionContent += ' - ';
-                        if (item.classList.contains('portfolio-item')) { // 슬라이더 아이템인 경우
-                            const category = item.dataset.category.replace(/\s/g, '');
-                            const imgAlt = item.querySelector('img').alt;
-                            const descKey = `${category}${imgAlt.slice(-2)}Desc`;
-                            captionContent += (translations[currentLang][descKey] || p.innerHTML);
-                        } else { // 그리드 아이템인 경우
-                            captionContent += (p.getAttribute(`data-${currentLang}`) || p.innerHTML);
+                    // data-ko/data-en 속성이 있는 경우 해당 언어 텍스트 사용, 없으면 innerHTML 사용
+                    const titleText = h3 ? (h3.getAttribute(`data-${currentLang}`) || h3.innerHTML) : '';
+
+                    // 슬라이더 아이템만 p 태그의 Desc가 있으므로, 해당 번역 키를 사용
+                    // 그리드 아이템은 p 태그에 별도 Desc가 없으므로 h3 텍스트만 사용
+                    if (item.classList.contains('portfolio-item') && h3) { // 슬라이더 아이템인 경우
+                        const category = item.dataset.category.replace(/\s/g, '');
+                        const altNumber = imgAlt.match(/\d+/); // Alt 텍스트에서 숫자 부분 추출 (e.g. "01", "02")
+                        const numStr = altNumber ? (altNumber[0].length === 1 ? `0${altNumber[0]}` : altNumber[0]) : ''; // '1' -> '01'
+                        const descKey = `${category}${numStr}Desc`; // e.g., Swirl01Desc
+
+                        captionContent = titleText; // 일단 h3 내용을 추가
+                        if (translations[currentLang][descKey]) {
+                             // 번역 데이터에 Desc가 있다면 추가
+                            captionContent += ` - ${translations[currentLang][descKey]}`;
+                        } else {
+                            // Desc 번역이 없으면 기존 p 태그 내용 사용 (기존 HTML에 p 태그는 없지만 만약을 대비)
+                            const p = portfolioInfoOverlay.querySelector('p');
+                            if (p) captionContent += ` - ${p.innerHTML}`;
                         }
+                    } else if (h3) { // 그리드 아이템인 경우, 오버레이에 p 태그 내용이 없으므로 h3 내용만 사용
+                        captionContent = titleText;
                     }
                 }
                 
