@@ -1719,7 +1719,7 @@
     </div>
 
     <script>
-        // 언어별 텍스트 데이터 (확장 가능)
+       // 언어별 텍스트 데이터 (확장 가능)
         const translations = {
             ko: {
                 logo: "김민겸",
@@ -2033,26 +2033,21 @@
             document.getElementById('prev-slide').addEventListener('click', showPrevSlide);
             document.getElementById('next-slide').addEventListener('click', showNextSlide);
 
-            // transitionend 리스너를 여기에서 한 번만 추가합니다.
             portfolioSlider = document.querySelector('.portfolio-slider'); 
             portfolioSlider.addEventListener('transitionend', () => {
                 const originalLength = originalPortfolioItems.length;
 
-                // 슬라이더가 맨 끝 클론에 도달 (예: originalLength + 1 번째 아이템, 인덱스상 originalLength)
                 if (slideIndex === originalLength + 1) { 
-                    portfolioSlider.style.transition = 'none'; // 애니메이션 끔
-                    slideIndex = 1; // 실제 첫 번째 원본 아이템의 인덱스 (preClone 다음)
-                    updateSliderPosition(false); // 애니메이션 없이 순간 이동
+                    portfolioSlider.style.transition = 'none'; 
+                    slideIndex = 1; 
+                    updateSliderPosition(false); 
                 } 
-                // 슬라이더가 맨 앞 클론에 도달 (인덱스 0)
                 else if (slideIndex === 0) {
-                    portfolioSlider.style.transition = 'none'; // 애니메이션 끔
-                    slideIndex = originalLength; // 실제 마지막 원본 아이템의 인덱스
-                    updateSliderPosition(false); // 애니메이션 없이 순간 이동
+                    portfolioSlider.style.transition = 'none'; 
+                    slideIndex = originalLength; 
+                    updateSliderPosition(false); 
                 }
-                isAnimating = false; // 애니메이션 완료 플래그 해제
-                // 마지막으로, transition이 'none'으로 변경된 후 다시 원래 transition으로 복구
-                // setTimeout을 사용하여 다음 프레임에서 복구하도록 합니다.
+                isAnimating = false; 
                 setTimeout(() => {
                     portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
                 }, 0); 
@@ -2064,7 +2059,6 @@
 
             // 자동 재생 시작 함수
             function startAutoSlide() {
-                // 기존 인터벌이 있다면 클리어하여 중복 실행 방지
                 if (autoSlideInterval) {
                     clearInterval(autoSlideInterval);
                 }
@@ -2075,8 +2069,8 @@
 
             // 자동 재생 일시 정지 및 재설정 함수 (사용자 상호작용 시)
             function resetAutoSlide() {
-                clearInterval(autoSlideInterval); // 현재 자동 재생 정지
-                startAutoSlide(); // 다시 시작
+                clearInterval(autoSlideInterval); 
+                startAutoSlide(); 
             }
 
             // 초기 페이지 로드 시 자동 재생 시작
@@ -2098,7 +2092,7 @@
                 clearTimeout(resizeTimeout);
                 resizeTimeout = setTimeout(() => {
                     initializeSlider(); 
-                    resetAutoSlide(); // 리사이즈 후에도 자동 재생 재시작
+                    resetAutoSlide(); 
                 }, 100); 
             });
 
@@ -2243,6 +2237,70 @@
                     }
                 }
             });
+
+            // 메일 버튼 활성화를 위한 JavaScript 코드 추가 (Formspree 연동)
+            const contactForm = document.getElementById('contactForm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    const statusMessage = document.createElement('div');
+                    statusMessage.style.marginTop = '15px';
+                    statusMessage.style.padding = '10px';
+                    statusMessage.style.borderRadius = '5px';
+                    statusMessage.style.textAlign = 'center';
+
+                    const existingMessage = contactForm.querySelector('.form-status-message');
+                    if (existingMessage) {
+                        existingMessage.remove();
+                    }
+
+                    try {
+                        const response = await fetch(this.action, {
+                            method: this.method,
+                            body: new FormData(this),
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            statusMessage.textContent = translations[currentLang].sendSuccessMessage || '메시지가 성공적으로 전송되었습니다!';
+                            statusMessage.style.backgroundColor = '#d4edda';
+                            statusMessage.style.color = '#155724';
+                            contactForm.reset();
+                        } else {
+                            let errorMessage = translations[currentLang].sendErrorMessage || '메시지 전송에 실패했습니다. 다시 시도해주세요.';
+                            try {
+                                const errorData = await response.json();
+                                if (errorData.errors && errorData.errors.length > 0) {
+                                    errorMessage = errorData.errors.map(err => err.message).join(', ');
+                                }
+                            } catch (jsonError) {
+                                // JSON 파싱 실패 시 일반 오류 메시지
+                            }
+                            statusMessage.textContent = errorMessage;
+                            statusMessage.style.backgroundColor = '#f8d7da';
+                            statusMessage.style.color = '#721c24';
+                            console.error('Formspree response error:', response.status, errorMessage);
+                        }
+                    } catch (error) {
+                        statusMessage.textContent = translations[currentLang].networkErrorMessage || '메시지 전송 중 네트워크 오류가 발생했습니다. 다시 시도해주세요.';
+                        statusMessage.style.backgroundColor = '#f8d7da';
+                        statusMessage.style.color = '#721c24';
+                        console.error('Fetch error:', error);
+                    }
+                    statusMessage.classList.add('form-status-message');
+                    contactForm.appendChild(statusMessage);
+
+                    setTimeout(() => {
+                        if (statusMessage.parentNode) {
+                            statusMessage.remove();
+                        }
+                    }, 5000);
+                });
+            }
         });
     </script>
 </body>
