@@ -10,7 +10,7 @@
         :root {
             --primary-color: #E97B4F; /* 메인 강조 색상 변경 */
             --secondary-color: #5a6268; /* 보조 텍스트 색상 */
-            --dark-color: #212529; /* 매우 어두운 텍스트 */
+            --dark-color: #212529; /* 매우 어두운 텍색 */
             --white-color: #ffffff; /* 모든 배경색을 흰색으로 통일 */
             --border-color: #e9ecef; /* 부드러운 테두리 색상 (거의 보이지 않도록 얇게 유지) */
             --font-main: 'Montserrat', sans-serif;
@@ -404,7 +404,7 @@
             margin-bottom: 8px;
             font-weight: 700;
         }
-        .portfolio-info-overlay p {
+        .portfolio-info-overlay .overlay-text { /* 뷰 디테일용 새로운 클래스 */
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 0; 
@@ -623,12 +623,12 @@
             margin-bottom: 8px;
             font-weight: 700;
         }
-        .portfolio-item-grid-overlay p {
+        .portfolio-item-grid-overlay .overlay-text { /* 뷰 디테일용 새로운 클래스 */
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 15px;
         }
-        .portfolio-item-grid-overlay .overlay-link {
+        .portfolio-item-grid-overlay .overlay-button { /* 링크 대신 버튼으로 변경 */
             background-color: var(--primary-color);
             color: var(--white-color);
             padding: 8px 20px;
@@ -637,9 +637,9 @@
             font-weight: 500;
             transition: background-color 0.3s ease;
             border: none;
-            box-shadow: none;
+            cursor: pointer; /* 버튼이므로 커서 변경 */
         }
-        .portfolio-item-grid-overlay .overlay-link:hover {
+        .portfolio-item-grid-overlay .overlay-button:hover {
             background-color: #e06c3f;
         }
 
@@ -1123,10 +1123,10 @@
             .portfolio-item-grid-overlay h3 {
                 font-size: 1.1em;
             }
-            .portfolio-item-grid-overlay p {
+            .portfolio-item-grid-overlay .overlay-text {
                 font-size: 0.8em;
             }
-            .portfolio-item-grid-overlay .overlay-link {
+            .portfolio-item-grid-overlay .overlay-button {
                 padding: 6px 15px;
                 font-size: 0.8em;
             }
@@ -1195,51 +1195,58 @@
             <div class="portfolio-slider-wrapper">
                 <div class="portfolio-slider">
                     <div class="portfolio-item" data-category="Swirl">
-                        <img src="images/swirl_01.jpg" alt="Swirl 01">
+                        <img src="images/swirl_01.jpg" alt="Swirl 01" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
-                        </div>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p> </div>
                     </div>
                     <div class="portfolio-item" data-category="Flow Roll">
-                        <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
+                        <img src="images/flow_roll_01.jpg" alt="Flow Roll 01" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Pyeonggang">
-                        <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
+                        <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Pyeonggang 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Comission">
-                        <img src="images/comission_01.jpg" alt="Comission 01">
+                        <img src="images/comission_01.jpg" alt="Comission 01" data-details-ko="의뢰받아 제작된 맞춤형 작품." data-details-en="Custom artwork created on commission.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Personal Art">
-                        <img src="images/personal_art_01.jpg" alt="Personal Art 01">
+                        <img src="images/personal_art_01.jpg" alt="Personal Art 01" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Swirl">
-                        <img src="images/swirl_02.jpg" alt="Swirl 02">
+                        <img src="images/swirl_02.jpg" alt="Swirl 02" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Flow Roll">
-                        <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
+                        <img src="images/flow_roll_02.jpg" alt="Flow Roll 02" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Pyeonggang">
-                        <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
+                        <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Pyeonggang 02" data-en="Pyeonggang 02">Pyeonggang 02</h3>
+                            <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                         </div>
                     </div>
                 </div>
@@ -1265,202 +1272,182 @@
                     <div class="portfolio-grid">
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_01.jpg" alt="Swirl 01">
+                                <img src="images/swirl_01.jpg" alt="Swirl 01" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_02.jpg" alt="Swirl 02">
+                                <img src="images/swirl_02.jpg" alt="Swirl 02" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_03.jpg" alt="Swirl 03">
+                                <img src="images/swirl_03.jpg" alt="Swirl 03" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 03" data-en="Swirl 03">Swirl 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_04.jpg" alt="Swirl 04">
+                                <img src="images/swirl_04.jpg" alt="Swirl 04" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 04" data-en="Swirl 04">Swirl 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_05.jpg" alt="Swirl 05">
+                                <img src="images/swirl_05.jpg" alt="Swirl 05" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 05" data-en="Swirl 05">Swirl 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_06.jpg" alt="Swirl 06">
+                                <img src="images/swirl_06.jpg" alt="Swirl 06" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 06" data-en="Swirl 06">Swirl 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_07.jpg" alt="Swirl 07">
+                                <img src="images/swirl_07.jpg" alt="Swirl 07" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 07" data-en="Swirl 07">Swirl 07</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_08.jpg" alt="Swirl 08">
+                                <img src="images/swirl_08.jpg" alt="Swirl 08" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 08" data-en="Swirl 08">Swirl 08</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_09.jpg" alt="Swirl 09">
+                                <img src="images/swirl_09.jpg" alt="Swirl 09" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 09" data-en="Swirl 09">Swirl 09</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_10.jpg" alt="Swirl 10">
+                                <img src="images/swirl_10.jpg" alt="Swirl 10" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 10" data-en="Swirl 10">Swirl 10</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_11.jpg" alt="Swirl 11">
+                                <img src="images/swirl_11.jpg" alt="Swirl 11" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 11" data-en="Swirl 11">Swirl 11</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_12.jpg" alt="Swirl 12">
+                                <img src="images/swirl_12.jpg" alt="Swirl 12" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 12" data-en="Swirl 12">Swirl 12</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_13.jpg" alt="Swirl 13">
+                                <img src="images/swirl_13.jpg" alt="Swirl 13" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 13" data-en="Swirl 13">Swirl 13</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_14.jpg" alt="Swirl 14">
+                                <img src="images/swirl_14.jpg" alt="Swirl 14" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 14" data-en="Swirl 14">Swirl 14</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_15.jpg" alt="Swirl 15">
+                                <img src="images/swirl_15.jpg" alt="Swirl 15" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 15" data-en="Swirl 15">Swirl 15</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_16.jpg" alt="Swirl 16">
+                                <img src="images/swirl_16.jpg" alt="Swirl 16" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 16" data-en="Swirl 16">Swirl 16</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_17.jpg" alt="Swirl 17">
+                                <img src="images/swirl_17.jpg" alt="Swirl 17" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 17" data-en="Swirl 17">Swirl 17</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_18.jpg" alt="Swirl 18">
+                                <img src="images/swirl_18.jpg" alt="Swirl 18" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 18" data-en="Swirl 18">Swirl 18</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_19.jpg" alt="Swirl 19">
+                                <img src="images/swirl_19.jpg" alt="Swirl 19" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 19" data-en="Swirl 19">Swirl 19</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_20.jpg" alt="Swirl 20">
+                                <img src="images/swirl_20.jpg" alt="Swirl 20" data-details-ko="환상적인 소용돌이 테마 아트." data-details-en="Fantastic swirl themed art.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 20" data-en="Swirl 20">Swirl 20</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                     </div>
@@ -1471,62 +1458,56 @@
                     <div class="portfolio-grid">
                         <div class="portfolio-item-grid" data-category="Flow Roll">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
+                                <img src="images/flow_roll_01.jpg" alt="Flow Roll 01" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
+                                <img src="images/flow_roll_02.jpg" alt="Flow Roll 02" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_03.jpg" alt="Flow Roll 03">
+                                <img src="images/flow_roll_03.jpg" alt="Flow Roll 03" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 03" data-en="Flow Roll 03">Flow Roll 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_04.jpg" alt="Flow Roll 04">
+                                <img src="images/flow_roll_04.jpg" alt="Flow Roll 04" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 04" data-en="Flow Roll 04">Flow Roll 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_05.jpg" alt="Flow Roll 05">
+                                <img src="images/flow_roll_05.jpg" alt="Flow Roll 05" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 05" data-en="Flow Roll 05">Flow Roll 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Flow Roll">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_06.jpg" alt="Flow Roll 06">
+                                <img src="images/flow_roll_06.jpg" alt="Flow Roll 06" data-details-ko="유려한 움직임을 담은 롤 아트." data-details-en="Roll art with flowing movements.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Flow Roll 06" data-en="Flow Roll 06">Flow Roll 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                     </div>
@@ -1537,102 +1518,92 @@
                     <div class="portfolio-grid">
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
+                                <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
+                                <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 02" data-en="Pyeonggang 02">평강 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_03.jpg" alt="Pyeonggang 03">
+                                <img src="images/pyeonggang_03.jpg" alt="Pyeonggang 03" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 03" data-en="Pyeonggang 03">평강 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_04.jpg" alt="Pyeonggang 04">
+                                <img src="images/pyeonggang_04.jpg" alt="Pyeonggang 04" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 04" data-en="Pyeonggang 04">평강 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_05.jpg" alt="Pyeonggang 05">
+                                <img src="images/pyeonggang_05.jpg" alt="Pyeonggang 05" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 05" data-en="Pyeonggang 05">평강 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_06.jpg" alt="Pyeonggang 06">
+                                <img src="images/pyeonggang_06.jpg" alt="Pyeonggang 06" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 06" data-en="Pyeonggang 06">평강 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_07.jpg" alt="Pyeonggang 07">
+                                <img src="images/pyeonggang_07.jpg" alt="Pyeonggang 07" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 07" data-en="Pyeonggang 07">평강 07</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_08.jpg" alt="Pyeonggang 08">
+                                <img src="images/pyeonggang_08.jpg" alt="Pyeonggang 08" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 08" data-en="Pyeonggang 08">평강 08</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_09.jpg" alt="Pyeonggang 09">
+                                <img src="images/pyeonggang_09.jpg" alt="Pyeonggang 09" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 09" data-en="Pyeonggang 09">평강 09</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Pyeonggang">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_10.jpg" alt="Pyeonggang 10">
+                                <img src="images/pyeonggang_10.jpg" alt="Pyeonggang 10" data-details-ko="평강 테마의 전통적인 분위기." data-details-en="Traditional atmosphere with a Pyeonggang theme.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="평강 10" data-en="Pyeonggang 10">평강 10</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                     </div>
@@ -1643,21 +1614,20 @@
                     <div class="portfolio-grid">
                         <div class="portfolio-item-grid" data-category="Comission">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/comission_01.jpg" alt="Comission 01">
+                                <img src="images/comission_01.jpg" alt="Comission 01" data-details-ko="의뢰받아 제작된 맞춤형 작품." data-details-en="Custom artwork created on commission.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
- 
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Comission">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/comission_03.jpg" alt="Comission 03">
+                                <img src="images/comission_03.jpg" alt="Comission 03" data-details-ko="의뢰받아 제작된 맞춤형 작품." data-details-en="Custom artwork created on commission.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Comission 03" data-en="Comission 03">Comission 03</h3>
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                     </div>
@@ -1668,112 +1638,101 @@
                     <div class="portfolio-grid">
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_01.jpg" alt="Personal Art 01">
+                                <img src="images/personal_art_01.jpg" alt="Personal Art 01" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_02.jpg" alt="Personal Art 02">
+                                <img src="images/personal_art_02.jpg" alt="Personal Art 02" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 02" data-en="Personal Art 02">Personal Art 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_03.jpg" alt="Personal Art 03">
+                                <img src="images/personal_art_03.jpg" alt="Personal Art 03" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 03" data-en="Personal Art 03">Personal Art 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_04.jpg" alt="Personal Art 04">
+                                <img src="images/personal_art_04.jpg" alt="Personal Art 04" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 04" data-en="Personal Art 04">Personal Art 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_05.jpg" alt="Personal Art 05">
+                                <img src="images/personal_art_05.jpg" alt="Personal Art 05" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 05" data-en="Personal Art 05">Personal Art 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_06.jpg" alt="Personal Art 06">
+                                <img src="images/personal_art_06.jpg" alt="Personal Art 06" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 06" data-en="Personal Art 06">Personal Art 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_07.jpg" alt="Personal Art 07">
+                                <img src="images/personal_art_07.jpg" alt="Personal Art 07" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 07" data-en="Personal Art 07">Personal Art 07</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_08.jpg" alt="Personal Art 08">
+                                <img src="images/personal_art_08.jpg" alt="Personal Art 08" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 08" data-en="Personal Art 08">Personal Art 08</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_09.jpg" alt="Personal Art 09">
+                                <img src="images/personal_art_09.jpg" alt="Personal Art 09" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 09" data-en="Personal Art 09">Personal Art 09</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_10.jpg" alt="Personal Art 10">
+                                <img src="images/personal_art_10.jpg" alt="Personal Art 10" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 10" data-en="Personal Art 10">Personal Art 10</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
                             <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_11.jpg" alt="Personal Art 11">
+                                <img src="images/personal_art_11.jpg" alt="Personal Art 11" data-details-ko="개인적인 창작물이 담긴 아트." data-details-en="Art containing personal creations.">
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 11" data-en="Personal Art 11">Personal Art 11</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
                             </div>
                         </div>
                     </div>
@@ -1874,7 +1833,7 @@
                 aboutP2: "감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다.",
                 aboutP3: "현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.",
                 contactHeading: "연락처",
-                contactP: "문의:ohjingohjing@naver.com",
+                contactP: "문의:gyeom951127@gmail.com",
                 contactNameLabel: "이름",
                 contactEmailLabel: "이메일",
                 contactMessageLabel: "메시지",
@@ -1891,15 +1850,19 @@
                 ComissionArtworks: "Comission 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
                 PersonalArtworks: "Personal Art 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
                 
-                // 슬라이더 오버레이 텍스트
-                Swirl01Desc: "환상적인 소용돌이 테마 아트.",
-                FlowRoll01Desc: "유려한 움직임을 담은 롤 아트.",
-                Pyeonggang01Desc: "평강 테마의 전통적인 분위기.",
-                Comission01Desc: "의뢰받아 제작된 맞춤형 작품.",
-                PersonalArt01Desc: "개인적인 창작물이 담긴 아트.",
-                Swirl02Desc: "환상적인 소용돌이 테마 아트.",
-                FlowRoll02Desc: "유려한 움직임을 담은 롤 아트.",
-                Pyeonggang02Desc: "평강 테마의 전통적인 분위기.",
+                // 슬라이더 오버레이 텍스트 (여기에 'View Details' 또는 상세 설명 추가)
+                Swirl01Details: "환상적인 소용돌이 테마 아트에 대한 자세한 내용입니다.",
+                FlowRoll01Details: "유려한 움직임을 담은 롤 아트에 대한 상세 정보입니다.",
+                Pyeonggang01Details: "평강 테마의 전통적인 분위기에 대한 설명입니다.",
+                Comission01Details: "의뢰받아 제작된 맞춤형 작품의 상세 내역입니다.",
+                PersonalArt01Details: "개인적인 창작물이 담긴 아트의 상세 정보입니다.",
+                Swirl02Details: "환상적인 소용돌이 테마 아트 두 번째 작품입니다.",
+                FlowRoll02Details: "유려한 움직임을 담은 롤 아트 두 번째 작품입니다.",
+                Pyeonggang02Details: "평강 테마의 전통적인 분위기 두 번째 작품입니다.",
+
+                // 그리드 오버레이 텍스트 ('View Details'를 위한 공통 텍스트)
+                viewDetails: "자세히 보기", 
+
                 // Formspree 관련 메시지 추가
                 sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
                 sendErrorMessage: '메시지 전송에 실패했습니다. 다시 시도해주세요.',
@@ -1940,15 +1903,19 @@
                 ComissionArtworks: "Comission Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
                 PersonalArtworks: "Personal Artworks", /* 새롭게 추가된 카테고리 소제목 번호 */
 
-                // 슬라이더 오버레이 텍스트
-                Swirl01Desc: "Fantastic swirl themed art.",
-                FlowRoll01Desc: "Roll art with flowing movements.",
-                Pyeonggang01Desc: "Traditional atmosphere with a Pyeonggang theme.",
-                Comission01Desc: "Custom artwork created on commission.",
-                PersonalArt01Desc: "Art containing personal creations.",
-                Swirl02Desc: "Fantastic swirl themed art.",
-                FlowRoll02Desc: "Roll art with flowing movements.",
-                Pyeonggang02Desc: "Traditional atmosphere with a Pyeonggang theme.",
+                // 슬라이더 오버레이 텍스트 (여기에 'View Details' 또는 상세 설명 추가)
+                Swirl01Details: "Detailed information about the fantastic swirl themed art.",
+                FlowRoll01Details: "Detailed information about the roll art with flowing movements.",
+                Pyeonggang01Details: "Description of traditional atmosphere with a Pyeonggang theme.",
+                Comission01Details: "Details of custom artwork created on commission.",
+                PersonalArt01Details: "Detailed information about personal creations.",
+                Swirl02Details: "Second piece of fantastic swirl themed art.",
+                FlowRoll02Details: "Second piece of roll art with flowing movements.",
+                Pyeonggang02Details: "Second piece of traditional atmosphere with a Pyeonggang theme.",
+
+                // 그리드 오버레이 텍스트 ('View Details'를 위한 공통 텍스트)
+                viewDetails: "View Details",
+
                 // Formspree 관련 메시지 추가
                 sendSuccessMessage: 'Message sent successfully!',
                 sendErrorMessage: 'Failed to send message. Please try again.',
@@ -1999,12 +1966,25 @@
             document.querySelector('.portfolio-category-heading[data-ko="Comission 작품"]').innerHTML = translations[lang].ComissionArtworks;
             document.querySelector('.portfolio-category-heading[data-ko="Personal Art 작품"]').innerHTML = translations[lang].PersonalArtworks;
 
+            // overlay-text 업데이트 (슬라이더, 그리드 공통)
+            document.querySelectorAll('.overlay-text').forEach(pElement => {
+                pElement.innerHTML = translations[currentLang].viewDetails;
+            });
+            
             document.getElementById('lang-ko').classList.remove('active');
             document.getElementById('lang-en').classList.remove('active');
             document.getElementById(`lang-${lang}`).classList.add('active');
 
-            // 슬라이더 오버레이 텍스트 업데이트
-            // 이 부분은 initializeSlider()에서 처리되도록 변경했습니다.
+            // 슬라이더 오버레이 텍스트 업데이트는 initializeSlider() 내에서, 
+            // 또는 개별 아이템 생성/업데이트 시점에 호출되도록 처리하는 것이 좋습니다.
+            // 여기서는 originalPortfolioItems의 data-details 속성으로 직접 업데이트합니다.
+            document.querySelectorAll('#portfolio .portfolio-item img').forEach(imgElement => {
+                const parentItem = imgElement.closest('.portfolio-item');
+                const overlayTextElement = parentItem.querySelector('.overlay-text');
+                if (overlayTextElement) {
+                    overlayTextElement.innerHTML = imgElement.getAttribute(`data-details-${currentLang}`) || translations[currentLang].viewDetails;
+                }
+            });
         }
 
         // 슬라이더 초기화 함수 (DOM 조작 및 이벤트 리스너 설정)
@@ -2047,29 +2027,29 @@
                     item.removeEventListener('click', oldClickHandler);
                 }
 
+                // 🌟 수정: 아이템 자체에 클릭 이벤트 리스너를 부여하고,
+                // 기본 <a> 태그의 동작을 막지 않아도 되도록 개선
                 const newClickHandler = function() {
-                    const currentTargetSrc = this.querySelector('img').src; 
+                    const currentTargetImg = this.querySelector('img');
+                    const currentTargetSrc = currentTargetImg.src; 
                     const originalIndex = originalPortfolioItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
                     
                     if (originalIndex !== -1) { 
-                        // 슬라이더 아이템 클릭 시에는 originalPortfolioItems를 라이트박스 아이템으로 사용
+                        // 슬라이더 아이템 클릭 시에는 originalPortfolioItems (클론 제외)를 라이트박스 아이템으로 사용
                         currentLightboxItems = originalPortfolioItems; 
                         openModal(originalIndex);
                     }
                 };
                 item.addEventListener('click', newClickHandler);
-                item.__clickHandler = newClickHandler; 
+                item.__clickHandler = newClickHandler; // 이벤트 핸들러 참조 저장
             });
 
-            // 슬라이더 오버레이 텍스트 업데이트 로직 추가
+            // 슬라이더 오버레이 텍스트 업데이트
             document.querySelectorAll('#portfolio .portfolio-item').forEach(item => {
-                const category = item.dataset.category.replace(/\s/g, ''); 
-                const imgAlt = item.querySelector('img').alt; 
-                const descKey = `${category}${imgAlt.slice(-2)}Desc`; // e.g., Swirl01Desc
-
-                const overlayP = item.querySelector('.portfolio-info-overlay p');
-                if (overlayP && translations[currentLang][descKey]) {
-                    overlayP.innerHTML = translations[currentLang][descKey];
+                const imgElement = item.querySelector('img');
+                const overlayTextElement = item.querySelector('.overlay-text');
+                if (imgElement && overlayTextElement) {
+                    overlayTextElement.innerHTML = imgElement.getAttribute(`data-details-${currentLang}`) || translations[currentLang].viewDetails;
                 }
             });
 
@@ -2094,9 +2074,9 @@
                 
                 portfolioSlider.style.transform = `translateX(${finalTransformX}px)`;
 
-                // 1개만 보이므로 활성/비활성 클래스 조작은 필요 없음 (CSS에서 opacity 1 고정)
-                // z-index는 클릭 시 오버레이 때문에 필요할 수 있으나, 슬라이드 자체에는 영향 없음.
-                // 이전 active/neighbor 클래스 관련 CSS는 주석 처리하거나 제거했으므로, JS에서도 해당 로직 제거
+                isAnimating = false; 
+                // transitionend 이벤트 리스너가 중복될 수 있으므로, 여기서는 직접 transition을 다시 설정하지 않습니다.
+                // 대신 transitionend 이벤트에서 transition을 'none'으로 했다가 다시 'transform 0.5s ease-in-out'으로 복구합니다.
             });
         }
 
@@ -2116,6 +2096,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function() {
+            // 초기 언어 설정 및 텍스트 적용
             applyTranslations(currentLang);
 
             document.getElementById('lang-ko').addEventListener('click', () => applyTranslations('ko'));
@@ -2129,10 +2110,6 @@
             function activateNavLink() {
                 let current = "";
                 sections.forEach(section => {
-                    // "home" 섹션이 존재하지 않으므로, 이 조건은 제거하거나 다른 ID로 변경해야 함.
-                    // 현재 HTML에는 id="home" 섹션이 없으므로, 이 줄은 무시해도 됩니다.
-                    if (section.id === "home") return; 
-
                     const sectionTop = section.offsetTop - headerHeight - 30; 
                     const sectionHeight = section.clientHeight;
                     if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
@@ -2142,11 +2119,9 @@
 
                 navLinks.forEach(link => {
                     link.classList.remove("active");
-                    // 현재 활성화된 섹션에 따라 네비게이션 링크 활성화
                     if (current && link.getAttribute("href").includes(current)) {
                         link.classList.add("active");
                     } else if (!current && link.getAttribute("href") === "#portfolio") {
-                        // 페이지 로드 시 또는 스크롤이 맨 위에 있을 때 포트폴리오를 기본 활성화
                         link.classList.add("active");
                     }
                 });
@@ -2157,7 +2132,7 @@
 
             document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
+                    e.preventDefault(); // 기본 앵커 동작 방지
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
@@ -2173,8 +2148,8 @@
             // --- 포트폴리오 슬라이더 기능 초기화 ---
             initializeSlider(); 
             
-            document.getElementById('prev-slide').addEventListener('click', showPrevSlide);
-            document.getElementById('next-slide').addEventListener('click', showNextSlide);
+            document.getElementById('prev-slide').addEventListener('click', resetAutoSlide); // 클릭 시 자동 재생 재설정
+            document.getElementById('next-slide').addEventListener('click', resetAutoSlide); // 클릭 시 자동 재생 재설정
 
             portfolioSlider = document.querySelector('.portfolio-slider'); 
             portfolioSlider.addEventListener('transitionend', () => {
@@ -2191,6 +2166,9 @@
                     updateSliderPosition(false); 
                 }
                 isAnimating = false; 
+                // CSS에서 transition이 'transform 0.5s ease-in-out'으로 설정되어 있으므로, 
+                // transitionend에서 다시 설정할 필요는 없습니다. 
+                // 다만, 'none'으로 바꿨다가 다시 복구하는 패턴을 유지하려면 아래 setTimeout을 유지합니다.
                 setTimeout(() => {
                     portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
                 }, 0); 
@@ -2218,10 +2196,6 @@
 
             // 초기 페이지 로드 시 자동 재생 시작
             startAutoSlide();
-
-            // 사용자가 수동으로 슬라이드를 넘기면 자동 재생 재설정
-            document.getElementById('prev-slide').addEventListener('click', resetAutoSlide);
-            document.getElementById('next-slide').addEventListener('click', resetAutoSlide);
 
             // 슬라이더 영역에 마우스가 올라가면 자동 재생 일시 정지, 벗어나면 다시 시작
             const sliderWrapper = document.querySelector('.portfolio-slider-wrapper');
@@ -2251,40 +2225,47 @@
                     const filter = this.dataset.filter;
 
                     document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                        // 모든 wrapper를 숨김 처리
-                        wrapper.style.display = 'none';
-                        // wrapper 내부의 모든 아이템을 숨김 처리 (opacity 0으로 먼저 만든 후 display none)
+                        // 모든 wrapper를 숨김 처리 (opacity 0 -> display none)
                         wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
                             item.style.opacity = '0';
-                            item.style.display = 'none'; // 즉시 숨김
-                        });
-                    });
-
-                    if (filter === 'all') {
-                        document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                            wrapper.style.display = 'block'; // wrapper 다시 보여줌
-                            wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                                item.style.display = 'block'; // 아이템 다시 보여줌
-                                setTimeout(() => item.style.opacity = '1', 50); // 부드럽게 나타나도록
+                            // 트랜지션 후에 display none 적용
+                            item.addEventListener('transitionend', function handler() {
+                                this.style.display = 'none';
+                                this.removeEventListener('transitionend', handler);
                             });
                         });
-                    } else {
-                        const targetWrapper = document.querySelector(`.portfolio-category-wrapper .portfolio-category-heading[data-ko="${filter} 작품"], .portfolio-category-wrapper .portfolio-category-heading[data-en="${filter} Artworks"]`);
-                        if (targetWrapper) {
-                            const parentWrapper = targetWrapper.closest('.portfolio-category-wrapper');
-                            if (parentWrapper) {
-                                parentWrapper.style.display = 'block'; // 해당 wrapper만 보여줌
-                                parentWrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                                    if (item.dataset.category === filter) {
-                                        item.style.display = 'block'; // 필터링된 아이템만 보여줌
-                                        setTimeout(() => item.style.opacity = '1', 50); // 부드럽게 나타나도록
-                                    } else {
-                                        item.style.opacity = '0';
-                                        item.style.display = 'none'; // 필터링되지 않은 아이템은 숨김
-                                    }
-                                });
-                            }
+                        wrapper.style.display = 'none'; // wrapper 자체는 바로 숨기지 않고, 내부 아이템만 조절
+                    });
+
+                    // 특정 카테고리만 보여줌
+                    const targetWrapper = document.querySelector(`.portfolio-category-wrapper .portfolio-category-heading[data-ko="${filter} 작품"]`) || 
+                                          document.querySelector(`.portfolio-category-wrapper .portfolio-category-heading[data-en="${filter} Artworks"]`);
+                    if (targetWrapper) {
+                        const parentWrapper = targetWrapper.closest('.portfolio-category-wrapper');
+                        if (parentWrapper) {
+                            parentWrapper.style.display = 'block'; // 해당 wrapper만 보이도록 설정
+                            parentWrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                                if (filter === 'all' || item.dataset.category === filter) {
+                                    item.style.display = 'block'; // 필터링된/전체 아이템을 보여줌
+                                    // 짧은 지연 후 opacity 1로 전환 (애니메이션 효과)
+                                    setTimeout(() => item.style.opacity = '1', 50); 
+                                } else {
+                                    item.style.opacity = '0';
+                                    item.addEventListener('transitionend', function handler() {
+                                        this.style.display = 'none';
+                                        this.removeEventListener('transitionend', handler);
+                                    });
+                                }
+                            });
                         }
+                    } else if (filter === 'all') { // 'ALL' 버튼 클릭 시 모든 wrapper 표시
+                        document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                            wrapper.style.display = 'block';
+                            wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                                item.style.display = 'block';
+                                setTimeout(() => item.style.opacity = '1', 50); 
+                            });
+                        });
                     }
                 });
             });
@@ -2300,13 +2281,12 @@
             let currentLightboxItems = []; // 라이트박스에 표시될 현재 아이템 목록
             let currentIndex = 0; 
 
-            // 슬라이더 아이템 클릭 이벤트 (initializeSlider 내에서 이미 처리됨)
-            // 슬라이더 아이템 클릭 시, originalPortfolioItems (클론 제외 원본 슬라이더 아이템)을 사용하도록 이미 설정되어 있습니다.
-
             // 그리드 아이템 클릭 이벤트
-            // 그리드 아이템 클릭 시, 현재 화면에 '보이는' 그리드 아이템들만 라이트박스에 포함
             document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
-                item.addEventListener('click', function() {
+                // 🌟 수정: <a> 태그의 기본 동작을 막고, div 자체에 이벤트 리스너 부여
+                item.addEventListener('click', function(e) {
+                    e.preventDefault(); // 중요: 기본 <a> 태그 동작(페이지 상단 이동) 방지
+
                     // 현재 필터링되어 보이는 아이템만 가져옴
                     currentLightboxItems = allGridItems.filter(visibleItem => window.getComputedStyle(visibleItem).display !== 'none');
                     
@@ -2345,41 +2325,25 @@
                 }
 
                 const item = currentLightboxItems[currentIndex];
-                const imgSrc = item.querySelector('img').src;
-                const imgAlt = item.querySelector('img').alt;
+                const imgElementInItem = item.querySelector('img'); // 아이템 내의 이미지 태그
+                const imgSrc = imgElementInItem.src;
+                const imgAlt = imgElementInItem.alt;
                 
-                const portfolioInfoOverlay = item.querySelector('.portfolio-info-overlay') || item.querySelector('.portfolio-item-grid-overlay');
+                // 캡션 텍스트 가져오기 (data-details-lang 속성 우선, 없으면 h3 텍스트 사용)
                 let captionContent = '';
-                if (portfolioInfoOverlay) {
-                    const h3 = portfolioInfoOverlay.querySelector('h3');
-                    // data-ko/data-en 속성이 있는 경우 해당 언어 텍스트 사용, 없으면 innerHTML 사용
-                    const titleText = h3 ? (h3.getAttribute(`data-${currentLang}`) || h3.innerHTML) : '';
+                const h3Element = item.querySelector('h3');
 
-                    // 슬라이더 아이템만 p 태그의 Desc가 있으므로, 해당 번역 키를 사용
-                    // 그리드 아이템은 p 태그에 별도 Desc가 없으므로 h3 텍스트만 사용
-                    if (item.classList.contains('portfolio-item') && h3) { // 슬라이더 아이템인 경우
-                        const category = item.dataset.category.replace(/\s/g, '');
-                        const altNumber = imgAlt.match(/\d+/); // Alt 텍스트에서 숫자 부분 추출 (e.g. "01", "02")
-                        const numStr = altNumber ? (altNumber[0].length === 1 ? `0${altNumber[0]}` : altNumber[0]) : ''; // '1' -> '01'
-                        const descKey = `${category}${numStr}Desc`; // e.g., Swirl01Desc
-
-                        captionContent = titleText; // 일단 h3 내용을 추가
-                        if (translations[currentLang][descKey]) {
-                             // 번역 데이터에 Desc가 있다면 추가
-                            captionContent += ` - ${translations[currentLang][descKey]}`;
-                        } else {
-                            // Desc 번역이 없으면 기존 p 태그 내용 사용 (기존 HTML에 p 태그는 없지만 만약을 대비)
-                            const p = portfolioInfoOverlay.querySelector('p');
-                            if (p) captionContent += ` - ${p.innerHTML}`;
-                        }
-                    } else if (h3) { // 그리드 아이템인 경우, 오버레이에 p 태그 내용이 없으므로 h3 내용만 사용
-                        captionContent = titleText;
-                    }
+                if (imgElementInItem.hasAttribute(`data-details-${currentLang}`)) {
+                    captionContent = imgElementInItem.getAttribute(`data-details-${currentLang}`);
+                } else if (h3Element) {
+                    captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
+                } else {
+                    captionContent = imgAlt; // 마지막 수단으로 alt 텍스트 사용
                 }
                 
                 modalImage.src = imgSrc;
                 modalImage.alt = imgAlt;
-                captionText.innerHTML = captionContent || imgAlt;
+                captionText.innerHTML = captionContent; // p 태그는 더 이상 필요 없음
             }
 
             function showNextLightbox() {
