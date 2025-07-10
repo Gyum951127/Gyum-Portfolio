@@ -1,1915 +1,2448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINGYUM KIM</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        /* 변수 설정 - 색상 팔레트 조정 (전반적인 흰색 강조) */
-        :root {
-            --primary-color: #E97B4F; /* 메인 강조 색상 변경 */
-            --secondary-color: #5a6268; /* 보조 텍스트 색상 */
-            --dark-color: #212529; /* 매우 어두운 텍스트 */
-            --white-color: #ffffff; /* 모든 배경색을 흰색으로 통일 */
-            --border-color: #e9ecef; /* 부드러운 테두리 색상 (거의 보이지 않도록 얇게 유지) */
-            --font-main: 'Montserrat', sans-serif;
-            --font-kr: 'Noto Sans KR', sans-serif;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINGYUM KIM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 변수 설정 - 색상 팔레트 조정 (전반적인 흰색 강조) */
+        :root {
+            --primary-color: #E97B4F; /* 메인 강조 색상 변경 */
+            --secondary-color: #5a6268; /* 보조 텍스트 색상 */
+            --dark-color: #212529; /* 매우 어두운 텍스트 */
+            --white-color: #ffffff; /* 모든 배경색을 흰색으로 통일 */
+            --border-color: #e9ecef; /* 부드러운 테두리 색상 (거의 보이지 않도록 얇게 유지) */
+            --font-main: 'Montserrat', sans-serif;
+            --font-kr: 'Noto Sans KR', sans-serif;
+        }
 
-        /* 기본 스타일 및 폰트 설정 */
-        body {
-            font-family: var(--font-kr);
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            background-color: var(--white-color); /* 흰색 배경 */
-            color: var(--dark-color);
-            line-height: 1.8;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased; /* 폰트 렌더링 최적화 */
-            -moz-osx-font-smoothing: grayscale; /* 폰트 렌더링 최적화 */
-        }
-        *, *::before, *::after {
-            box-sizing: inherit;
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-main);
-            color: var(--dark-color);
-            margin-top: 0;
-            margin-bottom: 0.8em;
-            font-weight: 700;
-        }
-        p {
-            margin-bottom: 1.5em;
-        }
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: var(--primary-color); /* 호버 시 색상 유지 또는 조정 */
-        }
+        /* 기본 스타일 및 폰트 설정 */
+        body {
+            font-family: var(--font-kr);
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--white-color); /* 흰색 배경 */
+            color: var(--dark-color);
+            line-height: 1.8;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* 폰트 렌더링 최적화 */
+            -moz-osx-font-smoothing: grayscale; /* 폰트 렌더링 최적화 */
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-main);
+            color: var(--dark-color);
+            margin-top: 0;
+            margin-bottom: 0.8em;
+            font-weight: 700;
+        }
+        p {
+            margin-bottom: 1.5em;
+        }
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: var(--primary-color); /* 호버 시 색상 유지 또는 조정 */
+        }
 
-        /* 공통 유틸리티 클래스 */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 0;
-        }
-        .text-center {
-            text-align: center;
-        }
-        .section-heading {
-            font-size: 3em;
-            margin-bottom: 80px;
-            position: relative;
-            display: inline-block;
-            font-weight: 700;
-        }
-        .section-heading::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 5px;
-            background-color: var(--primary-color);
-            margin: 20px auto 0;
-            border-radius: 3px;
-        }
+        /* 공통 유틸리티 클래스 */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 0;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .section-heading {
+            font-size: 3em;
+            margin-bottom: 80px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+        .section-heading::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background-color: var(--primary-color);
+            margin: 20px auto 0;
+            border-radius: 3px;
+        }
 
-        /* 헤더 */
-        header {
-            background-color: var(--white-color); /* 완전히 흰색 배경 */
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-        }
-        .lang-switcher {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            z-index: 1002;
-        }
-        .lang-switcher button {
-            background: none;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-family: var(--font-kr);
-            font-size: 0.9em;
-            color: var(--secondary-color);
-            transition: transform 0.2s ease, color 0.2s ease;
-        }
-        .lang-switcher button:hover, .lang-switcher button.active {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-        .lang-switcher button:not(:last-child) {
-            margin-right: 5px;
-        }
+        /* 헤더 */
+        header {
+            background-color: var(--white-color); /* 완전히 흰색 배경 */
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+        .lang-switcher {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            z-index: 1002;
+        }
+        .lang-switcher button {
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: var(--font-kr);
+            font-size: 0.9em;
+            color: var(--secondary-color);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+        .lang-switcher button:hover, .lang-switcher button.active {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        .lang-switcher button:not(:last-child) {
+            margin-right: 5px;
+        }
 
-        .header-container { /* 로고, 소셜 링크, 내비게이션을 담는 메인 컨테이너 */
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            padding-top: 20px; /* lang-switcher의 높이를 고려하여 헤더 컨테이너 하단으로 밀어줌 */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: relative; /* 자식 요소의 absolute 위치 기준 */
-        }
-        .logo-wrapper { /* 로고 이미지와 텍스트, 소셜 링크를 묶는 div */
-            display: flex;
-            align-items: center;
-            gap: 10px; /* 로고와 아이콘/텍스트 사이 간격 */
-            z-index: 1001;
-        }
-        .logo { /* MINGYUM KIM 텍스트 자체의 스타일 */
-            font-size: 2em;
-            font-weight: 300; /* 폰트 굵기 얇게 변경 */
-            color: var(--dark-color);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex; /* 로고 텍스트와 로고 이미지를 위한 flexbox */
-            align-items: center;
-            gap: 8px; /* 로고 이미지와 텍스트 사이 간격 */
-        }
-        .logo img { /* 로고 이미지의 스타일 */
-            width: 40px; /* 로고 이미지 크기 */
-            height: 40px;
-            vertical-align: middle;
-            border-radius: 5px; /* 로고 이미지 둥근 모서리 */
-        }
-        .header-social-links { /* 헤더에 추가된 소셜 링크 스타일 */
-            display: flex;
-            gap: 15px; /* 아이콘 간격 */
-            margin-left: 15px; /* 로고 그룹과 소셜 링크 사이 간격 */
-        }
-        .header-social-links a img {
-            width: 20px; /* 헤더 아이콘 크기 작게 */
-            height: 20px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-        .header-social-links a:hover img {
-            opacity: 1;
-        }
+        .header-container { /* 로고, 소셜 링크, 내비게이션을 담는 메인 컨테이너 */
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            padding-top: 20px; /* lang-switcher의 높이를 고려하여 헤더 컨테이너 하단으로 밀어줌 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative; /* 자식 요소의 absolute 위치 기준 */
+        }
+        .logo-wrapper { /* 로고 이미지와 텍스트, 소셜 링크를 묶는 div */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 로고와 아이콘/텍스트 사이 간격 */
+            z-index: 1001;
+        }
+        .logo { /* MINGYUM KIM 텍스트 자체의 스타일 */
+            font-size: 2em;
+            font-weight: 300; /* 폰트 굵기 얇게 변경 */
+            color: var(--dark-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex; /* 로고 텍스트와 로고 이미지를 위한 flexbox */
+            align-items: center;
+            gap: 8px; /* 로고 이미지와 텍스트 사이 간격 */
+        }
+        .logo img { /* 로고 이미지의 스타일 */
+            width: 40px; /* 로고 이미지 크기 */
+            height: 40px;
+            vertical-align: middle;
+            border-radius: 5px; /* 로고 이미지 둥근 모서리 */
+        }
+        .header-social-links { /* 헤더에 추가된 소셜 링크 스타일 */
+            display: flex;
+            gap: 15px; /* 아이콘 간격 */
+            margin-left: 15px; /* 로고 그룹과 소셜 링크 사이 간격 */
+        }
+        .header-social-links a img {
+            width: 20px; /* 헤더 아이콘 크기 작게 */
+            height: 20px;
+            vertical-align: middle;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        .header-social-links a:hover img {
+            opacity: 1;
+        }
 
 
-        /* 메인 내비게이션 */
-        .main-nav {
-            margin-left: auto;
-            z-index: 1001;
-        }
-        .main-nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-        .main-nav ul li {
-            margin-left: 40px;
-        }
-        .main-nav ul li a {
-            color: var(--dark-color);
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            font-size: 1.1em;
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-        .main-nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 3px;
-            background-color: var(--primary-color);
-            left: 50%;
-            bottom: -8px;
-            transform: translateX(-50%);
-            transition: width 0.3s ease;
-        }
-        .main-nav ul li a:hover,
-        .main-nav ul li a.active {
-            color: var(--primary-color);
-            transform: scale(1.05);
-        }
-        .main-nav ul li a:hover::after,
-        .main-nav ul li a.active::after {
-            width: 100%;
-        }
+        /* 메인 내비게이션 */
+        .main-nav {
+            margin-left: auto;
+            z-index: 1001;
+        }
+        .main-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
+        .main-nav ul li {
+            margin-left: 40px;
+        }
+        .main-nav ul li a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            font-size: 1.1em;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+        .main-nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary-color);
+            left: 50%;
+            bottom: -8px;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        .main-nav ul li a:hover,
+        .main-nav ul li a.active {
+            color: var(--primary-color);
+            transform: scale(1.05);
+        }
+        .main-nav ul li a:hover::after,
+        .main-nav ul li a.active::after {
+            width: 100%;
+        }
 
-        /* 히어로 섹션 (display:none 유지) */
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/main_background.jpg') no-repeat center center/cover; /* 로컬 이미지로 변경 예시 */
-            color: var(--white-color);
-            text-align: center;
-            padding: 180px 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 85vh;
-            position: relative;
-        }
-        .hero-section h1 {
-            color: var(--white-color);
-            font-size: 4.5em;
-            margin-bottom: 25px;
-            line-height: 1.1;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-            font-weight: 700;
-        }
-        .hero-section p {
-            font-size: 1.8em;
-            margin-bottom: 50px;
-            text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
-            font-weight: 300;
-        }
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2em;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            display: inline-block;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #e06c3f; /* Hover 색상 조정 */
-            transform: translateY(-5px);
-        }
+        /* 히어로 섹션 (display:none 유지) */
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/main_background.jpg') no-repeat center center/cover; /* 로컬 이미지로 변경 예시 */
+            color: var(--white-color);
+            text-align: center;
+            padding: 180px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 85vh;
+            position: relative;
+        }
+        .hero-section h1 {
+            color: var(--white-color);
+            font-size: 4.5em;
+            margin-bottom: 25px;
+            line-height: 1.1;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            font-weight: 700;
+        }
+        .hero-section p {
+            font-size: 1.8em;
+            margin-bottom: 50px;
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.4);
+            font-weight: 300;
+        }
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #e06c3f; /* Hover 색상 조정 */
+            transform: translateY(-5px);
+        }
 
-        /* 소개 섹션 */
-        #about {
-            background-color: var(--white-color);
-            padding: 100px 0;
-        }
-        .about-content {
-            display: flex;
-            align-items: center;
-            gap: 80px;
-            flex-wrap: wrap;
-            justify-content: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .about-image {
-            flex-shrink: 0;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 10px solid var(--primary-color);
-        }
-        .about-image img {
-            display: block;
-            width: 300px;
-            height: 300px;
-            object-fit: cover;
-        }
-        .about-text {
-            flex-grow: 1;
-            max-width: 600px;
-            text-align: left;
-        }
-        .about-text h3 {
-            font-size: 2.2em;
-            margin-bottom: 25px;
-            color: var(--dark-color);
-        }
-        .about-text p {
-            font-size: 1.15em;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
+        /* 소개 섹션 */
+        #about {
+            background-color: var(--white-color);
+            padding: 100px 0;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .about-image {
+            flex-shrink: 0;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 10px solid var(--primary-color);
+        }
+        .about-image img {
+            display: block;
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+        }
+        .about-text {
+            flex-grow: 1;
+            max-width: 600px;
+            text-align: left;
+        }
+        .about-text h3 {
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+        }
+        .about-text p {
+            font-size: 1.15em;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
 
-        /* 포트폴리오 슬라이더 섹션 (1개만 보이는 방식) */
-        #portfolio { 
-            background-color: #000; /* 나머지 여백을 검정색으로 덮음 */
-            padding: 0; /* 패딩 제거 */
-            position: relative;
-            overflow: hidden; 
-            height: 50vh; /* 뷰포트 높이 대비 슬라이더 섹션 높이 */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .portfolio-slider-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1000px; /* 슬라이더 보여지는 최대 너비 */
-            height: 90%; /* 슬라이더 wrapper도 높이를 채우도록 */
-            margin: 0 auto;
-            display: flex;
-            justify-content: center; 
-            align-items: center;
-            overflow: hidden; /* 아이템이 넘치면 숨김 */
-        }
-        .portfolio-slider {
-            display: flex;
-            width: 100%; /* wrapper 너비에 맞춤 */
-            height: 100%; /* wrapper 높이에 맞춤 */
-            transition: transform 0.5s ease-in-out; /* JS에서 transform 제어 */
-            transform: translateX(0); /* 초기값 */
-            align-items: center;
-            padding: 0; /* 내부 여백 제거 */
-        }
-        .portfolio-item { /* 슬라이더 개별 이미지 아이템 */
-            flex: 0 0 auto; /* 축소/확장되지 않고 고정 너비 유지 */
-            width: 100%; /* 부모(portfolio-slider)의 너비를 꽉 채움 */
-            height: 100%; /* 부모의 높이를 꽉 채움 */
-            margin: 0; /* 마진 제거 */
-            position: relative;
-            overflow: hidden;
-            border-radius: 0; /* 모서리 둥글게 하지 않음 (꽉 채우므로) */
-            cursor: pointer;
-            transition: opacity 0.3s ease; /* 투명도 변화만 (크기 변화 없음) */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #000000; /* 이미지 없을 경우 대비 */
-            opacity: 1; /* 항상 보이게 */
-            z-index: 1; /* 기본 z-index */
-            box-shadow: none; /* 그림자 제거 */
-        }
-        /* 이 방식에서는 active/neighbor 클래스를 CSS에서 별도로 정의하지 않고,
-           JavaScript에서 직접 z-index를 조절하여 한 장만 보이게 합니다. */
-        .portfolio-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* 이미지가 잘리지 않고 전체 보이도록 contain 사용 */
-            display: block;
-            border-radius: inherit;
-        }
+        /* 포트폴리오 슬라이더 섹션 (1개만 보이는 방식) */
+        #portfolio { 
+            background-color: #000; /* 나머지 여백을 검정색으로 덮음 */
+            padding: 0; /* 패딩 제거 */
+            position: relative;
+            overflow: hidden; 
+            height: 50vh; /* 뷰포트 높이 대비 슬라이더 섹션 높이 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .portfolio-slider-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px; /* 슬라이더 보여지는 최대 너비 */
+            height: 90%; /* 슬라이더 wrapper도 높이를 채우도록 */
+            margin: 0 auto;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            overflow: hidden; /* 아이템이 넘치면 숨김 */
+        }
+        .portfolio-slider {
+            display: flex;
+            width: 100%; /* wrapper 너비에 맞춤 */
+            height: 100%; /* wrapper 높이에 맞춤 */
+            transition: transform 0.5s ease-in-out; /* JS에서 transform 제어 */
+            transform: translateX(0); /* 초기값 */
+            align-items: center;
+            padding: 0; /* 내부 여백 제거 */
+        }
+        .portfolio-item { /* 슬라이더 개별 이미지 아이템 */
+            flex: 0 0 auto; /* 축소/확장되지 않고 고정 너비 유지 */
+            width: 100%; /* 부모(portfolio-slider)의 너비를 꽉 채움 */
+            height: 100%; /* 부모의 높이를 꽉 채움 */
+            margin: 0; /* 마진 제거 */
+            position: relative;
+            overflow: hidden;
+            border-radius: 0; /* 모서리 둥글게 하지 않음 (꽉 채우므로) */
+            cursor: pointer;
+            transition: opacity 0.3s ease; /* 투명도 변화만 (크기 변화 없음) */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #000000; /* 이미지 없을 경우 대비 */
+            opacity: 1; /* 항상 보이게 */
+            z-index: 1; /* 기본 z-index */
+            box-shadow: none; /* 그림자 제거 */
+        }
+        /* 이 방식에서는 active/neighbor 클래스를 CSS에서 별도로 정의하지 않고,
+            JavaScript에서 직접 z-index를 조절하여 한 장만 보이게 합니다. */
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* 이미지가 잘리지 않고 전체 보이도록 contain 사용 */
+            display: block;
+            border-radius: inherit;
+        }
 
-        /* 슬라이더 제어 버튼 */
-        .slider-nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent; 
-            border: none; 
-            color: var(--white-color); /* 버튼 색상을 흰색으로 변경 */
-            font-size: 3.5em; /* 버튼 크기 더 키움 */
-            padding: 0 20px; /* 패딩 더 추가 */
-            cursor: pointer;
-            z-index: 100;
-            transition: color 0.3s, transform 0.3s;
-        }
-        .slider-nav-btn:hover {
-            color: var(--primary-color);
-            transform: translateY(-50%) scale(1.1); /* 호버 시 살짝 확대 */
-        }
-        #prev-slide {
-            left: 0; /* 왼쪽 끝에 붙임 */
-        }
-        #next-slide {
-            right: 0; /* 오른쪽 끝에 붙임 */
-        }
+        /* 슬라이더 제어 버튼 */
+        .slider-nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent; 
+            border: none; 
+            color: var(--white-color); /* 버튼 색상을 흰색으로 변경 */
+            font-size: 3.5em; /* 버튼 크기 더 키움 */
+            padding: 0 20px; /* 패딩 더 추가 */
+            cursor: pointer;
+            z-index: 100;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .slider-nav-btn:hover {
+            color: var(--primary-color);
+            transform: translateY(-50%) scale(1.1); /* 호버 시 살짝 확대 */
+        }
+        #prev-slide {
+            left: 0; /* 왼쪽 끝에 붙임 */
+        }
+        #next-slide {
+            right: 0; /* 오른쪽 끝에 붙임 */
+        }
 
-        /* 포트폴리오 오버레이 (이 방식에서는 필요 없을 수 있으나 기존 스타일 유지) */
-        .portfolio-info-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.65); 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0; 
-            transition: opacity 0.3s ease; 
-            color: var(--white-color);
-            padding: 15px;
-            text-align: center;
-        }
-        .portfolio-item:hover .portfolio-info-overlay {
-            opacity: 1; 
-        }
-        .portfolio-info-overlay h3 {
-            color: var(--white-color);
-            font-size: 1.3em;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .portfolio-info-overlay p {
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0; 
-        }
+        /* 포트폴리오 오버레이 (이 방식에서는 필요 없을 수 있으나 기존 스타일 유지) */
+        .portfolio-info-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65); 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; 
+            transition: opacity 0.3s ease; 
+            color: var(--white-color);
+            padding: 15px;
+            text-align: center;
+        }
+        .portfolio-item:hover .portfolio-info-overlay {
+            opacity: 1; 
+        }
+        .portfolio-info-overlay h3 {
+            color: var(--white-color);
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .portfolio-info-overlay p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0; 
+        }
 
-        /* 라이트박스/모달 스타일 (기존과 동일) */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.9);
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s forwards;
-        }
-        .modal-content {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 90%;
-            max-height: 90vh;
-        }
-        .modal-content img {
-            max-width: 100%;
-            max-height: 80vh;
-            display: block;
-            object-fit: contain;
-            animation: zoomIn 0.3s forwards;
-        }
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .prev-btn, .next-btn {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            margin-top: -50px;
-            color: white;
-            font-weight: bold;
-            font-size: 30px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        .next-btn {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        .prev-btn {
-            left: 0;
-            border-radius: 0 3px 3px 0;
-        }
-        .prev-btn:hover, .next-btn:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
-        .caption-container {
-            text-align: center;
-            background-color: #000;
-            color: #fff;
-            padding: 15px 0;
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-        }
-        .caption-container p {
-            margin: 0;
-            font-size: 1.1em;
-        }
+        /* 라이트박스/모달 스타일 (기존과 동일) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s forwards;
+        }
+        .modal-content {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+        .modal-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            display: block;
+            object-fit: contain;
+            animation: zoomIn 0.3s forwards;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .prev-btn, .next-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -50px;
+            color: white;
+            font-weight: bold;
+            font-size: 30px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .next-btn {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        .prev-btn {
+            left: 0;
+            border-radius: 0 3px 3px 0;
+        }
+        .prev-btn:hover, .next-btn:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+        .caption-container {
+            text-align: center;
+            background-color: #000;
+            color: #fff;
+            padding: 15px 0;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+        .caption-container p {
+            margin: 0;
+            font-size: 1.1em;
+        }
 
-        /* 애니메이션 */
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-        @keyframes zoomIn {
-            from {transform: scale(0.8); opacity: 0;}
-            to {transform: scale(1); opacity: 1;}
-        }
+        /* 애니메이션 */
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+        @keyframes zoomIn {
+            from {transform: scale(0.8); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
 
-        /* 포트폴리오 그리드 섹션 */
-        #portfolio-grid-section { 
-            background-color: var(--white-color);
-            padding: 100px 0; /* 슬라이더 섹션과 구분되는 여백 */
-            margin-top: 50px; /* 슬라이더 앨범과의 상단 간격 조절 */
-        }
-        #portfolio-grid-section .section-heading { /* 제목 스타일 */
-            font-size: 3em;
-            margin-bottom: 80px;
-            position: relative;
-            display: inline-block;
-            font-weight: 700;
-            text-align: center;
-            width: 100%; /* 제목 중앙 정렬을 위해 */
-        }
-        #portfolio-grid-section .section-heading::after { /* 제목 밑줄 스타일 */
-            content: '';
-            display: block;
-            width: 100px;
-            height: 5px;
-            background-color: var(--primary-color);
-            margin: 20px auto 0;
-            border-radius: 3px;
-        }
-        .portfolio-filters { /* 5열 포트폴리오 필터 버튼 */
-            margin-bottom: 60px;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-        .filter-btn { /* 5열 포트폴리오 필터 버튼 스타일 */
-            background: none;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 50px;
-            font-size: 1em;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: var(--dark-color);
-            box-shadow: none;
-        }
-        .filter-btn:hover, .filter-btn.active {
-            color: var(--primary-color);
-            transform: scale(1.1);
-        }
-        .portfolio-grid { /* 5열 포트폴리오 그리드 */
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-        @media (min-width: 1200px) { /* 1200px 이상일 때 5열 */
-            .portfolio-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-        .portfolio-item-grid { /* 5열 그리드 내부 아이템 (구분 위해 새로운 클래스) */
-            background-color: var(--white-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 은은한 그림자 */
-            transition: transform 0.3s ease, opacity 0.4s ease;
-            position: relative;
-            cursor: pointer;
-        }
-        .portfolio-item-grid:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        .portfolio-item-grid-image {
-            width: 100%;
-            padding-bottom: 100%; /* 정사각형 비율 유지 */
-            position: relative;
-            overflow: hidden;
-        }
-        .portfolio-item-grid-image img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-        }
-        .portfolio-item-grid:hover .portfolio-item-grid-image img {
-            transform: scale(1.05);
-        }
-        .portfolio-item-grid-overlay { /* 5열 그리드 아이템의 오버레이 */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: var(--white-color);
-            padding: 15px;
-            text-align: center;
-        }
-        .portfolio-item-grid:hover .portfolio-item-grid-overlay {
-            opacity: 1;
-        }
-        .portfolio-item-grid-overlay h3 {
-            color: var(--white-color);
-            font-size: 1.3em;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
-        .portfolio-item-grid-overlay p {
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 15px;
-        }
-        .portfolio-item-grid-overlay .overlay-link {
-            background-color: var(--primary-color);
-            color: var(--white-color);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-            border: none;
-            box-shadow: none;
-        }
-        .portfolio-item-grid-overlay .overlay-link:hover {
-            background-color: #e06c3f;
-        }
+        /* 포트폴리오 그리드 섹션 */
+        #portfolio-grid-section { 
+            background-color: var(--white-color);
+            padding: 100px 0; /* 슬라이더 섹션과 구분되는 여백 */
+            margin-top: 50px; /* 슬라이더 앨범과의 상단 간격 조절 */
+        }
+        #portfolio-grid-section .section-heading { /* 제목 스타일 */
+            font-size: 3em;
+            margin-bottom: 80px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            text-align: center;
+            width: 100%; /* 제목 중앙 정렬을 위해 */
+        }
+        #portfolio-grid-section .section-heading::after { /* 제목 밑줄 스타일 */
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background-color: var(--primary-color);
+            margin: 20px auto 0;
+            border-radius: 3px;
+        }
+        .portfolio-filters { /* 5열 포트폴리오 필터 버튼 */
+            margin-bottom: 60px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .filter-btn { /* 5열 포트폴리오 필터 버튼 스타일 */
+            background: none;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--dark-color);
+            box-shadow: none;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        .portfolio-grid { /* 5열 포트폴리오 그리드 */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+        @media (min-width: 1200px) { /* 1200px 이상일 때 5열 */
+            .portfolio-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+        .portfolio-item-grid { /* 5열 그리드 내부 아이템 (구분 위해 새로운 클래스) */
+            background-color: var(--white-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 은은한 그림자 */
+            transition: transform 0.3s ease, opacity 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        .portfolio-item-grid:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .portfolio-item-grid-image {
+            width: 100%;
+            padding-bottom: 100%; /* 정사각형 비율 유지 */
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-item-grid-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .portfolio-item-grid:hover .portfolio-item-grid-image img {
+            transform: scale(1.05);
+        }
+        .portfolio-item-grid-overlay { /* 5열 그리드 아이템의 오버레이 */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: var(--white-color);
+            padding: 15px;
+            text-align: center;
+        }
+        .portfolio-item-grid:hover .portfolio-item-grid-overlay {
+            opacity: 1;
+        }
+        .portfolio-item-grid-overlay h3 {
+            color: var(--white-color);
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .portfolio-item-grid-overlay p {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 15px;
+        }
+        .portfolio-item-grid-overlay .overlay-link {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            border: none;
+            box-shadow: none;
+        }
+        .portfolio-item-grid-overlay .overlay-link:hover {
+            background-color: #e06c3f;
+        }
 
-        /* 그리드 내 카테고리별 소제목 스타일 */
-        .portfolio-category-heading {
-            font-size: 1.6em; /* 소제목 크기 */
-            font-weight: 300; /* 이 부분을 수정: 얇은 글씨체 */
-            color: var(--dark-color);
-            margin-top: 40px; /* 이전 카테고리와의 간격 */
-            margin-bottom: 30px; /* 이미지 그리드와의 간격 */
-            text-align: left; /* 왼쪽 정렬 */
-            width: 100%;
-        }
-        .portfolio-category-wrapper {
-            margin-bottom: 50px; /* 각 카테고리 그룹 하단 간격 */
-        }
-        .portfolio-category-heading::after {
-            content: '';
-            display: block;
-            width: 60px; /* 소제목 밑줄 길이 */
-            height: 3px;
-            background-color: var(--primary-color);
-            margin-top: 10px;
-            margin-left: 0; /* 왼쪽 정렬 */
-            border-radius: 2px;
-        }
+        /* 그리드 내 카테고리별 소제목 스타일 */
+        .portfolio-category-heading {
+            font-size: 1.6em; /* 소제목 크기 */
+            font-weight: 300; /* 이 부분을 수정: 얇은 글씨체 */
+            color: var(--dark-color);
+            margin-top: 40px; /* 이전 카테고리와의 간격 */
+            margin-bottom: 30px; /* 이미지 그리드와의 간격 */
+            text-align: left; /* 왼쪽 정렬 */
+            width: 100%;
+        }
+        .portfolio-category-wrapper {
+            margin-bottom: 50px; /* 각 카테고리 그룹 하단 간격 */
+        }
+        .portfolio-category-heading::after {
+            content: '';
+            display: block;
+            width: 60px; /* 소제목 밑줄 길이 */
+            height: 3px;
+            background-color: var(--primary-color);
+            margin-top: 10px;
+            margin-left: 0; /* 왼쪽 정렬 */
+            border-radius: 2px;
+        }
 
-        /* 연락처 섹션 */
-        #contact {
-            background-color: var(--white-color);
-            padding: 100px 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .contact-content-wrapper {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: flex-start;
-            max-width: 1000px;
-            width: 90%;
-            margin: 0 auto;
-            gap: 50px;
-            padding: 40px;
-            border: 1px solid var(--border-color);
-            border-radius: 15px;
-        }
+        /* 연락처 섹션 */
+        #contact {
+            background-color: var(--white-color);
+            padding: 100px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-content-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            max-width: 1000px;
+            width: 90%;
+            margin: 0 auto;
+            gap: 50px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+        }
 
-        .contact-info {
-            flex: 1;
-            min-width: 300px;
-            max-width: 450px;
-            text-align: left;
-            padding-top: 20px;
-        }
-        .contact-info h3 {
-            font-size: 2.5em;
-            margin-bottom: 25px;
-            color: var(--dark-color);
-            font-weight: 300; /* 폰트 굵기 얇게 */
-            text-transform: uppercase; /* 대문자로 */
-            letter-spacing: 2px; /* 자간 넓게 */
-            border-bottom: 1px solid var(--border-color); /* 얇은 밑줄 */
-            padding-bottom: 15px; /* 밑줄과 텍스트 간격 */
-            margin-bottom: 30px;
-        }
-        .contact-info p {
-            font-size: 1.1em;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-        .contact-info strong {
-            color: var(--dark-color);
-            font-weight: 500;
-        }
-        .contact-info a {
-            color: var(--dark-color); /* 링크 색상 기본 텍스트와 동일 */
-            text-decoration: underline; /* 밑줄 */
-            transition: color 0.3s ease;
-        }
-        .contact-info a:hover {
-            color: var(--primary-color); /* 호버 시 강조 색상 */
-        }
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+            max-width: 450px;
+            text-align: left;
+            padding-top: 20px;
+        }
+        .contact-info h3 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            color: var(--dark-color);
+            font-weight: 300; /* 폰트 굵기 얇게 */
+            text-transform: uppercase; /* 대문자로 */
+            letter-spacing: 2px; /* 자간 넓게 */
+            border-bottom: 1px solid var(--border-color); /* 얇은 밑줄 */
+            padding-bottom: 15px; /* 밑줄과 텍스트 간격 */
+            margin-bottom: 30px;
+        }
+        .contact-info p {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        .contact-info strong {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        .contact-info a {
+            color: var(--dark-color); /* 링크 색상 기본 텍스트와 동일 */
+            text-decoration: underline; /* 밑줄 */
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover {
+            color: var(--primary-color); /* 호버 시 강조 색상 */
+        }
 
-        .contact-form-wrapper {
-            flex: 1.5;
-            min-width: 350px;
-            max-width: 550px;
-            padding: 30px;
-            background-color: var(--white-color);
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-        }
-        .contact-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark-color);
-            font-size: 1em;
-        }
-        .contact-form input[type="text"],
-        .contact-form input[type="email"],
-        .contact-form textarea {
-            width: 100%;
-            padding: 12px 15px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1em;
-            font-family: var(--font-kr);
-            transition: border-color 0.3s ease;
-            background-color: var(--white-color);
-        }
-        .contact-form input[type="text"]:focus,
-        .contact-form input[type="email"]:focus,
-        .contact-form textarea:focus {
-            border-color: var(--primary-color);
-            outline: none;
-        }
-        .contact-form textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-        .contact-form button {
-            background-color: transparent; /* 배경색 없음 */
-            color: var(--dark-color); /* 기본 텍스트 색상 */
-            padding: 12px 25px;
-            border: 1px solid var(--dark-color); /* 테두리만 */
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: 500;
-            display: inline-block;
-            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-        }
-        .contact-form button:hover {
-            background-color: var(--primary-color); /* 호버 시 배경색 */
-            color: var(--white-color); /* 호버 시 텍스트 색상 */
-            transform: translateY(-3px);
-            border-color: var(--primary-color); /* 호버 시 테두리 색상 */
-        }
+        .contact-form-wrapper {
+            flex: 1.5;
+            min-width: 350px;
+            max-width: 550px;
+            padding: 30px;
+            background-color: var(--white-color);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+            font-size: 1em;
+        }
+        .contact-form input[type="text"],
+        .contact-form input[type="email"],
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: var(--font-kr);
+            transition: border-color 0.3s ease;
+            background-color: var(--white-color);
+        }
+        .contact-form input[type="text"]:focus,
+        .contact-form input[type="email"]:focus,
+        .contact-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        .contact-form button {
+            background-color: transparent; /* 배경색 없음 */
+            color: var(--dark-color); /* 기본 텍스트 색상 */
+            padding: 12px 25px;
+            border: 1px solid var(--dark-color); /* 테두리만 */
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+        }
+        .contact-form button:hover {
+            background-color: var(--primary-color); /* 호버 시 배경색 */
+            color: var(--white-color); /* 호버 시 텍스트 색상 */
+            transform: translateY(-3px);
+            border-color: var(--primary-color); /* 호버 시 테두리 색상 */
+        }
 
-        /* 반응형 디자인 */
-        @media (max-width: 992px) {
-            .hero-section h1 {
-                font-size: 3.5em;
-            }
-            .hero-section p {
-                font-size: 1.4em;
-            }
-            .about-content {
-                gap: 50px;
-            }
-            #portfolio {
-                height: 50vh; /* 슬라이더 섹션 높이 조정 */
-            }
-            /* 1개만 보이는 방식에서는 이 미디어 쿼리 필요 없음 */
-            /* .portfolio-item { width: 180px; height: 90px; margin: 0 8px; } */
-            /* .portfolio-item.active { width: 450px; height: 225px; margin: 0 15px; } */
-            #portfolio-grid-section {
-                margin-top: 40px; /* 태블릿 슬라이더와의 간격 */
-            }
-            #portfolio-grid-section .section-heading {
-                font-size: 2.5em;
-                margin-bottom: 60px;
-            }
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 15px;
-            }
-            .portfolio-category-heading {
-                font-size: 1.8em;
-                margin-top: 30px;
-                margin-bottom: 20px;
-            }
-        }
+        /* 푸터 */
+        footer {
+            background-color: var(--dark-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 40px 0;
+            font-size: 1em;
+        }
+        footer p {
+            margin: 0;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        .social-links {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        .social-links img {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            border-radius: 5px;
+        }
 
-        @media (max-width: 768px) {
-            .container {
-                width: 95%; /* 컨테이너 너비 유지 */
-                padding: 30px 0; /* 섹션 상하 패딩을 조금 줄여줍니다. */
-            }
-            header {
-                padding: 10px 0; /* 헤더의 상하 패딩을 줄여 더 컴팩트하게 만듭니다. */
-            }
-            .header-container {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 10px 15px;
-                padding-top: 40px; /* lang-switcher 높이를 고려하여 조정. */
-            }
-            .logo-wrapper {
-                width: 100%;
-                justify-content: center;
-                margin-bottom: 10px;
-            }
-            .logo {
-                font-size: 1.4em; /* 로고 텍스트 크기를 더 줄여줍니다. */
-            }
-            .logo img {
-                width: 35px; /* 로고 이미지 크기를 더 줄여줍니다. */
-                height: 35px;
-            }
-            .header-social-links {
-                gap: 10px;
-            }
-            .header-social-links a img {
-                width: 18px; /* 헤더 소셜 아이콘 크기를 더 줄여줍니다. */
-                height: 18px;
-            }
-            .lang-switcher {
-                position: absolute;
-                top: 10px;
-                right: 15px;
-                margin: 0;
-            }
-            .main-nav {
-                margin-top: 10px;
-                width: 100%;
-                margin-left: 0;
-            }
-            .main-nav ul {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            .main-nav ul li {
-                margin: 0 6px 6px 6px; /* 내비게이션 아이템 간격을 더 줄여줍니다. */
-            }
-            .main-nav ul li a {
-                font-size: 0.9em; /* 내비게이션 링크 폰트 크기를 더 줄여줍니다. */
-            }
-            .hero-section {
-                padding: 80px 20px; /* 히어로 섹션 패딩을 더 줄여 화면을 덜 차지하게 합니다. */
-                min-height: 60vh; /* 히어로 섹션 최소 높이를 더 줄여줍니다. */
-            }
-            .hero-section h1 {
-                font-size: 2.8em;
-            }
-            .hero-section p {
-                font-size: 1.2em;
-            }
-            .btn-primary {
-                padding: 14px 30px;
-                font-size: 1.1em;
-            }
-            .about-content {
-                flex-direction: column;
-                gap: 30px;
-                text-align: center;
-            }
-            .about-image img {
-                width: 200px; /* 프로필 이미지 크기를 더 줄입니다. */
-                height: 200px;
-                border-width: 8px; /* 테두리 두께도 살짝 줄입니다. */
-            }
-            .about-text {
-                text-align: center;
-            }
-            .about-text h3 {
-                font-size: 1.8em; /* 소개 제목 크기를 줄입니다. */
-                margin-bottom: 15px;
-            }
-            .about-text p {
-                font-size: 0.95em; /* 소개 문단 폰트 크기를 줄입니다. */
-            }
-            #portfolio {
-                height: 30vh; /* 모바일 슬라이더 섹션 높이 조정 */
-            }
-            /* 1개만 보이는 방식에서는 이 미디어 쿼리 필요 없음 */
-            /* .portfolio-item { width: 120px; height: 60px; margin: 0 5px; } */
-            /* .portfolio-item.active { width: 300px; height: 150px; margin: 0 10px; } */
-            .slider-nav-btn {
-                font-size: 2em; /* 슬라이더 버튼 크기를 조금 더 줄입니다. */
-                padding: 0 10px;
-            }
-            #prev-slide { left: 0px; } /* 위치 조정 */
-            #next-slide { right: 0px; } /* 위치 조정 */
+        /* 반응형 디자인 */
+        /* PC (Desktop) styles - Base styles, 992px and above */
+        @media (min-width: 993px) {
+            .header-container {
+                flex-direction: row;
+                align-items: center;
+                padding-top: 20px;
+            }
+            .logo-wrapper {
+                width: auto;
+                justify-content: flex-start;
+                margin-bottom: 0;
+            }
+            .main-nav {
+                margin-left: auto;
+                width: auto;
+                margin-top: 0;
+            }
+            .main-nav ul {
+                flex-wrap: nowrap;
+            }
+            .main-nav ul li {
+                margin-left: 40px;
+                margin-bottom: 0;
+            }
+            #portfolio-grid-section .section-heading {
+                font-size: 3em;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+            #contact .contact-content-wrapper {
+                flex-direction: row;
+                justify-content: center;
+                align-items: flex-start;
+            }
+            .contact-info {
+                text-align: left;
+            }
+        }
 
-            #portfolio-grid-section {
-                margin-top: 30px; /* 모바일 슬라이더와의 간격 */
-                padding: 60px 0; /* 그리드 섹션 패딩 줄입니다. */
-            }
-            #portfolio-grid-section .section-heading {
-                font-size: 2em; /* 그리드 섹션 제목 크기 줄입니다. */
-                margin-bottom: 50px;
-            }
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* 그리드 아이템 최소 너비 조정 */
-                gap: 10px; /* 그리드 아이템 간격 줄입니다. */
-            }
-            .portfolio-category-heading {
-                font-size: 1.5em; /* 카테고리 소제목 크기 줄입니다. */
-                margin-top: 30px;
-                margin-bottom: 20px;
-            }
-            .contact-content-wrapper {
-                padding: 20px; /* 연락처 섹션 내부 패딩 줄입니다. */
-                gap: 30px; /* 연락처 정보와 폼 사이 간격 줄입니다. */
-            }
-            .contact-info h3 {
-                font-size: 2em; /* 연락처 제목 크기 줄입니다. */
-                margin-bottom: 20px;
-                padding-bottom: 10px;
-            }
-            .contact-info p {
-                font-size: 0.95em; /* 연락처 정보 폰트 크기 줄입니다. */
-            }
-            .contact-form-wrapper {
-                padding: 20px; /* 연락처 폼 내부 패딩 줄입니다. */
-            }
-            .contact-form label {
-                font-size: 0.95em; /* 폼 라벨 폰트 크기 줄입니다. */
-                margin-bottom: 5px;
-            }
-            .contact-form input, .contact-form textarea, .contact-form button {
-                padding: 10px; /* 폼 입력 필드와 버튼 패딩 줄입니다. */
-                font-size: 0.9em;
-                margin-bottom: 15px; /* 폼 요소 하단 마진 줄입니다. */
-            }
-            .contact-form textarea {
-                min-height: 100px; /* 텍스트 에어리어 최소 높이 줄입니다. */
-            }
-            .contact-form button {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-            .modal-content img {
-                max-height: 70vh;
-            }
-            .prev-btn, .next-btn {
-                font-size: 24px;
-                margin-top: -30px;
-            }
-            .close-btn {
-                font-size: 30px;
-                top: 10px;
-                right: 20px;
-            }
-        }
 
-        @media (max-width: 480px) {
-            .hero-section h1 {
-                font-size: 2.2em;
-            }
-            .hero-section p {
-                font-size: 1em;
-            }
-            .about-image img {
-                width: 150px; /* 프로필 이미지 크기를 더 줄입니다. */
-                height: 150px;
-                border-width: 5px; /* 테두리 두께도 더 줄입니다. */
-            }
-            .about-text h3 {
-                font-size: 1.5em; /* 어바웃 제목 크기를 더 줄입니다. */
-            }
-            .about-text p {
-                font-size: 0.9em; /* 어바웃 문단 폰트 크기를 더 줄입니다. */
-            }
-            #portfolio {
-                height: 20vh; /* 아주 작은 화면에서 슬라이더 높이 조정 */
-            }
-            /* 1개만 보이는 방식에서는 이 미디어 쿼리 필요 없음 */
-            /* .portfolio-item { width: 80px; height: 40px; margin: 0 3px; } */
-            /* .portfolio-item.active { width: 200px; height: 100px; margin: 0 5px; } */
-            .slider-nav-btn {
-                font-size: 1.8em; /* 슬라이더 버튼 크기를 더 줄입니다. */
-                padding: 0 5px;
-            }
-            #portfolio-grid-section {
-                margin-top: 20px; /* 아주 작은 화면에서 슬라이더와의 간격 */
-                padding: 40px 0; /* 그리드 섹션 패딩 더 줄입니다. */
-            }
-            #portfolio-grid-section .section-heading {
-                font-size: 1.8em;
-                margin-bottom: 40px;
-            }
-            .portfolio-grid {
-                grid-template-columns: 1fr; /* 1열로 변경 */
-                gap: 8px; /* 그리드 아이템 간격 더 줄입니다. */
-            }
-            .portfolio-item-grid-overlay h3 {
-                font-size: 1.1em; /* 그리드 오버레이 제목 크기 줄입니다. */
-                margin-bottom: 5px;
-            }
-            .portfolio-item-grid-overlay p {
-                font-size: 0.8em; /* 그리드 오버레이 문단 크기 줄입니다. */
-                margin-bottom: 10px;
-            }
-            .portfolio-item-grid-overlay .overlay-link {
-                padding: 6px 15px; /* 오버레이 링크 패딩을 줄입니다. */
-                font-size: 0.75em; /* 오버레이 링크 폰트 크기를 줄입니다. */
-            }
-            .portfolio-category-heading {
-                font-size: 1.2em;
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-            .contact-form input, .contact-form textarea, .contact-form button {
-                padding: 10px 12px;
-                font-size: 0.9em;
-            }
-            .contact-form button {
-                padding: 10px 20px;
-                font-size: 0.9em;
-            }
-            .modal-content img {
-                max-height: 50vh; /* 모달 이미지 최대 높이 더 줄입니다. */
-            }
-            .prev-btn, .next-btn {
-                font-size: 20px;
-                margin-top: -25px;
-            }
-            .close-btn {
-                font-size: 25px;
-                top: 5px;
-                right: 15px;
-            }
-            .caption-container {
-                padding: 10px 0;
-            }
-            .caption-container p {
-                font-size: 0.9em;
-            }
-        }
-    </style>
+        /* 태블릿 (Tablet) Portrait and Landscape - 769px to 992px */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 3.5em;
+            }
+            .hero-section p {
+                font-size: 1.4em;
+            }
+            .about-content {
+                gap: 50px;
+            }
+            #portfolio {
+                height: 50vh; /* 슬라이더 섹션 높이 조정 */
+            }
+            #portfolio-grid-section {
+                margin-top: 40px; /* 태블릿 슬라이더와의 간격 */
+            }
+            #portfolio-grid-section .section-heading {
+                font-size: 2.5em;
+                margin-bottom: 60px;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                gap: 15px;
+            }
+            .portfolio-category-heading {
+                font-size: 1.8em;
+                margin-top: 30px;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* 모바일 (Mobile) - 768px and below */
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 30px 0;
+            }
+            header {
+                padding: 15px 0; /* 상단 패딩 줄임 */
+            }
+            .header-container {
+                flex-direction: column; /* 로고와 내비게이션 세로 정렬 */
+                align-items: center; /* 가운데 정렬 */
+                padding: 10px 15px;
+                padding-top: 40px; /* 언어 스위처 아래로 내림 */
+            }
+            .lang-switcher {
+                top: 5px; /* 언어 스위처 상단으로 이동 */
+                right: 15px;
+            }
+            .logo-wrapper {
+                width: auto; /* 너비 자동 */
+                justify-content: center; /* 로고와 소셜 링크 가운데 정렬 */
+                margin-bottom: 10px;
+            }
+            .logo {
+                font-size: 1.6em;
+            }
+            .logo img {
+                width: 35px;
+                height: 35px;
+            }
+            .header-social-links {
+                margin-left: 0; /* 간격 제거 */
+                margin-top: 5px; /* 로고와 소셜 링크 사이 간격 */
+            }
+            .main-nav {
+                margin-top: 10px;
+                width: 100%;
+                margin-left: 0;
+            }
+            .main-nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px; /* 메뉴 항목 간 간격 */
+            }
+            .main-nav ul li {
+                margin: 0; /* 기존 마진 제거 */
+            }
+            .main-nav ul li a {
+                font-size: 1em;
+                padding: 5px 10px; /* 패딩 조정 */
+            }
+            .hero-section {
+                padding: 80px 20px; /* 패딩 줄임 */
+                min-height: 60vh; /* 높이 줄임 */
+            }
+            .hero-section h1 {
+                font-size: 2.8em;
+            }
+            .hero-section p {
+                font-size: 1.2em;
+            }
+            .btn-primary {
+                padding: 14px 30px;
+                font-size: 1.1em;
+            }
+            .about-content {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            .about-image img {
+                width: 250px;
+                height: 250px;
+            }
+            .about-text {
+                text-align: center;
+            }
+            .about-text h3 {
+                font-size: 2em; /* about 섹션 제목 크기 조정 */
+            }
+            .about-text p {
+                font-size: 1em; /* about 섹션 본문 폰트 크기 조정 */
+            }
+            #portfolio {
+                height: 35vh; /* 모바일 슬라이더 섹션 높이 조정 */
+            }
+            .slider-nav-btn {
+                font-size: 2.5em; /* 버튼 크기 조정 */
+                padding: 0 10px; /* 패딩 조정 */
+            }
+            #prev-slide { left: 5px; } /* 위치 조정 */
+            #next-slide { right: 5px; } /* 위치 조정 */
+
+            #portfolio-grid-section {
+                margin-top: 30px; /* 모바일 그리드 섹션 상단 간격 */
+                padding: 60px 0; /* 패딩 조정 */
+            }
+            #portfolio-grid-section .section-heading {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+            .portfolio-filters {
+                margin-bottom: 30px;
+                gap: 10px;
+            }
+            .filter-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 10px;
+            }
+            .portfolio-category-heading {
+                font-size: 1.3em;
+                margin-top: 25px;
+                margin-bottom: 15px;
+            }
+            .contact-content-wrapper {
+                flex-direction: column; /* 세로 정렬 */
+                padding: 30px;
+                gap: 30px;
+            }
+            .contact-info {
+                min-width: auto;
+                max-width: 100%;
+                padding-top: 0;
+            }
+            .contact-info h3 {
+                font-size: 2em; /* Contact 섹션 제목 크기 조정 */
+                margin-bottom: 20px;
+                letter-spacing: 1px;
+                padding-bottom: 10px;
+            }
+            .contact-info p {
+                font-size: 1em;
+            }
+            .contact-form-wrapper {
+                min-width: auto;
+                max-width: 100%;
+                padding: 20px;
+            }
+            .contact-form input, .contact-form textarea {
+                padding: 10px 12px;
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+            .contact-form textarea {
+                min-height: 100px;
+            }
+            .contact-form button {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+            .modal-content img {
+                max-height: 70vh;
+            }
+            .prev-btn, .next-btn {
+                font-size: 24px;
+                margin-top: -30px;
+            }
+            .close-btn {
+                font-size: 30px;
+                top: 10px;
+                right: 20px;
+            }
+            .caption-container p {
+                font-size: 1em;
+                padding: 10px 0;
+            }
+        }
+
+        /* 아주 작은 모바일 화면 (Small Mobile) - 480px and below */
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 60px 15px;
+                min-height: 50vh;
+            }
+            .hero-section h1 {
+                font-size: 2em;
+            }
+            .hero-section p {
+                font-size: 0.9em;
+            }
+            .btn-primary {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            .about-image img {
+                width: 180px;
+                height: 180px;
+                border-width: 8px; /* 테두리 얇게 */
+            }
+            .about-text h3 {
+                font-size: 1.6em;
+            }
+            .about-text p {
+                font-size: 0.9em;
+            }
+            #portfolio {
+                height: 28vh; /* 슬라이더 높이 더 줄임 */
+            }
+            .slider-nav-btn {
+                font-size: 2em;
+            }
+            #portfolio-grid-section {
+                margin-top: 20px;
+                padding: 40px 0;
+            }
+            #portfolio-grid-section .section-heading {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            .portfolio-filters {
+                gap: 8px;
+            }
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.8em;
+            }
+            .portfolio-grid {
+                grid-template-columns: 1fr; /* 한 열로 변경 */
+                gap: 8px;
+            }
+            .portfolio-item-grid-overlay h3 {
+                font-size: 1.1em;
+            }
+            .portfolio-item-grid-overlay p {
+                font-size: 0.8em;
+            }
+            .portfolio-item-grid-overlay .overlay-link {
+                padding: 6px 15px;
+                font-size: 0.8em;
+            }
+            .portfolio-category-heading {
+                font-size: 1.1em;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+            .contact-info h3 {
+                font-size: 1.8em;
+            }
+            .contact-info p {
+                font-size: 0.9em;
+            }
+            .contact-form input, .contact-form textarea, .contact-form button {
+                font-size: 0.85em;
+            }
+            .modal-content img {
+                max-height: 60vh;
+            }
+            .prev-btn, .next-btn {
+                font-size: 20px;
+                margin-top: -25px;
+            }
+            .close-btn {
+                font-size: 28px;
+                top: 5px;
+                right: 15px;
+            }
+        }
+    </style>
 </head>
 <body class="en-lang">
-    <header>
-        <div class="lang-switcher">
-            <button id="lang-en" class="active">EN</button>
-            <button id="lang-ko">KR</button>
-        </div>
-
-        <div class="header-container">
-            <div class="logo-wrapper">
-                <a href="#portfolio" class="logo" data-ko="김민겸" data-en="MINGYUM KIM">
-                    <img src="images/gyum_logo.png" alt="Logo"> MINGYUM KIM
-                </a>
-                <div class="header-social-links">
-                    <a href="https://www.instagram.com/gye_om/" target="_blank" aria-label="Instagram">
-                        <img src="images/insta_logo.png" alt="Instagram">
-                    </a>
-                    <a href="https://x.com/Gyeom_art" target="_blank" aria-label="X (Twitter)">
-                        <img src="images/x_logo.png" alt="X (Twitter)">
-                    </a>
-                </div>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#portfolio" class="active" data-ko="포트폴리오" data-en="PORTFOLIO">PORTFOLIO</a></li>
-                    <li><a href="#about" data-ko="소개" data-en="ABOUT">ABOUT</a></li>
-                    <li><a href="#contact" data-ko="연락처" data-en="CONTACT">CONTACT</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-       <section id="portfolio">
-            <div class="portfolio-slider-wrapper">
-                <div class="portfolio-slider">
-                    <div class="portfolio-item" data-category="Swirl">
-                        <img src="images/swirl_01.jpg" alt="Swirl 01">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Flow Roll">
-                        <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Pyeonggang">
-                        <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Pyeonggang 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Comission">
-                        <img src="images/comission_01.jpg" alt="Comission 01">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Personal Art">
-                        <img src="images/personal_art_01.jpg" alt="Personal Art 01">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Swirl">
-                        <img src="images/swirl_02.jpg" alt="Swirl 02">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Flow Roll">
-                        <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-item" data-category="Pyeonggang">
-                        <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
-                        <div class="portfolio-info-overlay">
-                            <h3 data-ko="Pyeonggang 02" data-en="Pyeonggang 02">Pyeonggang 02</h3>
-                        </div>
-                    </div>
-                </div>
-                <button id="prev-slide" class="slider-nav-btn">&#10094;</button>
-                <button id="next-slide" class="slider-nav-btn">&#10095;</button>
-            </div>
-        </section>
-
-        <section id="portfolio-grid-section">
-            <div class="container text-center">
-                <h2 class="section-heading" data-ko="포트폴리오 갤러리" data-en="PORTFOLIO GALLERY">PORTFOLIO GALLERY</h2>
-                <div class="portfolio-filters">
-                    <button class="filter-btn active" data-filter="all" data-ko="전체 보기" data-en="ALL">ALL</button>
-                    <button class="filter-btn" data-filter="Swirl" data-ko="Swirl" data-en="Swirl">Swirl</button>
-                    <button class="filter-btn" data-filter="Flow Roll" data-ko="Flow Roll" data-en="Flow Roll">Flow Roll</button>
-                    <button class="filter-btn" data-filter="Pyeonggang" data-ko="Pyeonggang" data-en="Pyeonggang">Pyeonggang</button>
-                    <button class="filter-btn" data-filter="Comission" data-ko="Comission" data-en="Comission">Comission</button>
-                    <button class="filter-btn" data-filter="Personal Art" data-ko="Personal Art" data-en="Personal Art">Personal Art</button>
-                </div>
-                
-                <div class="portfolio-category-wrapper">
-                    <h3 class="portfolio-category-heading" data-ko="Swirl 작품" data-en="Swirl Artworks">Swirl Artworks</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_01.jpg" alt="Swirl 01">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_02.jpg" alt="Swirl 02">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_03.jpg" alt="Swirl 03">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 03" data-en="Swirl 03">Swirl 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_04.jpg" alt="Swirl 04">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 04" data-en="Swirl 04">Swirl 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_05.jpg" alt="Swirl 05">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 05" data-en="Swirl 05">Swirl 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_06.jpg" alt="Swirl 06">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 06" data-en="Swirl 06">Swirl 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_07.jpg" alt="Swirl 07">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 07" data-en="Swirl 07">Swirl 07</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_08.jpg" alt="Swirl 08">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 08" data-en="Swirl 08">Swirl 08</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_09.jpg" alt="Swirl 09">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 09" data-en="Swirl 09">Swirl 09</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_10.jpg" alt="Swirl 10">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 10" data-en="Swirl 10">Swirl 10</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_11.jpg" alt="Swirl 11">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 11" data-en="Swirl 11">Swirl 11</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_12.jpg" alt="Swirl 12">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 12" data-en="Swirl 12">Swirl 12</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_13.jpg" alt="Swirl 13">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 13" data-en="Swirl 13">Swirl 13</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_14.jpg" alt="Swirl 14">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 14" data-en="Swirl 14">Swirl 14</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_15.jpg" alt="Swirl 15">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 15" data-en="Swirl 15">Swirl 15</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_16.jpg" alt="Swirl 16">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 16" data-en="Swirl 16">Swirl 16</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_17.jpg" alt="Swirl 17">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 17" data-en="Swirl 17">Swirl 17</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_18.jpg" alt="Swirl 18">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 18" data-en="Swirl 18">Swirl 18</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_19.jpg" alt="Swirl 19">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 19" data-en="Swirl 19">Swirl 19</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Swirl">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/swirl_20.jpg" alt="Swirl 20">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Swirl 20" data-en="Swirl 20">Swirl 20</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-category-wrapper">
-                    <h3 class="portfolio-category-heading" data-ko="Flow Roll 작품" data-en="Flow Roll Artworks">Flow Roll Artworks</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item-grid" data-category="Flow Roll">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Flow Roll">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
- 
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Flow Roll">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_03.jpg" alt="Flow Roll 03">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Flow Roll 03" data-en="Flow Roll 03">Flow Roll 03</h3>
- 
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Flow Roll">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_04.jpg" alt="Flow Roll 04">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Flow Roll 04" data-en="Flow Roll 04">Flow Roll 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Flow Roll">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_05.jpg" alt="Flow Roll 05">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Flow Roll 05" data-en="Flow Roll 05">Flow Roll 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Flow Roll">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/flow_roll_06.jpg" alt="Flow Roll 06">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Flow Roll 06" data-en="Flow Roll 06">Flow Roll 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-category-wrapper">
-                    <h3 class="portfolio-category-heading" data-ko="평강 작품" data-en="Pyeonggang Artworks">Pyeonggang Artworks</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 02" data-en="Pyeonggang 02">평강 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_03.jpg" alt="Pyeonggang 03">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 03" data-en="Pyeonggang 03">평강 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_04.jpg" alt="Pyeonggang 04">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 04" data-en="Pyeonggang 04">평강 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_05.jpg" alt="Pyeonggang 05">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 05" data-en="Pyeonggang 05">평강 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_06.jpg" alt="Pyeonggang 06">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 06" data-en="Pyeonggang 06">평강 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_07.jpg" alt="Pyeonggang 07">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 07" data-en="Pyeonggang 07">평강 07</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_08.jpg" alt="Pyeonggang 08">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 08" data-en="Pyeonggang 08">평강 08</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_09.jpg" alt="Pyeonggang 09">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 09" data-en="Pyeonggang 09">평강 09</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Pyeonggang">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/pyeonggang_10.jpg" alt="Pyeonggang 10">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="평강 10" data-en="Pyeonggang 10">평강 10</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="portfolio-category-wrapper">
-                    <h3 class="portfolio-category-heading" data-ko="Comission 작품" data-en="Comission Artworks">Comission Artworks</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item-grid" data-category="Comission">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/comission_01.jpg" alt="Comission 01">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
- 
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Comission">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/comission_02.jpg" alt="Comission 02">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Comission 02" data-en="Comission 02">Comission 02</h3>
- 
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Comission">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/comission_03.jpg" alt="Comission 03">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Comission 03" data-en="Comission 03">Comission 03</h3>
- 
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="portfolio-category-wrapper">
-                    <h3 class="portfolio-category-heading" data-ko="Personal Art 작품" data-en="Personal Artworks">Personal Artworks</h3>
-                    <div class="portfolio-grid">
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_01.jpg" alt="Personal Art 01">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_02.jpg" alt="Personal Art 02">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 02" data-en="Personal Art 02">Personal Art 02</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_03.jpg" alt="Personal Art 03">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 03" data-en="Personal Art 03">Personal Art 03</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_04.jpg" alt="Personal Art 04">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 04" data-en="Personal Art 04">Personal Art 04</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_05.jpg" alt="Personal Art 05">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 05" data-en="Personal Art 05">Personal Art 05</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_06.jpg" alt="Personal Art 06">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 06" data-en="Personal Art 06">Personal Art 06</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_07.jpg" alt="Personal Art 07">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 07" data-en="Personal Art 07">Personal Art 07</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_08.jpg" alt="Personal Art 08">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 08" data-en="Personal Art 08">Personal Art 08</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_09.jpg" alt="Personal Art 09">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 09" data-en="Personal Art 09">Personal Art 09</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_10.jpg" alt="Personal Art 10">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 10" data-en="Personal Art 10">Personal Art 10</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                        </div>
-                        <div class="portfolio-item-grid" data-category="Personal Art">
-                            <div class="portfolio-item-grid-image">
-                                <img src="images/personal_art_11.jpg" alt="Personal Art 11">
-                            </div>
-                            <div class="portfolio-item-grid-overlay">
-                                <h3 data-ko="Personal Art 11" data-en="Personal Art 11">Personal Art 11</h3>
-
-                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="about">
-            <div class="container text-center">
-                <h2 class="section-heading" data-ko="소개" data-en="ABOUT">ABOUT</h2>
-                <div class="about-content">
-                    <div class="about-image">
-                        <img src="images/profile_image.jpg" alt="Your Profile Photo">
-                    </div>
-                    <div class="about-text">
-                        <h3 data-ko="김민겸" data-en="MINGYUM KIM">MINGYUM KIM</h3>
-                        <p data-ko="김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다." data-en="Kim Min-gyum is an illustrator who focuses on visualization and color.">김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.</p>
-                        <p data-ko="감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다." data-en="We are attracted to the work of capturing emotions and atmospheres concisely but delicately, and we continue to try various things in animation and illustration projects.">감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다。</p>
-                        <p data-ko="현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다." data-en="Currently, he is active mainly in Seoul, Korea, and has participated in various fields such as tvN, Korea Business Corporation, and Seneca College in Canada.">현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="contact-content-wrapper">
-                <div class="contact-info">
-                    <h3 data-ko="연락처" data-en="CONTACT">CONTACT</h3>
-                    <p data-ko="문의:gyeom951127@gmail.com" data-en="Inquiry:gyeom951127@gmail.com">문의:gyeom951127@gmail.com</p>
-                    <p><strong>Email:</strong> <a href="mailto:gyeom951127@gmail.com">gyeom951127@gmail.com</a></p>
-                    <p><strong>Phone:</strong> +82 10-7484-0757</p>
-                    <p><strong>Location:</strong> Seoul, South Korea</p>
-                </div>
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xanjrnga" method="post">
-                        <label for="name" data-ko="이름" data-en="Name">Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-
-                        <label for="email" data-ko="이메일" data-en="Email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="Your Email Address" required>
-
-                        <label for="message" data-ko="메시지" data-en="Message">Message</label>
-                        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
-
-                        <button type="submit" data-ko="메시지 보내기" data-en="SEND MESSAGE">SEND MESSAGE</button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://www.instagram.com/gye_om/" target="_blank" aria-label="Instagram">
-                    <img src="images/insta_logo_white.png" alt="Instagram">
-                </a>
-                <a href="https://x.com/Gyeom_art" target="_blank" aria-label="X (Twitter)">
-                    <img src="images/x_logo_white.png" alt="X (Twitter)">
-                </a>
-            </div>
-            <p data-ko="&copy; 2025 MINGYUM KIM. All Rights Reserved." data-en="&copy; 2025 MINGYUM KIM. All Rights Reserved.">&copy; 2025 MINGYUM KIM. All Rights Reserved.</p>
-            <p data-ko="Designed with passion and creativity." data-en="Designed with passion and creativity.">Designed with passion and creativity.</p>
-        </div>
-    </footer>
-
-    <div id="myModal" class="modal">
-        <span class="close-btn">&times;</span>
-        <div class="modal-content">
-            <img id="modalImage" src="" alt="">
-            <a class="prev-btn">&#10094;</a>
-            <a class="next-btn">&#10095;</a>
-        </div>
-        <div class="caption-container">
-            <p id="caption"></p>
-        </div>
-    </div>
-
-    <script>
-       // 언어별 텍스트 데이터 (확장 가능)
-        const translations = {
-            ko: {
-                logo: "김민겸",
-                navPortfolio: "포트폴리오",
-                navAbout: "소개",
-                navContact: "연락처",
-                portfolioGridHeading: "포트폴리오 갤러리", 
-                filterAll: "전체 보기",
-                filterSwirl: "Swirl", 
-                filterFlowRoll: "Flow Roll", 
-                filterPyeonggang: "Pyeonggang", 
-                filterComission: "Comission", 
-                filterPersonalArt: "Personal Art",
-                aboutHeading: "소개",
-                aboutName: "김민겸",
-                aboutP1: "김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.",
-                aboutP2: "감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다.",
-                aboutP3: "현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.",
-                contactHeading: "연락처",
-                contactP: "문의:ohjingohjing@naver.com",
-                contactNameLabel: "이름",
-                contactEmailLabel: "이메일",
-                contactMessageLabel: "메시지",
-                contactNamePlaceholder: "이름을 입력해주세요",
-                contactEmailPlaceholder: "이메일 주소를 입력해주세요",
-                contactMessagePlaceholder: "자세한 내용을 입력해주세요",
-                sendButton: "메시지 보내기",
-                footerCopy: "&copy; 2025 김민겸. 모든 권리 보유.",
-                footerDesign: "열정과 창의성으로 디자인했습니다.",
-                // 포트폴리오 오버레이 텍스트 (추가) - 5열 그리드 아이템과 슬라이더 아이템 모두 사용
-                SwirlArtworks: "Swirl 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
-                FlowRollArtworks: "Flow Roll 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
-                PyeonggangArtworks: "평강 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
-                ComissionArtworks: "Comission 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
-                PersonalArtworks: "Personal Art 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
-                
-                // 슬라이더 오버레이 텍스트
-                Swirl01Desc: "환상적인 소용돌이 테마 아트.",
-                FlowRoll01Desc: "유려한 움직임을 담은 롤 아트.",
-                Pyeonggang01Desc: "평강 테마의 전통적인 분위기.",
-                Comission01Desc: "의뢰받아 제작된 맞춤형 작품.",
-                PersonalArt01Desc: "개인적인 창작물이 담긴 아트.",
-                Swirl02Desc: "환상적인 소용돌이 테마 아트.",
-                FlowRoll02Desc: "유려한 움직임을 담은 롤 아트.",
-                Pyeonggang02Desc: "평강 테마의 전통적인 분위기.",
-                // Formspree 관련 메시지 추가
-                sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
-                sendErrorMessage: '메시지 전송에 실패했습니다. 다시 시도해주세요.',
-                networkErrorMessage: '메시지 전송 중 네트워크 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'
-            },
-            en: {
-                logo: "MINGYUM KIM",
-                navPortfolio: "PORTFOLIO",
-                navAbout: "ABOUT",
-                navContact: "CONTACT",
-                portfolioGridHeading: "PORTFOLIO GALLERY", 
-                filterAll: "ALL",
-                filterSwirl: "Swirl",
-                filterFlowRoll: "Flow Roll",
-                filterPyeonggang: "Pyeonggang",
-                filterComission: "Comission",
-                filterPersonalArt: "Personal Art",
-                aboutHeading: "ABOUT",
-                aboutName: "MINGYUM KIM",
-                aboutP1: "Kim Min-gyum is an illustrator and concept artist who focuses on the visualization and color in his works.",
-                aboutP2: "He is fascinated by the process of capturing emotions and atmospheres concisely but delicately, and he continues to explore various approaches in animation and illustration projects.",
-                aboutP3: "Currently, he is primarily active in Seoul, Korea, and has experience working on projects in various fields, including tvN, Korea Business Corporation, and Seneca College in Canada.",
-                contactHeading: "CONTACT",
-                contactP: "Inquiry:ohjingohjing@naver.email",
-                contactNameLabel: "Name",
-                contactEmailLabel: "Email",
-                contactMessageLabel: "Message",
-                contactNamePlaceholder: "Your Name",
-                contactEmailPlaceholder: "Your Email Address",
-                contactMessagePlaceholder: "Write your message here...",
-                sendButton: "SEND MESSAGE",
-                footerCopy: "&copy; 2025 MINGYUM KIM. All Rights Reserved.",
-                footerDesign: "Designed with passion and creativity.",
-                // 포트폴리오 오버레이 텍스트
-                SwirlArtworks: "Swirl Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
-                FlowRollArtworks: "Flow Roll Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
-                PyeonggangArtworks: "Pyeonggang Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
-                ComissionArtworks: "Comission Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
-                PersonalArtworks: "Personal Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
-
-                // 슬라이더 오버레이 텍스트
-                Swirl01Desc: "Fantastic swirl themed art.",
-                FlowRoll01Desc: "Roll art with flowing movements.",
-                Pyeonggang01Desc: "Traditional atmosphere with a Pyeonggang theme.",
-                Comission01Desc: "Custom artwork created on commission.",
-                PersonalArt01Desc: "Art containing personal creations.",
-                Swirl02Desc: "Fantastic swirl themed art.",
-                FlowRoll02Desc: "Roll art with flowing movements.",
-                Pyeonggang02Desc: "Traditional atmosphere with a Pyeonggang theme.",
-                // Formspree 관련 메시지 추가
-                sendSuccessMessage: 'Message sent successfully!',
-                sendErrorMessage: 'Failed to send message. Please try again.',
-                networkErrorMessage: 'Network error occurred while sending message. Please check your connection.'
-            }
-        };
-
-        let currentLang = 'en'; 
-        let portfolioSlider;
-        let originalPortfolioItems = []; // 원본 아이템만 저장
-        let allPortfolioItems = []; // 클론 포함 모든 아이템 (DOM에 있는 실제 아이템들)
-        let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
-        let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
-
-        function applyTranslations(lang) {
-            currentLang = lang;
-
-            document.querySelectorAll('[data-ko], [data-en]').forEach(element => {
-                const koText = element.getAttribute('data-ko');
-                const enText = element.getAttribute('data-en');
-                if (lang === 'ko' && koText) {
-                    element.innerHTML = koText;
-                } else if (lang === 'en' && enText) {
-                    element.innerHTML = enText;
-                }
-            });
-
-            document.querySelector('input[name="name"]').setAttribute('placeholder', translations[lang].contactNamePlaceholder);
-            document.querySelector('input[name="email"]').setAttribute('placeholder', translations[lang].contactEmailPlaceholder);
-            document.querySelector('textarea[name="message"]').setAttribute('placeholder', translations[lang].contactMessagePlaceholder);
-
-            const portfolioGridHeadingElement = document.querySelector('#portfolio-grid-section .section-heading');
-            if (portfolioGridHeadingElement) {
-                portfolioGridHeadingElement.innerHTML = translations[lang].portfolioGridHeading;
-            }
-
-            document.querySelector('.filter-btn[data-filter="all"]').innerHTML = translations[lang].filterAll;
-            document.querySelector('.filter-btn[data-filter="Swirl"]').innerHTML = translations[lang].filterSwirl;
-            document.querySelector('.filter-btn[data-filter="Flow Roll"]').innerHTML = translations[lang].filterFlowRoll;
-            document.querySelector('.filter-btn[data-filter="Pyeonggang"]').innerHTML = translations[lang].filterPyeonggang;
-            document.querySelector('.filter-btn[data-filter="Comission"]').innerHTML = translations[lang].filterComission;
-            document.querySelector('.filter-btn[data-filter="Personal Art"]').innerHTML = translations[lang].filterPersonalArt;
-
-            document.querySelector('.portfolio-category-heading[data-ko="Swirl 작품"]').innerHTML = translations[lang].SwirlArtworks;
-            document.querySelector('.portfolio-category-heading[data-ko="Flow Roll 작품"]').innerHTML = translations[lang].FlowRollArtworks;
-            document.querySelector('.portfolio-category-heading[data-ko="평강 작품"]').innerHTML = translations[lang].PyeonggangArtworks;
-            document.querySelector('.portfolio-category-heading[data-ko="Comission 작품"]').innerHTML = translations[lang].ComissionArtworks;
-            document.querySelector('.portfolio-category-heading[data-ko="Personal Art
+    <header>
+        <div class="lang-switcher">
+            <button id="lang-en" class="active">EN</button>
+            <button id="lang-ko">KR</button>
+        </div>
+
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <a href="#portfolio" class="logo" data-ko="김민겸" data-en="MINGYUM KIM">
+                    <img src="images/gyum_logo.png" alt="Logo"> MINGYUM KIM
+                </a>
+                <div class="header-social-links">
+                    <a href="https://www.instagram.com/gye_om/" target="_blank" aria-label="Instagram">
+                        <img src="images/insta_logo.png" alt="Instagram">
+                    </a>
+                    <a href="https://x.com/Gyeom_art" target="_blank" aria-label="X (Twitter)">
+                        <img src="images/x_logo.png" alt="X (Twitter)">
+                    </a>
+                </div>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#portfolio" class="active" data-ko="포트폴리오" data-en="PORTFOLIO">PORTFOLIO</a></li>
+                    <li><a href="#about" data-ko="소개" data-en="ABOUT">ABOUT</a></li>
+                    <li><a href="#contact" data-ko="연락처" data-en="CONTACT">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+       <section id="portfolio">
+            <div class="portfolio-slider-wrapper">
+                <div class="portfolio-slider">
+                    <div class="portfolio-item" data-category="Swirl">
+                        <img src="images/swirl_01.jpg" alt="Swirl 01">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Flow Roll">
+                        <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Pyeonggang">
+                        <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Pyeonggang 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Comission">
+                        <img src="images/comission_01.jpg" alt="Comission 01">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Personal Art">
+                        <img src="images/personal_art_01.jpg" alt="Personal Art 01">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Swirl">
+                        <img src="images/swirl_02.jpg" alt="Swirl 02">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Flow Roll">
+                        <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item" data-category="Pyeonggang">
+                        <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
+                        <div class="portfolio-info-overlay">
+                            <h3 data-ko="Pyeonggang 02" data-en="Pyeonggang 02">Pyeonggang 02</h3>
+                        </div>
+                    </div>
+                </div>
+                <button id="prev-slide" class="slider-nav-btn">&#10094;</button>
+                <button id="next-slide" class="slider-nav-btn">&#10095;</button>
+            </div>
+        </section>
+
+        <section id="portfolio-grid-section">
+            <div class="container text-center">
+                <h2 class="section-heading" data-ko="포트폴리오 갤러리" data-en="PORTFOLIO GALLERY">PORTFOLIO GALLERY</h2>
+                <div class="portfolio-filters">
+                    <button class="filter-btn active" data-filter="all" data-ko="전체 보기" data-en="ALL">ALL</button>
+                    <button class="filter-btn" data-filter="Swirl" data-ko="Swirl" data-en="Swirl">Swirl</button>
+                    <button class="filter-btn" data-filter="Flow Roll" data-ko="Flow Roll" data-en="Flow Roll">Flow Roll</button>
+                    <button class="filter-btn" data-filter="Pyeonggang" data-ko="Pyeonggang" data-en="Pyeonggang">Pyeonggang</button>
+                    <button class="filter-btn" data-filter="Comission" data-ko="Comission" data-en="Comission">Comission</button>
+                    <button class="filter-btn" data-filter="Personal Art" data-ko="Personal Art" data-en="Personal Art">Personal Art</button>
+                </div>
+                
+                <div class="portfolio-category-wrapper">
+                    <h3 class="portfolio-category-heading" data-ko="Swirl 작품" data-en="Swirl Artworks">Swirl Artworks</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_01.jpg" alt="Swirl 01">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_02.jpg" alt="Swirl 02">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_03.jpg" alt="Swirl 03">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 03" data-en="Swirl 03">Swirl 03</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_04.jpg" alt="Swirl 04">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 04" data-en="Swirl 04">Swirl 04</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_05.jpg" alt="Swirl 05">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 05" data-en="Swirl 05">Swirl 05</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_06.jpg" alt="Swirl 06">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 06" data-en="Swirl 06">Swirl 06</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_07.jpg" alt="Swirl 07">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 07" data-en="Swirl 07">Swirl 07</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_08.jpg" alt="Swirl 08">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 08" data-en="Swirl 08">Swirl 08</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_09.jpg" alt="Swirl 09">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 09" data-en="Swirl 09">Swirl 09</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_10.jpg" alt="Swirl 10">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 10" data-en="Swirl 10">Swirl 10</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_11.jpg" alt="Swirl 11">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 11" data-en="Swirl 11">Swirl 11</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_12.jpg" alt="Swirl 12">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 12" data-en="Swirl 12">Swirl 12</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_13.jpg" alt="Swirl 13">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 13" data-en="Swirl 13">Swirl 13</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_14.jpg" alt="Swirl 14">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 14" data-en="Swirl 14">Swirl 14</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_15.jpg" alt="Swirl 15">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 15" data-en="Swirl 15">Swirl 15</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_16.jpg" alt="Swirl 16">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 16" data-en="Swirl 16">Swirl 16</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_17.jpg" alt="Swirl 17">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 17" data-en="Swirl 17">Swirl 17</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_18.jpg" alt="Swirl 18">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 18" data-en="Swirl 18">Swirl 18</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_19.jpg" alt="Swirl 19">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 19" data-en="Swirl 19">Swirl 19</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Swirl">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/swirl_20.jpg" alt="Swirl 20">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Swirl 20" data-en="Swirl 20">Swirl 20</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-category-wrapper">
+                    <h3 class="portfolio-category-heading" data-ko="Flow Roll 작품" data-en="Flow Roll Artworks">Flow Roll Artworks</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item-grid" data-category="Flow Roll">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Flow Roll">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Flow Roll">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/flow_roll_03.jpg" alt="Flow Roll 03">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Flow Roll 03" data-en="Flow Roll 03">Flow Roll 03</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Flow Roll">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/flow_roll_04.jpg" alt="Flow Roll 04">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Flow Roll 04" data-en="Flow Roll 04">Flow Roll 04</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Flow Roll">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/flow_roll_05.jpg" alt="Flow Roll 05">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Flow Roll 05" data-en="Flow Roll 05">Flow Roll 05</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Flow Roll">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/flow_roll_06.jpg" alt="Flow Roll 06">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Flow Roll 06" data-en="Flow Roll 06">Flow Roll 06</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-category-wrapper">
+                    <h3 class="portfolio-category-heading" data-ko="평강 작품" data-en="Pyeonggang Artworks">Pyeonggang Artworks</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 02" data-en="Pyeonggang 02">평강 02</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_03.jpg" alt="Pyeonggang 03">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 03" data-en="Pyeonggang 03">평강 03</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_04.jpg" alt="Pyeonggang 04">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 04" data-en="Pyeonggang 04">평강 04</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_05.jpg" alt="Pyeonggang 05">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 05" data-en="Pyeonggang 05">평강 05</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_06.jpg" alt="Pyeonggang 06">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 06" data-en="Pyeonggang 06">평강 06</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_07.jpg" alt="Pyeonggang 07">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 07" data-en="Pyeonggang 07">평강 07</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_08.jpg" alt="Pyeonggang 08">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 08" data-en="Pyeonggang 08">평강 08</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_09.jpg" alt="Pyeonggang 09">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 09" data-en="Pyeonggang 09">평강 09</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Pyeonggang">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/pyeonggang_10.jpg" alt="Pyeonggang 10">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="평강 10" data-en="Pyeonggang 10">평강 10</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-category-wrapper">
+                    <h3 class="portfolio-category-heading" data-ko="Comission 작품" data-en="Comission Artworks">Comission Artworks</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item-grid" data-category="Comission">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/comission_01.jpg" alt="Comission 01">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
+ 
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Comission">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/comission_02.jpg" alt="Comission 02">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Comission 02" data-en="Comission 02">Comission 02</h3>
+ 
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Comission">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/comission_03.jpg" alt="Comission 03">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Comission 03" data-en="Comission 03">Comission 03</h3>
+ 
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-category-wrapper">
+                    <h3 class="portfolio-category-heading" data-ko="Personal Art 작품" data-en="Personal Artworks">Personal Artworks</h3>
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_01.jpg" alt="Personal Art 01">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_02.jpg" alt="Personal Art 02">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 02" data-en="Personal Art 02">Personal Art 02</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_03.jpg" alt="Personal Art 03">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 03" data-en="Personal Art 03">Personal Art 03</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_04.jpg" alt="Personal Art 04">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 04" data-en="Personal Art 04">Personal Art 04</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_05.jpg" alt="Personal Art 05">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 05" data-en="Personal Art 05">Personal Art 05</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_06.jpg" alt="Personal Art 06">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 06" data-en="Personal Art 06">Personal Art 06</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_07.jpg" alt="Personal Art 07">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 07" data-en="Personal Art 07">Personal Art 07</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_08.jpg" alt="Personal Art 08">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 08" data-en="Personal Art 08">Personal Art 08</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_09.jpg" alt="Personal Art 09">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 09" data-en="Personal Art 09">Personal Art 09</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_10.jpg" alt="Personal Art 10">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 10" data-en="Personal Art 10">Personal Art 10</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-grid" data-category="Personal Art">
+                            <div class="portfolio-item-grid-image">
+                                <img src="images/personal_art_11.jpg" alt="Personal Art 11">
+                            </div>
+                            <div class="portfolio-item-grid-overlay">
+                                <h3 data-ko="Personal Art 11" data-en="Personal Art 11">Personal Art 11</h3>
+
+                                <a href="#" target="_blank" class="overlay-link" data-ko="자세히 보기" data-en="View Details">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="about">
+            <div class="container text-center">
+                <h2 class="section-heading" data-ko="소개" data-en="ABOUT">ABOUT</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="images/profile_image.jpg" alt="Your Profile Photo">
+                    </div>
+                    <div class="about-text">
+                        <h3 data-ko="김민겸" data-en="MINGYUM KIM">MINGYUM KIM</h3>
+                        <p data-ko="김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다." data-en="Kim Min-gyum is an illustrator who focuses on visualization and color.">김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.</p>
+                        <p data-ko="감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다." data-en="We are attracted to the work of capturing emotions and atmospheres concisely but delicately, and we continue to try various things in animation and illustration projects.">감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다。</p>
+                        <p data-ko="현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다." data-en="Currently, he is active mainly in Seoul, Korea, and has participated in various fields such as tvN, Korea Business Corporation, and Seneca College in Canada.">현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="contact-content-wrapper">
+                <div class="contact-info">
+                    <h3 data-ko="연락처" data-en="CONTACT">CONTACT</h3>
+                    <p data-ko="문의:gyeom951127@gmail.com" data-en="Inquiry:gyeom951127@gmail.com">문의:gyeom951127@gmail.com</p>
+                    <p><strong>Email:</strong> <a href="mailto:gyeom951127@gmail.com">gyeom951127@gmail.com</a></p>
+                    <p><strong>Phone:</strong> +82 10-7484-0757</p>
+                    <p><strong>Location:</strong> Seoul, South Korea</p>
+                </div>
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm" action="https://formspree.io/f/xanjrnga" method="post">
+                        <label for="name" data-ko="이름" data-en="Name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+
+                        <label for="email" data-ko="이메일" data-en="Email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email Address" required>
+
+                        <label for="message" data-ko="메시지" data-en="Message">Message</label>
+                        <textarea id="message" name="message" placeholder="Write your message here..." required></textarea>
+
+                        <button type="submit" data-ko="메시지 보내기" data-en="SEND MESSAGE">SEND MESSAGE</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.instagram.com/gye_om/" target="_blank" aria-label="Instagram">
+                    <img src="images/insta_logo_white.png" alt="Instagram">
+                </a>
+                <a href="https://x.com/Gyeom_art" target="_blank" aria-label="X (Twitter)">
+                    <img src="images/x_logo_white.png" alt="X (Twitter)">
+                </a>
+            </div>
+            <p data-ko="&copy; 2025 김민겸. 모든 권리 보유." data-en="&copy; 2025 MINGYUM KIM. All Rights Reserved.">&copy; 2025 MINGYUM KIM. All Rights Reserved.</p>
+            <p data-ko="열정과 창의성으로 디자인했습니다." data-en="Designed with passion and creativity.">Designed with passion and creativity.</p>
+        </div>
+    </footer>
+
+    <div id="myModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+            <a class="prev-btn">&#10094;</a>
+            <a class="next-btn">&#10095;</a>
+        </div>
+        <div class="caption-container">
+            <p id="caption"></p>
+        </div>
+    </div>
+
+    <script>
+        // 언어별 텍스트 데이터 (확장 가능)
+        const translations = {
+            ko: {
+                logo: "김민겸",
+                navPortfolio: "포트폴리오",
+                navAbout: "소개",
+                navContact: "연락처",
+                portfolioGridHeading: "포트폴리오 갤러리", 
+                filterAll: "전체 보기",
+                filterSwirl: "Swirl", 
+                filterFlowRoll: "Flow Roll", 
+                filterPyeonggang: "Pyeonggang", 
+                filterComission: "Comission", 
+                filterPersonalArt: "Personal Art",
+                aboutHeading: "소개",
+                aboutName: "김민겸",
+                aboutP1: "김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.",
+                aboutP2: "감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다.",
+                aboutP3: "현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.",
+                contactHeading: "연락처",
+                contactP: "문의:ohjingohjing@naver.com",
+                contactNameLabel: "이름",
+                contactEmailLabel: "이메일",
+                contactMessageLabel: "메시지",
+                contactNamePlaceholder: "이름을 입력해주세요",
+                contactEmailPlaceholder: "이메일 주소를 입력해주세요",
+                contactMessagePlaceholder: "자세한 내용을 입력해주세요",
+                sendButton: "메시지 보내기",
+                footerCopy: "&copy; 2025 김민겸. 모든 권리 보유.",
+                footerDesign: "열정과 창의성으로 디자인했습니다.",
+                // 포트폴리오 오버레이 텍스트 (추가) - 5열 그리드 아이템과 슬라이더 아이템 모두 사용
+                SwirlArtworks: "Swirl 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
+                FlowRollArtworks: "Flow Roll 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
+                PyeonggangArtworks: "평강 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
+                ComissionArtworks: "Comission 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
+                PersonalArtworks: "Personal Art 작품", /* 새롭게 추가된 카테고리 소제목 번역 */
+                
+                // 슬라이더 오버레이 텍스트
+                Swirl01Desc: "환상적인 소용돌이 테마 아트.",
+                FlowRoll01Desc: "유려한 움직임을 담은 롤 아트.",
+                Pyeonggang01Desc: "평강 테마의 전통적인 분위기.",
+                Comission01Desc: "의뢰받아 제작된 맞춤형 작품.",
+                PersonalArt01Desc: "개인적인 창작물이 담긴 아트.",
+                Swirl02Desc: "환상적인 소용돌이 테마 아트.",
+                FlowRoll02Desc: "유려한 움직임을 담은 롤 아트.",
+                Pyeonggang02Desc: "평강 테마의 전통적인 분위기.",
+                // Formspree 관련 메시지 추가
+                sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
+                sendErrorMessage: '메시지 전송에 실패했습니다. 다시 시도해주세요.',
+                networkErrorMessage: '메시지 전송 중 네트워크 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'
+            },
+            en: {
+                logo: "MINGYUM KIM",
+                navPortfolio: "PORTFOLIO",
+                navAbout: "ABOUT",
+                navContact: "CONTACT",
+                portfolioGridHeading: "PORTFOLIO GALLERY", 
+                filterAll: "ALL",
+                filterSwirl: "Swirl",
+                filterFlowRoll: "Flow Roll",
+                filterPyeonggang: "Pyeonggang",
+                filterComission: "Comission",
+                filterPersonalArt: "Personal Art",
+                aboutHeading: "ABOUT",
+                aboutName: "MINGYUM KIM",
+                aboutP1: "Kim Min-gyum is an illustrator and concept artist who focuses on the visualization and color in his works.",
+                aboutP2: "He is fascinated by the process of capturing emotions and atmospheres concisely but delicately, and he continues to explore various approaches in animation and illustration projects.",
+                aboutP3: "Currently, he is primarily active in Seoul, Korea, and has experience working on projects in various fields, including tvN, Korea Business Corporation, and Seneca College in Canada.",
+                contactHeading: "CONTACT",
+                contactP: "Inquiry:gyeom951127@gmail.com",
+                contactNameLabel: "Name",
+                contactEmailLabel: "Email",
+                contactMessageLabel: "Message",
+                contactNamePlaceholder: "Your Name",
+                contactEmailPlaceholder: "Your Email Address",
+                contactMessagePlaceholder: "Write your message here...",
+                sendButton: "SEND MESSAGE",
+                footerCopy: "&copy; 2025 MINGYUM KIM. All Rights Reserved.",
+                footerDesign: "Designed with passion and creativity.",
+                // 포트폴리오 오버레이 텍스트
+                SwirlArtworks: "Swirl Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
+                FlowRollArtworks: "Flow Roll Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
+                PyeonggangArtworks: "Pyeonggang Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
+                ComissionArtworks: "Comission Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
+                PersonalArtworks: "Personal Artworks", /* 새롭게 추가된 카테고리 소제목 번역 */
+
+                // 슬라이더 오버레이 텍스트
+                Swirl01Desc: "Fantastic swirl themed art.",
+                FlowRoll01Desc: "Roll art with flowing movements.",
+                Pyeonggang01Desc: "Traditional atmosphere with a Pyeonggang theme.",
+                Comission01Desc: "Custom artwork created on commission.",
+                PersonalArt01Desc: "Art containing personal creations.",
+                Swirl02Desc: "Fantastic swirl themed art.",
+                FlowRoll02Desc: "Roll art with flowing movements.",
+                Pyeonggang02Desc: "Traditional atmosphere with a Pyeonggang theme.",
+                // Formspree 관련 메시지 추가
+                sendSuccessMessage: 'Message sent successfully!',
+                sendErrorMessage: 'Failed to send message. Please try again.',
+                networkErrorMessage: 'Network error occurred while sending message. Please check your connection.'
+            }
+        };
+
+        let currentLang = 'en'; 
+        let portfolioSlider;
+        let originalPortfolioItems = []; // 원본 아이템만 저장
+        let allPortfolioItems = []; // 클론 포함 모든 아이템 (DOM에 있는 실제 아이템들)
+        let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
+        let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
+
+        function applyTranslations(lang) {
+            currentLang = lang;
+
+            document.querySelectorAll('[data-ko], [data-en]').forEach(element => {
+                const koText = element.getAttribute('data-ko');
+                const enText = element.getAttribute('data-en');
+                if (lang === 'ko' && koText) {
+                    element.innerHTML = koText;
+                } else if (lang === 'en' && enText) {
+                    element.innerHTML = enText;
+                }
+            });
+
+            document.querySelector('input[name="name"]').setAttribute('placeholder', translations[lang].contactNamePlaceholder);
+            document.querySelector('input[name="email"]').setAttribute('placeholder', translations[lang].contactEmailPlaceholder);
+            document.querySelector('textarea[name="message"]').setAttribute('placeholder', translations[lang].contactMessagePlaceholder);
+
+            const portfolioGridHeadingElement = document.querySelector('#portfolio-grid-section .section-heading');
+            if (portfolioGridHeadingElement) {
+                portfolioGridHeadingElement.innerHTML = translations[lang].portfolioGridHeading;
+            }
+
+            document.querySelector('.filter-btn[data-filter="all"]').innerHTML = translations[lang].filterAll;
+            document.querySelector('.filter-btn[data-filter="Swirl"]').innerHTML = translations[lang].filterSwirl;
+            document.querySelector('.filter-btn[data-filter="Flow Roll"]').innerHTML = translations[lang].filterFlowRoll;
+            document.querySelector('.filter-btn[data-filter="Pyeonggang"]').innerHTML = translations[lang].filterPyeonggang;
+            document.querySelector('.filter-btn[data-filter="Comission"]').innerHTML = translations[lang].filterComission;
+            document.querySelector('.filter-btn[data-filter="Personal Art"]').innerHTML = translations[lang].filterPersonalArt;
+
+            document.querySelector('.portfolio-category-heading[data-ko="Swirl 작품"]').innerHTML = translations[lang].SwirlArtworks;
+            document.querySelector('.portfolio-category-heading[data-ko="Flow Roll 작품"]').innerHTML = translations[lang].FlowRollArtworks;
+            document.querySelector('.portfolio-category-heading[data-ko="평강 작품"]').innerHTML = translations[lang].PyeonggangArtworks;
+            document.querySelector('.portfolio-category-heading[data-ko="Comission 작품"]').innerHTML = translations[lang].ComissionArtworks;
+            document.querySelector('.portfolio-category-heading[data-ko="Personal Art 작품"]').innerHTML = translations[lang].PersonalArtworks;
+
+            document.getElementById('lang-ko').classList.remove('active');
+            document.getElementById('lang-en').classList.remove('active');
+            document.getElementById(`lang-${lang}`).classList.add('active');
+
+            // 슬라이더 오버레이 텍스트 업데이트는 initializeSlider() 내에서, 
+            // 또는 개별 아이템 생성/업데이트 시점에 호출되도록 처리하는 것이 좋습니다.
+            // 여기서는 원본 아이템만 직접 업데이트합니다.
+            document.querySelectorAll('#portfolio .portfolio-item:not(.clone)').forEach(item => {
+                const category = item.dataset.category.replace(/\s/g, ''); 
+                const imgAlt = item.querySelector('img').alt; 
+                const descKey = `${category}${imgAlt.slice(-2)}Desc`; 
+
+                const overlayP = item.querySelector('.portfolio-info-overlay p');
+                if (overlayP && translations[lang][descKey]) {
+                    overlayP.innerHTML = translations[lang][descKey];
+                }
+            });
+        }
+
+        // 슬라이더 초기화 함수 (DOM 조작 및 이벤트 리스너 설정)
+        function initializeSlider() {
+            portfolioSlider = document.querySelector('.portfolio-slider');
+            originalPortfolioItems = Array.from(document.querySelectorAll('#portfolio .portfolio-item:not(.clone)'));
+            const originalLength = originalPortfolioItems.length;
+            
+            // 기존 클론 제거 (재초기화 시 중복 방지)
+            document.querySelectorAll('.portfolio-item.clone').forEach(clone => clone.remove());
+
+            // DOM을 비우고 원본 아이템 재구성
+            portfolioSlider.innerHTML = '';
+            
+            // 클론을 양쪽에 1개씩만 추가 (1개만 보이는 슬라이드이므로)
+            // 맨 뒤 원본을 복제하여 맨 앞에 추가
+            const preClone = originalPortfolioItems[originalLength - 1].cloneNode(true);
+            preClone.classList.add('clone', 'clone-pre');
+            portfolioSlider.appendChild(preClone);
+
+            // 모든 원본 아이템 추가
+            originalPortfolioItems.forEach(item => portfolioSlider.appendChild(item));
+
+            // 맨 앞 원본을 복제하여 맨 뒤에 추가
+            const postClone = originalPortfolioItems[0].cloneNode(true);
+            postClone.classList.add('clone', 'clone-post');
+            portfolioSlider.appendChild(postClone);
+
+            // 클론 포함 모든 아이템을 다시 가져옵니다.
+            allPortfolioItems = Array.from(document.querySelectorAll('#portfolio .portfolio-item')); 
+            
+            // 초기 slideIndex는 실제 첫 번째 원본 아이템 (프리클론 바로 다음)
+            slideIndex = 1; // preClone (인덱스 0) 다음에 첫 번째 원본 아이템 (인덱스 1)
+
+            // 모든 슬라이더 아이템에 클릭 이벤트 리스너 적용 (클론 포함)
+            allPortfolioItems.forEach(item => {
+                // 이전에 추가된 이벤트 리스너를 제거하고 다시 추가하여 중복을 방지
+                // (initializeSlider가 resize시 호출될 때 안전하게 하기 위함)
+                const oldClickHandler = item.__clickHandler; 
+                if (oldClickHandler) {
+                    item.removeEventListener('click', oldClickHandler);
+                }
+
+                const newClickHandler = function() {
+                    const currentTargetSrc = this.querySelector('img').src; 
+                    const originalIndex = originalPortfolioItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
+                    
+                    if (originalIndex !== -1) { 
+                        currentLightboxItems = originalPortfolioItems; 
+                        openModal(originalIndex);
+                    }
+                };
+                item.addEventListener('click', newClickHandler);
+                item.__clickHandler = newClickHandler; 
+            });
+
+            // 초기 위치 설정 (애니메이션 없이)
+            updateSliderPosition(false); 
+        }
+
+        // 슬라이더 위치를 업데이트하고 활성 클래스를 적용하는 함수
+        function updateSliderPosition(animate = true) {
+            if (allPortfolioItems.length === 0) return;
+
+            requestAnimationFrame(() => {
+                const sliderWrapperWidth = document.querySelector('.portfolio-slider-wrapper').offsetWidth; 
+                // 각 아이템이 wrapper 너비를 꽉 채우므로, translateX는 -slideIndex * wrapperWidth
+                let finalTransformX = -slideIndex * sliderWrapperWidth; 
+
+                if (!animate) {
+                    portfolioSlider.style.transition = 'none';
+                } else {
+                    portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
+                }
+                
+                portfolioSlider.style.transform = `translateX(${finalTransformX}px)`;
+
+                // 1개만 보이므로 활성/비활성 클래스 조작은 필요 없음 (CSS에서 opacity 1 고정)
+                // z-index는 클릭 시 오버레이 때문에 필요할 수 있으나, 슬라이드 자체에는 영향 없음.
+                // 이전 active/neighbor 클래스 관련 CSS는 주석 처리하거나 제거했으므로, JS에서도 해당 로직 제거
+            });
+        }
+
+        function showNextSlide() {
+            if (isAnimating) return;
+            isAnimating = true;
+            slideIndex++;
+            updateSliderPosition(true);
+        }
+
+        function showPrevSlide() {
+            if (isAnimating) return;
+            isAnimating = true;
+            slideIndex--;
+            updateSliderPosition(true);
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            applyTranslations(currentLang);
+
+            document.getElementById('lang-ko').addEventListener('click', () => applyTranslations('ko'));
+            document.getElementById('lang-en').addEventListener('click', () => applyTranslations('en'));
+
+            // --- 스크롤 스파이 및 스무스 스크롤 ---
+            const sections = document.querySelectorAll("main section[id]");
+            const navLinks = document.querySelectorAll(".main-nav ul li a");
+            const headerHeight = document.querySelector('header').offsetHeight;
+
+            function activateNavLink() {
+                let current = "";
+                sections.forEach(section => {
+                    if (section.id === "home") return; 
+
+                    const sectionTop = section.offsetTop - headerHeight - 30; 
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href").includes(current)) {
+                        link.classList.add("active");
+                    }
+                });
+            }
+
+            window.addEventListener("scroll", activateNavLink);
+            activateNavLink();
+
+            document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerHeight;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                });
+            });
+
+            // --- 포트폴리오 슬라이더 기능 초기화 ---
+            initializeSlider(); 
+            
+            document.getElementById('prev-slide').addEventListener('click', showPrevSlide);
+            document.getElementById('next-slide').addEventListener('click', showNextSlide);
+
+            portfolioSlider = document.querySelector('.portfolio-slider'); 
+            portfolioSlider.addEventListener('transitionend', () => {
+                const originalLength = originalPortfolioItems.length;
+
+                if (slideIndex === originalLength + 1) { 
+                    portfolioSlider.style.transition = 'none'; 
+                    slideIndex = 1; 
+                    updateSliderPosition(false); 
+                } 
+                else if (slideIndex === 0) {
+                    portfolioSlider.style.transition = 'none'; 
+                    slideIndex = originalLength; 
+                    updateSliderPosition(false); 
+                }
+                isAnimating = false; 
+                setTimeout(() => {
+                    portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
+                }, 0); 
+            });
+
+            // 자동 재생 관련 변수
+            let autoSlideInterval;
+            const autoSlideDelay = 5000; // 5초 (5000ms)
+
+            // 자동 재생 시작 함수
+            function startAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                }
+                autoSlideInterval = setInterval(() => {
+                    showNextSlide();
+                }, autoSlideDelay);
+            }
+
+            // 자동 재생 일시 정지 및 재설정 함수 (사용자 상호작용 시)
+            function resetAutoSlide() {
+                clearInterval(autoSlideInterval); 
+                startAutoSlide(); 
+            }
+
+            // 초기 페이지 로드 시 자동 재생 시작
+            startAutoSlide();
+
+            // 사용자가 수동으로 슬라이드를 넘기면 자동 재생 재설정
+            document.getElementById('prev-slide').addEventListener('click', resetAutoSlide);
+            document.getElementById('next-slide').addEventListener('click', resetAutoSlide);
+
+            // 슬라이더 영역에 마우스가 올라가면 자동 재생 일시 정지, 벗어나면 다시 시작
+            const sliderWrapper = document.querySelector('.portfolio-slider-wrapper');
+            sliderWrapper.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            sliderWrapper.addEventListener('mouseleave', startAutoSlide);
+
+
+            // 리사이즈 이벤트 시 슬라이더 초기화
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    initializeSlider(); 
+                    resetAutoSlide(); 
+                }, 100); 
+            });
+
+            // --- 5열 그리드 포트폴리오의 필터링 기능 ---
+            const filterButtons = document.querySelectorAll('#portfolio-grid-section .filter-btn');
+            const gridPortfolioItems = document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                        wrapper.style.display = 'none';
+                    });
+
+                    if (filter === 'all') {
+                        document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                            wrapper.style.display = 'block';
+                            wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                                item.style.display = 'block';
+                                setTimeout(() => item.style.opacity = '1', 50); 
+                            });
+                        });
+                    } else {
+                        const targetWrapper = document.querySelector(`.portfolio-category-wrapper .portfolio-category-heading[data-ko="${filter} 작품"], .portfolio-category-wrapper .portfolio-category-heading[data-en="${filter} Artworks"]`);
+                        if (targetWrapper) {
+                            const parentWrapper = targetWrapper.closest('.portfolio-category-wrapper');
+                            if (parentWrapper) {
+                                parentWrapper.style.display = 'block';
+                                parentWrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                                    if (item.dataset.category === filter) {
+                                        item.style.display = 'block';
+                                        setTimeout(() => item.style.opacity = '1', 50); 
+                                    } else {
+                                        item.style.opacity = '0';
+                                        setTimeout(() => item.style.display = 'none', 400); 
+                                    }
+                                });
+                            }
+                        }
+                    }
+                });
+            });
+
+
+            // --- 라이트박스 기능 (슬라이더 이미지와 그리드 이미지 모두 클릭 시) ---
+            const modal = document.getElementById("myModal");
+            const modalImage = document.getElementById("modalImage");
+            const captionText = document.getElementById("caption");
+            const closeBtn = document.querySelector(".close-btn");
+            const prevBtn = document.querySelector(".prev-btn");
+            const nextBtn = document.querySelector(".next-btn");
+            let currentLightboxItems = [];
+            let currentIndex = 0; 
+
+            // 그리드 아이템 클릭 이벤트
+            document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
+                item.addEventListener('click', function() {
+                    currentLightboxItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid'))
+                                            .filter(visibleItem => window.getComputedStyle(visibleItem).display !== 'none');
+                    
+                    const clickedSrc = this.querySelector('img').src;
+                    currentIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === clickedSrc);
+
+                    if (currentIndex === -1) return;
+                    openModal(currentIndex);
+                });
+            });
+
+
+            closeBtn.addEventListener('click', closeModal);
+            prevBtn.addEventListener('click', showPrevLightbox);
+            nextBtn.addEventListener('click', showNextLightbox);
+
+            function openModal(index) {
+                if (currentLightboxItems.length === 0) return;
+                
+                modal.style.display = "flex";
+                showLightboxSlide(index);
+            }
+
+            function closeModal() {
+                modal.style.display = "none";
+            }
+
+            function showLightboxSlide(index) {
+                if (index >= currentLightboxItems.length) {
+                    currentIndex = 0;
+                } else if (index < 0) {
+                    currentIndex = currentLightboxItems.length - 1;
+                } else {
+                    currentIndex = index;
+                }
+
+                const item = currentLightboxItems[currentIndex];
+                const imgSrc = item.querySelector('img').src;
+                const imgAlt = item.querySelector('img').alt;
+                
+                const portfolioInfoOverlay = item.querySelector('.portfolio-info-overlay') || item.querySelector('.portfolio-item-grid-overlay');
+                let captionContent = '';
+                if (portfolioInfoOverlay) {
+                    const h3 = portfolioInfoOverlay.querySelector('h3');
+                    const p = portfolioInfoOverlay.querySelector('p');
+                    if (h3) captionContent += (h3.getAttribute(`data-${currentLang}`) || h3.innerHTML);
+                    if (p) {
+                        if (captionContent) captionContent += ' - ';
+                        if (item.classList.contains('portfolio-item')) { // 슬라이더 아이템인 경우
+                            const category = item.dataset.category.replace(/\s/g, '');
+                            const imgAlt = item.querySelector('img').alt;
+                            const descKey = `${category}${imgAlt.slice(-2)}Desc`;
+                            captionContent += (translations[currentLang][descKey] || p.innerHTML);
+                        } else { // 그리드 아이템인 경우
+                            captionContent += (p.getAttribute(`data-${currentLang}`) || p.innerHTML);
+                        }
+                    }
+                }
+                
+                modalImage.src = imgSrc;
+                modalImage.alt = imgAlt;
+                captionText.innerHTML = captionContent || imgAlt;
+            }
+
+            function showNextLightbox() {
+                showLightboxSlide(currentIndex + 1);
+            }
+
+            function showPrevLightbox() {
+                showLightboxSlide(currentIndex - 1);
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (modal.style.display === "flex") {
+                    if (e.key === "ArrowLeft") {
+                        showPrevLightbox();
+                    } else if (e.key === "ArrowRight") {
+                        showNextLightbox();
+                    } else if (e.key === "Escape") {
+                        closeModal();
+                    }
+                }
+            });
+
+            // 메일 버튼 활성화를 위한 JavaScript 코드 추가 (Formspree 연동)
+            const contactForm = document.getElementById('contactForm');
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+
+                    const statusMessage = document.createElement('div');
+                    statusMessage.style.marginTop = '15px';
+                    statusMessage.style.padding = '10px';
+                    statusMessage.style.borderRadius = '5px';
+                    statusMessage.style.textAlign = 'center';
+
+                    const existingMessage = contactForm.querySelector('.form-status-message');
+                    if (existingMessage) {
+                        existingMessage.remove();
+                    }
+
+                    try {
+                        const response = await fetch(this.action, {
+                            method: this.method,
+                            body: new FormData(this),
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            statusMessage.textContent = translations[currentLang].sendSuccessMessage || '메시지가 성공적으로 전송되었습니다!';
+                            statusMessage.style.backgroundColor = '#d4edda';
+                            statusMessage.style.color = '#155724';
+                            contactForm.reset();
+                        } else {
+                            let errorMessage = translations[currentLang].sendErrorMessage || '메시지 전송에 실패했습니다. 다시 시도해주세요.';
+                            try {
+                                const errorData = await response.json();
+                                if (errorData.errors && errorData.errors.length > 0) {
+                                    errorMessage = errorData.errors.map(err => err.message).join(', ');
+                                }
+                            } catch (jsonError) {
+                                // JSON 파싱 실패 시 일반 오류 메시지
+                            }
+                            statusMessage.textContent = errorMessage;
+                            statusMessage.style.backgroundColor = '#f8d7da';
+                            statusMessage.style.color = '#721c24';
+                            console.error('Formspree response error:', response.status, errorMessage);
+                        }
+                    } catch (error) {
+                        statusMessage.textContent = translations[currentLang].networkErrorMessage || '메시지 전송 중 네트워크 오류가 발생했습니다. 다시 시도해주세요.';
+                        statusMessage.style.backgroundColor = '#f8d7da';
+                        statusMessage.style.color = '#721c24';
+                        console.error('Fetch error:', error);
+                    }
+                    statusMessage.classList.add('form-status-message');
+                    contactForm.appendChild(statusMessage);
+
+                    setTimeout(() => {
+                        if (statusMessage.parentNode) {
+                            statusMessage.remove();
+                        }
+                    }, 5000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
