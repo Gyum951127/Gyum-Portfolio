@@ -369,14 +369,14 @@
             color: var(--white-color);
             padding: 15px;
             text-align: center;
-            cursor: pointer; /* 오버레이 클릭 가능 */
-            pointer-events: auto; /* 투명해도 클릭 이벤트를 받을 수 있도록 명시적으로 설정 */
+            cursor: default; /* 오버레이 전체 클릭 불가 */
+            pointer-events: none; /* 오버레이 자체가 클릭 이벤트를 받지 않도록 */
         }
         .portfolio-item:hover .portfolio-info-overlay {
             opacity: 1; /* 호버 시 나타남 */
         }
         .portfolio-info-overlay h3 {
-            color: var(--white-color); /* 호버 시에도 제목은 흰색 유지 */
+            color: var(--white-color); /* 제목은 흰색 유지 */
             font-size: 1.3em;
             margin-bottom: 8px;
             font-weight: 700;
@@ -392,9 +392,10 @@
             font-size: 0.9em;
             font-weight: 500;
             text-decoration: none; /* 밑줄 제거 */
-            cursor: pointer;
+            cursor: pointer; /* 클릭 가능 표시 */
             transition: all 0.3s ease;
             display: inline-block; /* 버튼처럼 보이게 */
+            pointer-events: auto; /* 이 요소만 클릭 이벤트를 받도록 허용 */
         }
         .portfolio-info-overlay .overlay-link:hover {
             background-color: var(--primary-color); /* 호버 시 배경색 변경 */
@@ -527,7 +528,7 @@
         }
 
         /* 포트폴리오 그리드 섹션 */
-        #portfolio-grid-section { 
+        #portfolio-grid-section {
             background-color: var(--white-color);
             padding: 100px 0; /* 슬라이더 섹션과 구분되는 여백 */
             margin-top: 50px; /* 슬라이더 앨범과의 상단 간격 조절 */
@@ -592,7 +593,7 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 은은한 그림자 */
             transition: transform 0.3s ease, opacity 0.4s ease;
             position: relative;
-            cursor: pointer; /* 이미지 자체도 클릭 가능 */
+            cursor: default; /* 오버레이에서 pointer 처리 */
         }
         .portfolio-item-grid:hover {
             transform: translateY(-5px);
@@ -633,7 +634,7 @@
             color: var(--white-color);
             padding: 15px;
             text-align: center;
-            cursor: pointer; /* 오버레이 클릭 가능하도록 */
+            pointer-events: none; /* 오버레이 자체가 클릭 이벤트를 받지 않도록 */
         }
         .portfolio-item-grid:hover .portfolio-item-grid-overlay {
             opacity: 1;
@@ -658,6 +659,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             display: inline-block; /* 버튼처럼 보이게 */
+            pointer-events: auto; /* 이 요소만 클릭 이벤트를 받도록 허용 */
         }
         .portfolio-item-grid-overlay .overlay-link:hover {
             background-color: var(--primary-color); /* 호버 시 배경색 변경 */
@@ -1683,6 +1685,78 @@
     </div>
 
     <script>
+        // 전역 변수 선언 (스코프 오류 해결을 위해 DOMContentLoaded 밖으로 이동)
+        let portfolioSlider;
+        let originalPortfolioItems = []; // 클론 제외한 원본 슬라이더 아이템만 저장
+        let allPortfolioItems = []; // 클론 포함 모든 슬라이더 아이템 (DOM에 있는 실제 아이템들)
+        let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
+        let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
+        let allGridItems = []; // 모든 그리드 아이템을 저장할 배열
+        let currentLightboxItems = []; // 라이트박스에 표시될 현재 아이템 목록
+        let currentIndex = 0; // 라이트박스 현재 이미지 인덱스
+
+        // 라이트박스 관련 함수들을 전역 스코프로 이동
+        function openModal(index) {
+            const modal = document.getElementById("myModal");
+            if (currentLightboxItems.length === 0) return;
+            
+            modal.style.display = "flex";
+            showLightboxSlide(index);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
+        function showLightboxSlide(index) {
+            const modalImage = document.getElementById("modalImage");
+            const captionText = document.getElementById("caption");
+
+            if (index >= currentLightboxItems.length) {
+                currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
+            } else if (index < 0) {
+                currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
+            } else {
+                currentIndex = index;
+            }
+
+            const item = currentLightboxItems[currentIndex];
+            const imgElement = item.querySelector('img'); // 이미지 태그
+            const h3Element = item.querySelector('h3'); // H3 태그
+            // 🌟 수정: overlay-text p 태그가 아니라 overlay-link a 태그에서 정보를 가져옵니다.
+            const overlayLinkElement = item.querySelector('.overlay-link'); 
+
+            const imgSrc = imgElement.src;
+            const imgAlt = imgElement.alt;
+            
+            // 캡션 내용 가져오기 우선순위: overlay-link의 data-ko/en 속성 -> h3 data-ko/en -> h3 innerHTML -> alt 텍스트
+            let captionContent = '';
+            // 🌟 수정: overlayLinkElement에서 data-ko/en 속성 확인
+            if (overlayLinkElement && overlayLinkElement.hasAttribute(`data-${currentLang}`)) { 
+                captionContent = overlayLinkElement.getAttribute(`data-${currentLang}`);
+            } else if (h3Element) {
+                // h3Element에 data-ko/en 속성이 있다면 사용, 없으면 innerHTML 사용
+                captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
+            } else {
+                // 모든 경우에 해당하지 않으면 img의 alt 텍스트를 최종 폴백으로 사용
+                captionContent = imgAlt; 
+            }
+            
+            modalImage.src = imgSrc;
+            modalImage.alt = imgAlt;
+            captionText.innerHTML = captionContent; 
+        }
+
+        function showNextLightbox() {
+            showLightboxSlide(currentIndex + 1);
+        }
+
+        function showPrevLightbox() {
+            showLightboxSlide(currentIndex - 1);
+        }
+
+
         // 언어별 텍스트 데이터 (확장 가능)
         const translations = {
             ko: {
@@ -1762,15 +1836,9 @@
             }
         };
 
-        let currentLang = 'en'; 
-        let portfolioSlider;
-        let originalPortfolioItems = []; // 클론 제외한 원본 슬라이더 아이템만 저장
-        let allPortfolioItems = []; // 클론 포함 모든 슬라이더 아이템 (DOM에 있는 실제 아이템들)
-        let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
-        let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
-        let allGridItems = []; // 모든 그리드 아이템을 저장할 배열
+        let currentLang = 'en'; // 이 변수는 applyTranslations 함수에서 사용되므로 전역 선언을 유지합니다.
 
-        // 언어 적용 함수
+        // 언어 적용 함수는 위에서 전역으로 정의된 translations 객체를 사용합니다.
         function applyTranslations(lang) {
             currentLang = lang;
 
@@ -1857,7 +1925,7 @@
                 }
 
                 const overlayLink = item.querySelector('.overlay-link'); // overlay-link를 찾음
-                if (overlayLink) {
+                if (overlayLink) { // overlayLink가 존재하는 경우에만 이벤트 연결
                     const newClickHandler = function(e) {
                         e.preventDefault(); // <a> 태그의 기본 동작(페이지 상단 이동) 방지
 
@@ -2107,10 +2175,9 @@
             const closeBtn = document.querySelector(".close-btn");
             const prevBtn = document.querySelector(".prev-btn");
             const nextBtn = document.querySelector(".next-btn");
-            let currentLightboxItems = []; // 라이트박스에 표시될 현재 아이템 목록
-            let currentIndex = 0; 
+            // currentLightboxItems, currentIndex는 전역으로 선언됨
 
-            // 그리드 아이템 클릭 이벤트
+            // 갤러리 아이템 클릭 이벤트
             document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
                 // 이전에 추가된 이벤트 리스너가 중복될 수 있으므로 제거 (선택적)
                 if (item.__clickHandler) {
@@ -2140,57 +2207,7 @@
             prevBtn.addEventListener('click', showPrevLightbox);
             nextBtn.addEventListener('click', showNextLightbox);
 
-            function openModal(index) {
-                if (currentLightboxItems.length === 0) return;
-                
-                modal.style.display = "flex";
-                showLightboxSlide(index);
-            }
-
-            function closeModal() {
-                modal.style.display = "none";
-            }
-
-            function showLightboxSlide(index) {
-                if (index >= currentLightboxItems.length) {
-                    currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
-                } else if (index < 0) {
-                    currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
-                } else {
-                    currentIndex = index;
-                }
-
-                const item = currentLightboxItems[currentIndex];
-                const imgElement = item.querySelector('img'); // 이미지 태그
-                const h3Element = item.querySelector('h3'); // H3 태그
-                const overlayLinkElement = item.querySelector('.overlay-link'); // overlay-link a 태그
-
-                const imgSrc = imgElement.src;
-                const imgAlt = imgElement.alt;
-                
-                // 캡션 내용 가져오기 우선순위: overlay-link의 data-ko/en 속성 -> h3 data-lang -> h3 innerHTML -> alt 텍스트
-                let captionContent = '';
-                if (overlayLinkElement && overlayLinkElement.hasAttribute(`data-${currentLang}`)) { // overlay-link의 data 속성 사용
-                    captionContent = overlayLinkElement.getAttribute(`data-${currentLang}`);
-                } else if (h3Element) {
-                    captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
-                } else {
-                    captionContent = imgAlt; // 최종 폴백
-                }
-                
-                modalImage.src = imgSrc;
-                modalImage.alt = imgAlt;
-                captionText.innerHTML = captionContent; 
-            }
-
-            function showNextLightbox() {
-                showLightboxSlide(currentIndex + 1);
-            }
-
-            function showPrevLightbox() {
-                showLightboxSlide(currentIndex - 1);
-            }
-
+            // keydown 이벤트 리스너
             document.addEventListener('keydown', function(e) {
                 if (modal.style.display === "flex") {
                     if (e.key === "ArrowLeft") {
