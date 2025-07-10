@@ -352,28 +352,28 @@
             border-radius: inherit;
         }
 
-        /* 슬라이더 오버레이 */
-        .portfolio-info-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.65); 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0; 
-            transition: opacity 0.3s ease; 
-            color: var(--white-color);
-            padding: 15px;
-            text-align: center;
-            cursor: pointer; /* 오버레이 클릭 가능 */
-        }
-        .portfolio-item:hover .portfolio-info-overlay {
-            opacity: 1; 
-        }
+       /* 슬라이더 오버레이 */
+.portfolio-info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65); 
+    display: flex; /* <-- 여기는 flex로 유지하여 자식 요소 정렬 */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* 평소에는 투명하게 존재 */
+    transition: opacity 0.3s ease; 
+    color: var(--white-color);
+    padding: 15px;
+    text-align: center;
+    cursor: pointer; /* 오버레이 클릭 가능 */
+}
+.portfolio-item:hover .portfolio-info-overlay {
+    opacity: 1; /* 호버 시 나타남 */
+}
         .portfolio-info-overlay h3 {
             color: var(--white-color);
             font-size: 1.3em;
@@ -2393,36 +2393,39 @@
             }
 
             function showLightboxSlide(index) {
-                if (index >= currentLightboxItems.length) {
-                    currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
-                } else if (index < 0) {
-                    currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
-                } else {
-                    currentIndex = index;
-                }
+    if (index >= currentLightboxItems.length) {
+        currentIndex = 0;
+    } else if (index < 0) {
+        currentIndex = currentLightboxItems.length - 1;
+    } else {
+        currentIndex = index;
+    }
 
-                const item = currentLightboxItems[currentIndex];
-                const imgElement = item.querySelector('img'); // 이미지 태그
-                const h3Element = item.querySelector('h3'); // H3 태그
-                const pElement = item.querySelector('.overlay-text'); // overlay-text p 태그 (슬라이더, 갤러리 공통)
+    const item = currentLightboxItems[currentIndex];
+    const imgElement = item.querySelector('img'); // 이미지 태그
+    const h3Element = item.querySelector('h3'); // H3 태그
+    const pElement = item.querySelector('.overlay-text'); // overlay-text p 태그 (슬라이더, 갤러리 공통)
 
-                const imgSrc = imgElement.src;
-                const imgAlt = imgElement.alt;
-                
-                // 캡션 내용 가져오기 우선순위: p태그의 data-details-lang 속성 -> h3 data-lang -> h3 innerHTML -> alt 텍스트
-                let captionContent = '';
-                if (pElement && pElement.hasAttribute(`data-details-${currentLang}`)) {
-                    captionContent = pElement.getAttribute(`data-details-${currentLang}`);
-                } else if (h3Element) {
-                    captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
-                } else {
-                    captionContent = imgAlt; // 최종 폴백
-                }
-                
-                modalImage.src = imgSrc;
-                modalImage.alt = imgAlt;
-                captionText.innerHTML = captionContent; 
-            }
+    const imgSrc = imgElement.src;
+    const imgAlt = imgElement.alt;
+    
+    // 캡션 내용 가져오기 우선순위: p태그의 data-details-lang 속성 -> h3 data-lang -> h3 innerHTML -> alt 텍스트
+    let captionContent = '';
+    // 🌟 수정: pElement가 존재하고 data-details-lang 속성이 있을 경우 우선적으로 사용
+    if (pElement && pElement.hasAttribute(`data-details-${currentLang}`)) {
+        captionContent = pElement.getAttribute(`data-details-${currentLang}`);
+    } else if (h3Element) {
+        // h3Element에 data-ko/en 속성이 있다면 사용, 없으면 innerHTML 사용
+        captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
+    } else {
+        // 모든 경우에 해당하지 않으면 img의 alt 텍스트를 최종 폴백으로 사용
+        captionContent = imgAlt; 
+    }
+    
+    modalImage.src = imgSrc;
+    modalImage.alt = imgAlt;
+    captionText.innerHTML = captionContent; 
+}
 
             function showNextLightbox() {
                 showLightboxSlide(currentIndex + 1);
