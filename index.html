@@ -2124,32 +2124,34 @@
 
                     const filter = this.dataset.filter;
 
-                    // 모든 카테고리 래퍼와 그 안의 아이템을 일단 숨김 (초기화)
+                    // ⬅️ 수정할 부분 시작: 모든 카테고리 래퍼와 그 안의 아이템을 일단 숨김 (초기화)
                     document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                        wrapper.style.display = 'none'; // 일단 래퍼 자체를 숨김
                         wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                            item.style.opacity = '0';
+                            item.style.opacity = '0'; // 아이템 투명하게
                             // 중요한 수정: transitionend 리스너는 display: 'none' 직전에만 추가하여 중복 방지
                             // 기존 transitionend 리스너가 있다면 제거
                             if (item.__filterTransitionEndHandler) {
                                 item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
                             }
                             const transitionEndHandler = function() {
-                                this.style.display = 'none';
+                                this.style.display = 'none'; // 투명해진 후에 완전히 숨김
                                 this.removeEventListener('transitionend', this.__filterTransitionEndHandler);
                                 delete this.__filterTransitionEndHandler; // 참조 정리
                             };
                             item.addEventListener('transitionend', transitionEndHandler);
                             item.__filterTransitionEndHandler = transitionEndHandler; // 참조 저장
                         });
+                        wrapper.style.display = 'none'; // 래퍼 자체도 숨김 (이 부분이 위로 이동)
                     });
+                    // ⬅️ 수정할 부분 끝
 
-                    // 선택된 필터에 따라 해당하는 카테고리 래퍼와 아이템만 표시
+                    // ⬅️ 수정된 부분 시작: 선택된 필터에 따라 해당하는 카테고리 래퍼와 아이템만 표시
                     if (filter === 'all') {
                         document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
                             wrapper.style.display = 'block'; // 모든 래퍼를 다시 보이게 함
                             wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                                item.style.display = 'block'; // 모든 아이템을 보이게 함
+                                // 모든 아이템을 보이게 할 때는 opacity 전환 후 display: block 유지
+                                item.style.display = 'block';
                                 setTimeout(() => item.style.opacity = '1', 50); // 부드럽게 나타나도록
                             });
                         });
@@ -2164,27 +2166,19 @@
                                 parentWrapper.style.display = 'block'; // 해당하는 래퍼만 보이게 함
                                 parentWrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
                                     if (item.dataset.category === filter) {
-                                        item.style.display = 'block'; // 필터링된 아이템만 표시
+                                        // 필터링된 아이템은 보이게 함
+                                        item.style.display = 'block';
                                         setTimeout(() => item.style.opacity = '1', 50); // 부드럽게 나타나도록
                                     } else {
-                                        item.style.opacity = '0'; // 필터링되지 않은 아이템은 투명하게
-                                        // 중요한 수정: display: 'none'으로 설정하기 전에 transitionend 이벤트 대기
-                                        // 기존 리스너가 있다면 제거
-                                        if (item.__filterTransitionEndHandler) {
-                                            item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
-                                        }
-                                        const transitionEndHandler = function() {
-                                            this.style.display = 'none';
-                                            this.removeEventListener('transitionend', this.__filterTransitionEndHandler);
-                                            delete this.__filterTransitionEndHandler;
-                                        };
-                                        item.addEventListener('transitionend', transitionEndHandler);
-                                        item.__filterTransitionEndHandler = transitionEndHandler;
+                                        // 필터링되지 않은 아이템은 투명해진 후 숨김 (기존 로직 유지)
+                                        item.style.opacity = '0';
+                                        // 이전에 추가된 transitionend 핸들러는 그대로 사용됨
                                     }
                                 });
                             }
                         }
                     }
+                    // ⬅️ 수정된 부분 끝
                 });
             });
 
