@@ -294,11 +294,11 @@
         }
 
         /* 포트폴리오 슬라이더 섹션 (1개만 보이는 방식) */
-        #portfolio { 
+        #portfolio {
             background-color: #000; /* 나머지 여백을 검정색으로 덮음 */
             padding: 0; /* 패딩 제거 */
             position: relative;
-            overflow: hidden; 
+            overflow: hidden;
             height: 50vh; /* 뷰포트 높이 대비 슬라이더 섹션 높이 */
             display: flex;
             align-items: center;
@@ -311,7 +311,7 @@
             height: 90%; /* 슬라이더 wrapper도 높이를 채우도록 */
             margin: 0 auto;
             display: flex;
-            justify-content: center; 
+            justify-content: center;
             align-items: center;
             overflow: hidden; /* 아이템이 넘치면 숨김 */
         }
@@ -352,30 +352,31 @@
             border-radius: inherit;
         }
 
-       /* 슬라이더 오버레이 */
-.portfolio-info-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.65); 
-    display: flex; /* <-- 여기는 flex로 유지하여 자식 요소 정렬 */
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0; /* 평소에는 투명하게 존재 */
-    transition: opacity 0.3s ease; 
-    color: var(--white-color);
-    padding: 15px;
-    text-align: center;
-    cursor: pointer; /* 오버레이 클릭 가능 */
-}
-.portfolio-item:hover .portfolio-info-overlay {
-    opacity: 1; /* 호버 시 나타남 */
-}
-        .portfolio-info-overlay h3 {
+        /* 슬라이더 오버레이 */
+        .portfolio-info-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65);
+            display: flex; /* <-- flex로 유지 */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0; /* 평소에는 투명하게 존재 */
+            transition: opacity 0.3s ease;
             color: var(--white-color);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer; /* 오버레이 클릭 가능 */
+            pointer-events: auto; /* 투명해도 클릭 이벤트를 받을 수 있도록 명시적으로 설정 */
+        }
+        .portfolio-item:hover .portfolio-info-overlay {
+            opacity: 1; /* 호버 시 나타남 */
+        }
+        .portfolio-info-overlay h3 {
+            color: var(--white-color); /* 제목은 다시 하얀색으로 롤백 */
             font-size: 1.3em;
             margin-bottom: 8px;
             font-weight: 700;
@@ -384,28 +385,35 @@
         .portfolio-info-overlay .overlay-text { /* 슬라이더 View Details 텍스트 스타일 */
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 0; 
-            transition: font-weight 0.2s ease, color 0.2s ease; /* 트랜지션 추가 */
-            display: block; /* 텍스트가 inline이 아닌 블록 요소로 표시되도록 */
-            /* 텍스트 중앙 정렬 */
-            text-align: center; 
+            margin-bottom: 0;
+            /* View Details 텍스트 자체를 버튼처럼 강조 */
+            padding: 8px 15px; /* 버튼처럼 보이도록 패딩 추가 */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 테두리 추가 */
+            border-radius: 20px; /* 둥근 테두리 */
+            cursor: pointer; /* 클릭 가능 표시 */
+            transition: all 0.3s ease; /* 모든 변화에 부드러운 트랜지션 */
+            display: inline-block; /* 텍스트가 inline-block으로 중앙 정렬되도록 */
+            text-align: center;
+            text-decoration: none; /* 밑줄 제거 (필요시) */
         }
-        .portfolio-info-overlay:hover h3 { /* 호버 시 h3 색상 변경 */
-            color: var(--primary-color);
+        .portfolio-info-overlay:hover h3 {
+            color: var(--white-color); /* 호버 시에도 제목은 흰색 유지 */
         }
         .portfolio-info-overlay:hover .overlay-text { /* 슬라이더 View Details 호버 스타일 */
             font-weight: bold; /* 마우스 오버 시 굵게 */
             color: var(--primary-color); /* 마우스 오버 시 주황색 */
+            background-color: rgba(255, 255, 255, 0.1); /* 배경색 살짝 추가 */
+            border-color: var(--primary-color); /* 테두리도 주황색으로 */
+            transform: scale(1.05); /* 살짝 확대 효과 */
         }
-
 
         /* 슬라이더 제어 버튼 */
         .slider-nav-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: transparent; 
-            border: none; 
+            background: transparent;
+            border: none;
             color: var(--white-color); /* 버튼 색상을 흰색으로 변경 */
             font-size: 3.5em; /* 버튼 크기 더 키움 */
             padding: 0 20px; /* 패딩 더 추가 */
@@ -521,7 +529,7 @@
         }
 
         /* 포트폴리오 그리드 섹션 */
-        #portfolio-grid-section { 
+        #portfolio-grid-section {
             background-color: var(--white-color);
             padding: 100px 0; /* 슬라이더 섹션과 구분되는 여백 */
             margin-top: 50px; /* 슬라이더 앨범과의 상단 간격 조절 */
@@ -633,7 +641,7 @@
             opacity: 1;
         }
         .portfolio-item-grid-overlay h3 {
-            color: var(--white-color);
+            color: var(--white-color); /* 제목은 흰색 유지 */
             font-size: 1.3em;
             margin-bottom: 8px;
             font-weight: 700;
@@ -643,17 +651,26 @@
             font-size: 0.9em;
             color: rgba(255, 255, 255, 0.9);
             margin-bottom: 15px;
-            display: block; /* 텍스트가 inline이 아닌 블록 요소로 표시되도록 */
-            /* 텍스트 중앙 정렬 */
-            text-align: center; 
-            transition: font-weight 0.2s ease, color 0.2s ease; /* 트랜지션 추가 */
+            /* View Details 텍스트 자체를 버튼처럼 강조 */
+            padding: 8px 15px; /* 버튼처럼 보이도록 패딩 추가 */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 테두리 추가 */
+            border-radius: 20px; /* 둥근 테두리 */
+            cursor: pointer; /* 클릭 가능 표시 */
+            transition: all 0.3s ease; /* 모든 변화에 부드러운 트랜지션 */
+            display: inline-block; /* 텍스트가 inline-block으로 중앙 정렬되도록 */
+            text-align: center;
+            text-decoration: none; /* 밑줄 제거 (필요시) */
         }
-        .portfolio-item-grid-overlay:hover h3,
-        .portfolio-item-grid-overlay:hover .overlay-text { /* 갤러리 오버레이 호버 시 텍스트 강조 */
-            color: var(--primary-color);
-            font-weight: bold; /* 굵게 */
+        .portfolio-item-grid-overlay:hover h3 { /* 갤러리 호버 시에도 제목은 흰색 유지 */
+            color: var(--white-color); 
         }
-
+        .portfolio-item-grid-overlay:hover .overlay-text { /* 갤러리 View Details 호버 스타일 */
+            font-weight: bold; /* 마우스 오버 시 굵게 */
+            color: var(--primary-color); /* 마우스 오버 시 주황색 */
+            background-color: rgba(255, 255, 255, 0.1); /* 배경색 살짝 추가 */
+            border-color: var(--primary-color); /* 테두리도 주황색으로 */
+            transform: scale(1.05); /* 살짝 확대 효과 */
+        }
 
         /* 그리드 내 카테고리별 소제목 스타일 */
         .portfolio-category-heading {
@@ -1079,94 +1096,37 @@
             }
         }
 
-        /* 아주 작은 모바일 화면 (Small Mobile) - 480px and below */
         @media (max-width: 480px) {
-            .hero-section {
-                padding: 60px 15px;
-                min-height: 50vh;
-            }
             .hero-section h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             .hero-section p {
-                font-size: 0.9em;
-            }
-            .btn-primary {
-                padding: 12px 25px;
                 font-size: 1em;
             }
             .about-image img {
-                width: 180px;
-                height: 180px;
-                border-width: 8px; /* 테두리 얇게 */
+                width: 200px;
+                height: 200px;
             }
             .about-text h3 {
-                font-size: 1.6em;
+                font-size: 1.8em;
             }
             .about-text p {
-                font-size: 0.9em;
+                font-size: 1em;
             }
             #portfolio {
-                height: 28vh; /* 슬라이더 높이 더 줄임 */
+                height: 25vh; /* 아주 작은 화면에서 슬라이더 높이 조정 */
+                padding: 15px 0;
             }
             .slider-nav-btn {
                 font-size: 2em;
             }
-            #portfolio-grid-section {
-                margin-top: 20px;
-                padding: 40px 0;
-            }
             #portfolio-grid-section .section-heading {
                 font-size: 1.8em;
-                margin-bottom: 30px;
-            }
-            .portfolio-filters {
-                gap: 8px;
-            }
-            .filter-btn {
-                padding: 8px 15px;
-                font-size: 0.8em;
+                margin-bottom: 40px;
             }
             .portfolio-grid {
-                grid-template-columns: 1fr; /* 한 열로 변경 */
-                justify-content: center; /* 그리드 아이템들을 중앙 정렬 */
-                gap: 8px;
-            }
-            .portfolio-item-grid-overlay h3 {
-                font-size: 1.1em;
-            }
-            .portfolio-item-grid-overlay .overlay-text {
-                font-size: 0.8em;
-            }
-            .portfolio-item-grid-overlay .overlay-button {
-                padding: 6px 15px;
-                font-size: 0.8em;
-            }
-            .portfolio-category-heading {
-                font-size: 1.1em;
-                margin-top: 20px;
-                margin-bottom: 10px;
-            }
-            .contact-info h3 {
-                font-size: 1.8em;
-            }
-            .contact-info p {
-                font-size: 0.9em;
-            }
-            .contact-form input, .contact-form textarea, .contact-form button {
-                font-size: 0.85em;
-            }
-            .modal-content img {
-                max-height: 60vh;
-            }
-            .prev-btn, .next-btn {
-                font-size: 20px;
-                margin-top: -25px;
-            }
-            .close-btn {
-                font-size: 28px;
-                top: 5px;
-                right: 15px;
+                grid-template-columns: 1fr;
+                gap: 10px;
             }
         }
     </style>
@@ -1203,63 +1163,63 @@
     </header>
 
     <main>
-       <section id="portfolio">
+        <section id="portfolio">
             <div class="portfolio-slider-wrapper">
                 <div class="portfolio-slider">
                     <div class="portfolio-item" data-category="Swirl">
                         <img src="images/swirl_01.jpg" alt="Swirl 01">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Swirl 01" data-en="Swirl 01">Swirl 01</h3>
-                            <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트에 대한 자세한 내용입니다." data-details-en="Detailed information about the fantastic swirl themed art."></p> 
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Flow Roll">
                         <img src="images/flow_roll_01.jpg" alt="Flow Roll 01">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Flow Roll 01" data-en="Flow Roll 01">Flow Roll 01</h3>
-                            <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트에 대한 상세 정보입니다." data-details-en="Detailed information about the roll art with flowing movements."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Pyeonggang">
                         <img src="images/pyeonggang_01.jpg" alt="Pyeonggang 01">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Pyeonggang 01" data-en="Pyeonggang 01">Pyeonggang 01</h3>
-                            <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기에 대한 설명입니다." data-details-en="Description of traditional atmosphere with a Pyeonggang theme."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Comission">
                         <img src="images/comission_01.jpg" alt="Comission 01">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Comission 01" data-en="Comission 01">Comission 01</h3>
-                            <p class="overlay-text" data-details-ko="의뢰받아 제작된 맞춤형 작품의 상세 내역입니다." data-details-en="Details of custom artwork created on commission."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Personal Art">
                         <img src="images/personal_art_01.jpg" alt="Personal Art 01">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Personal Art 01" data-en="Personal Art 01">Personal Art 01</h3>
-                            <p class="overlay-text" data-details-ko="개인적인 창작물이 담긴 아트의 상세 정보입니다." data-details-en="Detailed information about personal creations."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Swirl">
                         <img src="images/swirl_02.jpg" alt="Swirl 02">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Swirl 02" data-en="Swirl 02">Swirl 02</h3>
-                            <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 두 번째 작품입니다." data-details-en="Second piece of fantastic swirl themed art."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Flow Roll">
                         <img src="images/flow_roll_02.jpg" alt="Flow Roll 02">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Flow Roll 02" data-en="Flow Roll 02">Flow Roll 02</h3>
-                            <p class="overlay-text" data-details-ko="유려한 움직임을 담은 롤 아트 두 번째 작품입니다." data-details-en="Second piece of roll art with flowing movements."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                     <div class="portfolio-item" data-category="Pyeonggang">
                         <img src="images/pyeonggang_02.jpg" alt="Pyeonggang 02">
                         <div class="portfolio-info-overlay">
                             <h3 data-ko="Pyeonggang 02" data-en="Pyeonggang 02">Pyeonggang 02</h3>
-                            <p class="overlay-text" data-details-ko="평강 테마의 전통적인 분위기 두 번째 작품입니다." data-details-en="Second piece of traditional atmosphere with a Pyeonggang theme."></p>
+                            <p class="overlay-text" data-details-ko="자세히 보기" data-details-en="View Details"></p>
                         </div>
                     </div>
                 </div>
@@ -1352,7 +1312,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Swirl 08" data-en="Swirl 08">Swirl 08</h3>
-                                <p class="overlay-text" data-ko="자세히 보기" data-en="View Details"></p>
+                                <p class="overlay-text" data-details-ko="환상적인 소용돌이 테마 아트 여덟 번째 작품입니다." data-details-en="Eighth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Swirl">
@@ -1727,7 +1687,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 09" data-en="Personal Art 09">Personal Art 09</h3>
-                                <p class="overlay-text" data-details-ko="개인적인 창작물 아홉 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the ninth personal creation."></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 아홉 번째 작품에 대한 상세 정보입니다." data-details-en="Ninth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1736,7 +1696,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 10" data-en="Personal Art 10">Personal Art 10</h3>
-                                <p class="overlay-text" data-details-ko="개인적인 창작물 열 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the tenth personal creation."></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 열 번째 작품에 대한 상세 정보입니다." data-details-en="Tenth piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                         <div class="portfolio-item-grid" data-category="Personal Art">
@@ -1745,7 +1705,7 @@
                             </div>
                             <div class="portfolio-item-grid-overlay">
                                 <h3 data-ko="Personal Art 11" data-en="Personal Art 11">Personal Art 11</h3>
-                                <p class="overlay-text" data-details-ko="개인적인 창작물 열한 번째 작품에 대한 상세 정보입니다." data-details-en="Detailed information about the eleventh personal creation."></p>
+                                <p class="overlay-text" data-details-ko="개인적인 창작물 열한 번째 작품에 대한 상세 정보입니다." data-details-en="Eleventh piece of fantastic swirl themed art."></p>
                             </div>
                         </div>
                     </div>
@@ -2351,7 +2311,6 @@
             let currentIndex = 0; 
 
             // 그리드 아이템 클릭 이벤트
-            // 갤러리 이미지 클릭 시에도 이미지 자체에 이벤트 리스너를 달아서 라이트박스 열리게 수정
             document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
                 // 이전에 추가된 이벤트 리스너가 중복될 수 있으므로 제거 (선택적)
                 if (item.__clickHandler) {
@@ -2393,39 +2352,36 @@
             }
 
             function showLightboxSlide(index) {
-    if (index >= currentLightboxItems.length) {
-        currentIndex = 0;
-    } else if (index < 0) {
-        currentIndex = currentLightboxItems.length - 1;
-    } else {
-        currentIndex = index;
-    }
+                if (index >= currentLightboxItems.length) {
+                    currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
+                } else if (index < 0) {
+                    currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
+                } else {
+                    currentIndex = index;
+                }
 
-    const item = currentLightboxItems[currentIndex];
-    const imgElement = item.querySelector('img'); // 이미지 태그
-    const h3Element = item.querySelector('h3'); // H3 태그
-    const pElement = item.querySelector('.overlay-text'); // overlay-text p 태그 (슬라이더, 갤러리 공통)
+                const item = currentLightboxItems[currentIndex];
+                const imgElement = item.querySelector('img'); // 이미지 태그
+                const h3Element = item.querySelector('h3'); // H3 태그
+                const pElement = item.querySelector('.overlay-text'); // overlay-text p 태그 (슬라이더, 갤러리 공통)
 
-    const imgSrc = imgElement.src;
-    const imgAlt = imgElement.alt;
-    
-    // 캡션 내용 가져오기 우선순위: p태그의 data-details-lang 속성 -> h3 data-lang -> h3 innerHTML -> alt 텍스트
-    let captionContent = '';
-    // 🌟 수정: pElement가 존재하고 data-details-lang 속성이 있을 경우 우선적으로 사용
-    if (pElement && pElement.hasAttribute(`data-details-${currentLang}`)) {
-        captionContent = pElement.getAttribute(`data-details-${currentLang}`);
-    } else if (h3Element) {
-        // h3Element에 data-ko/en 속성이 있다면 사용, 없으면 innerHTML 사용
-        captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
-    } else {
-        // 모든 경우에 해당하지 않으면 img의 alt 텍스트를 최종 폴백으로 사용
-        captionContent = imgAlt; 
-    }
-    
-    modalImage.src = imgSrc;
-    modalImage.alt = imgAlt;
-    captionText.innerHTML = captionContent; 
-}
+                const imgSrc = imgElement.src;
+                const imgAlt = imgElement.alt;
+                
+                // 캡션 내용 가져오기 우선순위: p태그의 data-details-lang 속성 -> h3 data-lang -> h3 innerHTML -> alt 텍스트
+                let captionContent = '';
+                if (pElement && pElement.hasAttribute(`data-details-${currentLang}`)) {
+                    captionContent = pElement.getAttribute(`data-details-${currentLang}`);
+                } else if (h3Element) {
+                    captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
+                } else {
+                    captionContent = imgAlt; // 최종 폴백
+                }
+                
+                modalImage.src = imgSrc;
+                modalImage.alt = imgAlt;
+                captionText.innerHTML = captionContent; 
+            }
 
             function showNextLightbox() {
                 showLightboxSlide(currentIndex + 1);
