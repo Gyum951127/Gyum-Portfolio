@@ -80,9 +80,14 @@
             border-radius: 3px;
         }
 
-.portfolio-item-grid.hidden-item {
-    opacity: 0;
-}
+        /* 수정된 부분: hidden-item 클래스 (opacity 트랜지션 후 display: none) */
+        .portfolio-item-grid.hidden-item {
+            opacity: 0;
+            pointer-events: none; /* 클릭 이벤트 방지 */
+            height: 0; /* 높이를 0으로 만들어 공간 차지하지 않도록 함 */
+            overflow: hidden; /* 내용 숨김 */
+            transition: opacity 0.4s ease, height 0.4s ease; /* opacity와 height 모두 트랜지션 적용 */
+        }
 
         /* 헤더 */
         header {
@@ -347,7 +352,7 @@
             box-shadow: none; /* 그림자 제거 */
         }
         /* 이 방식에서는 active/neighbor 클래스를 CSS에서 별도로 정의하지 않고,
-            JavaScript에서 직접 z-index를 조절하여 한 장만 보이게 합니다. */
+             JavaScript에서 직접 z-index를 조절하여 한 장만 보이게 합니다. */
         .portfolio-item img {
             width: 100%;
             height: 100%;
@@ -596,7 +601,7 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03); /* 은은한 그림자 */
-            transition: transform 0.3s ease, opacity 0.4s ease;
+            transition: transform 0.3s ease, opacity 0.4s ease; /* opacity 트랜지션 유지 */
             position: relative;
             cursor: default; /* 오버레이에서 pointer 처리 */
         }
@@ -1628,7 +1633,7 @@
                     <div class="about-text">
                         <h3 data-ko="김민겸" data-en="MINGYUM KIM">MINGYUM KIM</h3>
                         <p data-ko="김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다." data-en="Kim Min-gyum is an illustrator who focuses on visualization and color.">김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다。</p>
-                        <p data-ko="감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다." data-en="He are attracted to the work of capturing emotions and mood concisely but delicately, and we continue to try various things in animation and illustration projects.">감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다。</p>
+                        <p data-ko="감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다." data-en="He are attracted to the work of capturing emotions and mood concisely but delicately, we continue to try various things in animation and illustration projects.">감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다。</p>
                         <p data-ko="현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다." data-en="Currently, he is active mainly in Seoul, Korea, and has participated in various fields such as tvN, Korea Business Corporation, and Seneca College in Canada.">현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.</p>
                     </div>
                 </div>
@@ -1729,22 +1734,17 @@
             const item = currentLightboxItems[currentIndex];
             const imgElement = item.querySelector('img'); // 이미지 태그
             const h3Element = item.querySelector('h3'); // H3 태그
-            // 🌟 수정: overlay-text p 태그가 아니라 overlay-link a 태그에서 정보를 가져옵니다.
             const overlayLinkElement = item.querySelector('.overlay-link'); 
 
             const imgSrc = imgElement.src;
             const imgAlt = imgElement.alt;
             
-            // 캡션 내용 가져오기 우선순위: overlay-link의 data-ko/en 속성 -> h3 data-ko/en -> h3 innerHTML -> alt 텍스트
             let captionContent = '';
-            // 🌟 수정: overlayLinkElement에서 data-ko/en 속성 확인
             if (overlayLinkElement && overlayLinkElement.hasAttribute(`data-${currentLang}`)) { 
                 captionContent = overlayLinkElement.getAttribute(`data-${currentLang}`);
             } else if (h3Element) {
-                // h3Element에 data-ko/en 속성이 있다면 사용, 없으면 innerHTML 사용
                 captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
             } else {
-                // 모든 경우에 해당하지 않으면 img의 alt 텍스트를 최종 폴백으로 사용
                 captionContent = imgAlt; 
             }
             
@@ -1760,7 +1760,6 @@
         function showPrevLightbox() {
             showLightboxSlide(currentIndex - 1);
         }
-
 
         // 언어별 텍스트 데이터 (확장 가능)
         const translations = {
@@ -1792,12 +1791,7 @@
                 sendButton: "메시지 보내기",
                 footerCopy: "&copy; 2025 김민겸. 모든 권리 보유.",
                 footerDesign: "열정과 창의성으로 디자인했습니다.",
-                
-                // 슬라이더 및 그리드 오버레이 상세 설명 텍스트 (사용 안함)
-                // View Details를 위한 공통 텍스트만 유지
                 viewDetails: "자세히 보기", 
-
-                // Formspree 관련 메시지 추가
                 sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
                 sendErrorMessage: '메시지 전송에 실패했습니다. 다시 시도해주세요.',
                 networkErrorMessage: '메시지 전송 중 네트워크 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'
@@ -1818,7 +1812,7 @@
                 aboutName: "MINGYUM KIM",
                 aboutP1: "Kim Min-gyum is an illustrator and concept artist who focuses on the visualization and color in his works.",
                 aboutP2: "He is fascinated by the process of capturing emotions and atmospheres concisely but delicately, and he continues to explore various approaches in animation and illustration projects.",
-                aboutP3: "Currently, he is primarily active in Seoul, Korea, and has experience working on projects in various fields, including tvN, Korea Business Corporation, and Seneca College in Canada.",
+                aboutP3: "Currently, he is primarily active in Seoul, Korea, and has participated in various fields, including tvN, Korea Business Corporation, and Seneca College in Canada.",
                 contactHeading: "CONTACT",
                 contactP: "Inquiry:gyeom951127@gmail.com",
                 contactNameLabel: "Name",
@@ -1830,11 +1824,7 @@
                 sendButton: "SEND MESSAGE",
                 footerCopy: "&copy; 2025 MINGYUM KIM. All Rights Reserved.",
                 footerDesign: "Designed with passion and creativity.",
-                
-                // 슬라이더 및 그리드 오버레이 상세 설명 텍스트 (사용 안함)
-                viewDetails: "View Details", /* View Details를 위한 공통 텍스트 */
-
-                // Formspree 관련 메시지 추가
+                viewDetails: "View Details", 
                 sendSuccessMessage: 'Message sent successfully!',
                 sendErrorMessage: 'Failed to send message. Please try again.',
                 networkErrorMessage: 'Network error occurred while sending message. Please check your connection.'
@@ -1857,9 +1847,12 @@
                 }
             });
 
+            // 플레이스홀더 및 버튼 텍스트 업데이트
             document.querySelector('input[name="name"]').setAttribute('placeholder', translations[lang].contactNamePlaceholder);
             document.querySelector('input[name="email"]').setAttribute('placeholder', translations[lang].contactEmailPlaceholder);
             document.querySelector('textarea[name="message"]').setAttribute('placeholder', translations[lang].contactMessagePlaceholder);
+            document.querySelector('.contact-form button[type="submit"]').innerHTML = translations[lang].sendButton;
+
 
             const portfolioGridHeadingElement = document.querySelector('#portfolio-grid-section .section-heading');
             if (portfolioGridHeadingElement) {
@@ -1873,7 +1866,7 @@
             document.querySelector('.filter-btn[data-filter="Comission"]').innerHTML = translations[lang].filterComission;
             document.querySelector('.filter-btn[data-filter="Personal Art"]').innerHTML = translations[lang].filterPersonalArt;
 
-            // 갤러리 카테고리 소제목 업데이트 (수정된 부분)
+            // 갤러리 카테고리 소제목 업데이트
             document.querySelectorAll('.portfolio-category-heading').forEach(headingElement => {
                 const koText = headingElement.getAttribute('data-ko');
                 const enText = headingElement.getAttribute('data-en');
@@ -1927,33 +1920,30 @@
             // 초기 slideIndex는 실제 첫 번째 원본 아이템 (프리클론 바로 다음)
             slideIndex = 1; // preClone (인덱스 0) 다음에 첫 번째 원본 아이템 (인덱스 1)
 
-            // 🌟 수정: 슬라이더 이미지 클릭 이벤트 리스너 (overlay-link에 연결)
+            // 슬라이더 이미지 클릭 이벤트 리스너 (overlay-link에 연결)
             allPortfolioItems.forEach(item => {
-                // 이전에 추가된 이벤트 리스너가 중복될 수 있으므로 제거 (선택적)
                 if (item.__clickHandler) {
                     item.removeEventListener('click', item.__clickHandler);
                 }
 
-                const overlayLink = item.querySelector('.overlay-link'); // overlay-link를 찾음
-                if (overlayLink) { // overlayLink가 존재하는 경우에만 이벤트 연결
+                const overlayLink = item.querySelector('.overlay-link');
+                if (overlayLink) {
                     const newClickHandler = function(e) {
-                        e.preventDefault(); // <a> 태그의 기본 동작(페이지 상단 이동) 방지
+                        e.preventDefault();
 
-                        const currentTargetImg = item.querySelector('img'); // 클릭된 오버레이의 부모 아이템에서 이미지 찾기
-                        const currentTargetSrc = currentTargetImg.src; 
+                        const currentTargetImg = item.querySelector('img');
+                        const currentTargetSrc = currentTargetImg.src;
                         
-                        // 라이트박스에 보여줄 아이템 목록은 항상 원본 슬라이더 아이템이어야 합니다.
                         currentLightboxItems = originalPortfolioItems; 
                         
-                        // 클릭된 이미지의 src와 일치하는 원본 아이템의 인덱스를 찾습니다.
                         const originalIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
                         
                         if (originalIndex !== -1) { 
                             openModal(originalIndex);
                         }
                     };
-                    overlayLink.addEventListener('click', newClickHandler); // overlayLink에 이벤트 연결
-                    item.__clickHandler = newClickHandler; // 이벤트 핸들러 참조 저장
+                    overlayLink.addEventListener('click', newClickHandler);
+                    item.__clickHandler = newClickHandler;
                 }
             });
 
@@ -1972,7 +1962,6 @@
 
             requestAnimationFrame(() => {
                 const sliderWrapperWidth = document.querySelector('.portfolio-slider-wrapper').offsetWidth; 
-                // 각 아이템이 wrapper 너비를 꽉 채우므로, translateX는 -slideIndex * wrapperWidth
                 let finalTransformX = -slideIndex * sliderWrapperWidth; 
 
                 if (!animate) {
@@ -1984,9 +1973,12 @@
                 portfolioSlider.style.transform = `translateX(${finalTransformX}px)`;
 
                 isAnimating = false; 
-                setTimeout(() => {
-                    portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
-                }, 0); 
+                // 애니메이션이 'none'으로 설정된 후 다시 원래 트랜지션으로 복원
+                if (!animate) {
+                    setTimeout(() => {
+                        portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
+                    }, 50); // 짧은 딜레이
+                }
             });
         }
 
@@ -2058,7 +2050,6 @@
             // --- 포트폴리오 슬라이더 기능 초기화 ---
             initializeSlider(); 
             
-            // 🌟 수정: 슬라이드 버튼 클릭 시 자동 재생 재설정만 수행, 슬라이드 이동은 showNext/PrevSlide에서 담당
             document.getElementById('prev-slide').addEventListener('click', function() {
                 showPrevSlide();
                 resetAutoSlide();
@@ -2068,7 +2059,6 @@
                 resetAutoSlide();
             });
 
-            portfolioSlider = document.querySelector('.portfolio-slider'); 
             portfolioSlider.addEventListener('transitionend', () => {
                 const originalLength = originalPortfolioItems.length;
 
@@ -2083,6 +2073,7 @@
                     updateSliderPosition(false); 
                 }
                 isAnimating = false; 
+                // transitionend 이후에 다시 트랜지션 속성 복원
                 setTimeout(() => {
                     portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
                 }, 0); 
@@ -2119,6 +2110,80 @@
 
             // --- 5열 그리드 포트폴리오의 필터링 기능 ---
             const filterButtons = document.querySelectorAll('#portfolio-grid-section .filter-btn');
+            // DOMContentLoaded 시점에 모든 그리드 아이템을 초기화합니다.
+            allGridItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid'));
+
+            // 초기 로드 시 모든 카테고리 래퍼와 아이템이 보이도록 설정
+            document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                wrapper.style.display = 'block';
+                wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                    item.style.opacity = '1';
+                    item.style.display = 'block';
+                    item.style.height = ''; 
+                    item.classList.remove('hidden-item');
+                });
+            });
+
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const filter = this.dataset.filter;
+
+                    // 모든 카테고리 래퍼 순회
+                    document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                        const categoryHeading = wrapper.querySelector('.portfolio-category-heading');
+                        const wrapperCategory = (currentLang === 'ko' ? categoryHeading.getAttribute('data-ko') : categoryHeading.getAttribute('data-en'))
+                                                .replace(' 작품', '')
+                                                .replace(' Artworks', '');
+
+                        let hasVisibleItemsInWrapper = false; // 현재 래퍼에 표시될 아이템이 있는지 확인
+
+                        wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                            if (item.__filterTransitionEndHandler) {
+                                item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
+                                delete item.__filterTransitionEndHandler;
+                            }
+
+                            if (filter === 'all' || item.dataset.category === filter) {
+                                // 보여져야 할 아이템
+                                item.style.display = 'block'; 
+                                item.classList.remove('hidden-item'); 
+                                item.style.height = ''; 
+
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                }, 10);
+                                hasVisibleItemsInWrapper = true;
+                            } else {
+                                // 숨겨져야 할 아이템
+                                item.style.opacity = '0'; 
+                                item.style.height = '0px'; 
+
+                                const hideAfterTransition = function() {
+                                    item.style.display = 'none';
+                                    item.classList.add('hidden-item');
+                                    item.removeEventListener('transitionend', hideAfterTransition);
+                                    delete item.__filterTransitionEndHandler;
+                                };
+                                item.addEventListener('transitionend', hideAfterTransition);
+                                item.__filterTransitionEndHandler = hideAfterTransition;
+                            }
+                        });
+
+                        // 래퍼 자체의 display를 조절하여 빈 래퍼를 숨김
+                        if (filter === 'all' || (filter !== 'all' && filter === wrapperCategory)) {
+                             // 'All' 필터이거나 해당 카테고리 필터일 경우, 내용이 있으면 block, 없으면 none
+                            wrapper.style.display = hasVisibleItemsInWrapper ? 'block' : 'none';
+                        } else {
+                            // 다른 카테고리 필터일 경우, 이 래퍼는 무조건 숨김
+                            wrapper.style.display = 'none';
+                        }
+                    });
+                });
+            });
 
 
             // --- 라이트박스 기능 (슬라이더 이미지와 그리드 이미지 모두 클릭 시) ---
@@ -2128,33 +2193,38 @@
             const closeBtn = document.querySelector(".close-btn");
             const prevBtn = document.querySelector(".prev-btn");
             const nextBtn = document.querySelector(".next-btn");
-            // currentLightboxItems, currentIndex는 전역으로 선언됨
-
+            
             // 갤러리 아이템 클릭 이벤트
             document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
-                // 이전에 추가된 이벤트 리스너가 중복될 수 있으므로 제거 (선택적)
                 if (item.__clickHandler) {
                     item.removeEventListener('click', item.__clickHandler);
+                    delete item.__clickHandler; 
                 }
 
                 const newClickHandler = function(e) {
-                    e.preventDefault(); // 기본 <a> 태그 동작(페이지 상단 이동) 방지
+                    // overlay-link를 직접 클릭했을 때만 실행
+                    if (e.target.classList.contains('overlay-link')) {
+                        e.preventDefault(); 
 
-                    // 현재 필터링되어 보이는 아이템만 가져옴
-                    currentLightboxItems = allGridItems.filter(visibleItem => window.getComputedStyle(visibleItem).display !== 'none');
-                    
-                    const clickedImgSrc = this.querySelector('img').src;
-                    // 클릭된 이미지의 src와 일치하는 아이템의 인덱스를 찾습니다.
-                    currentIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === clickedImgSrc);
+                        // 현재 필터링되어 보이는 아이템만 가져옴
+                        currentLightboxItems = allGridItems.filter(visibleItem => {
+                            const computedStyle = window.getComputedStyle(visibleItem);
+                            // hidden-item 클래스가 없거나, display가 'none'이 아닌 경우만 포함 (정확한 체크)
+                            return !visibleItem.classList.contains('hidden-item') && computedStyle.display !== 'none' && computedStyle.opacity > '0';
+                        });
+                        
+                        const clickedImgSrc = this.querySelector('img').src;
+                        currentIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === clickedImgSrc);
 
-                    if (currentIndex !== -1) { 
-                        openModal(currentIndex);
+                        if (currentIndex !== -1) { 
+                            openModal(currentIndex);
+                        }
                     }
                 };
+                // 오버레이 링크 자체가 아니라, 그리드 아이템 전체에 이벤트 리스너를 붙이고 내부에서 필터링
                 item.addEventListener('click', newClickHandler);
-                item.__clickHandler = newClickHandler; // 이벤트 핸들러 참조 저장
+                item.__clickHandler = newClickHandler; 
             });
-
 
             closeBtn.addEventListener('click', closeModal);
             prevBtn.addEventListener('click', showPrevLightbox);
