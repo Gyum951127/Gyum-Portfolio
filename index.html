@@ -2126,23 +2126,36 @@
 
                     // ⬅️ 수정할 부분 시작: 모든 카테고리 래퍼와 그 안의 아이템을 일단 숨김 (초기화)
                     document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                        wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                            item.style.opacity = '0'; // 아이템 투명하게
-                            // 중요한 수정: transitionend 리스너는 display: 'none' 직전에만 추가하여 중복 방지
-                            // 기존 transitionend 리스너가 있다면 제거
-                            if (item.__filterTransitionEndHandler) {
-                                item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
-                            }
-                            const transitionEndHandler = function() {
-                                this.style.display = 'none'; // 투명해진 후에 완전히 숨김
-                                this.removeEventListener('transitionend', this.__filterTransitionEndHandler);
-                                delete this.__filterTransitionEndHandler; // 참조 정리
-                            };
-                            item.addEventListener('transitionend', transitionEndHandler);
-                            item.__filterTransitionEndHandler = transitionEndHandler; // 참조 저장
-                        });
-                        wrapper.style.display = 'none'; // 래퍼 자체도 숨김 (이 부분이 위로 이동)
-                    });
+    wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+        // 이미 display: none 이거나 opacity가 0인 경우 다시 트랜지션 걸 필요 없음.
+        // 그리고 transitionend 핸들러를 중복 등록하지 않도록 개선
+        if (item.style.display === 'none' && item.style.opacity === '0') {
+            return; // 이미 숨겨져 있다면 스킵
+        }
+
+        // 이전 transitionend 핸들러가 있다면 제거
+        if (item.__filterTransitionEndHandler) {
+            item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
+            delete item.__filterTransitionEndHandler;
+        }
+
+        // opacity를 0으로 설정하여 애니메이션 시작
+        item.style.opacity = '0'; 
+
+        // opacity 트랜지션이 끝난 후에 display: 'none'을 적용
+        const hideAfterTransition = function() {
+            item.style.display = 'none';
+            item.removeEventListener('transitionend', hideAfterTransition);
+            delete item.__filterTransitionEndHandler; // 참조 정리
+        };
+        item.addEventListener('transitionend', hideAfterTransition);
+        item.__filterTransitionEndHandler = hideAfterTransition; // 핸들러 참조 저장
+    });
+    // 모든 아이템이 숨겨진 후 해당 래퍼도 숨김. (이전과 동일)
+    // 모든 아이템의 트랜지션이 끝난 후 wrapper를 숨기는게 더 좋지만,
+    // 현재 구조에서는 wrapper를 먼저 숨겨도 시각적 문제는 크지 않으므로 유지.
+    wrapper.style.display = 'none'; 
+});
                     // ⬅️ 수정할 부분 끝
 
                     // ⬅️ 수정된 부분 시작: 선택된 필터에 따라 해당하는 카테고리 래퍼와 아이템만 표시
