@@ -1696,623 +1696,628 @@
 
     <script>
         // 전역 변수 선언 (스코프 오류 해결을 위해 DOMContentLoaded 밖으로 이동)
-        let portfolioSlider;
-        let originalPortfolioItems = []; // 클론 제외한 원본 슬라이더 아이템만 저장
-        let allPortfolioItems = []; // 클론 포함 모든 슬라이더 아이템 (DOM에 있는 실제 아이템들)
-        let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
-        let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
-        let allGridItems = []; // 모든 그리드 아이템을 저장할 배열
-        let currentLightboxItems = []; // 라이트박스에 표시될 현재 아이템 목록
-        let currentIndex = 0; // 라이트박스 현재 이미지 인덱스
+let portfolioSlider;
+let originalPortfolioItems = []; // 클론 제외한 원본 슬라이더 아이템만 저장
+let allPortfolioItems = []; // 클론 포함 모든 슬라이더 아이템 (DOM에 있는 실제 아이템들)
+let slideIndex = 0; // 현재 활성 아이템의 인덱스 (allPortfolioItems 기준)
+let isAnimating = false; // 애니메이션 중복 실행 방지 플래그
+let allGridItems = []; // 모든 그리드 아이템을 저장할 배열
+let currentLightboxItems = []; // 라이트박스에 표시될 현재 아이템 목록
+let currentIndex = 0; // 라이트박스 현재 이미지 인덱스
 
-        // 라이트박스 관련 함수들을 전역 스코프로 이동
-        function openModal(index) {
-            const modal = document.getElementById("myModal");
-            if (currentLightboxItems.length === 0) return;
-            
-            modal.style.display = "flex";
-            showLightboxSlide(index);
+// 라이트박스 관련 함수들을 전역 스코프로 이동
+function openModal(index) {
+    const modal = document.getElementById("myModal");
+    if (currentLightboxItems.length === 0) return;
+    
+    modal.style.display = "flex";
+    showLightboxSlide(index);
+}
+
+function closeModal() {
+    const modal = document.getElementById("myModal");
+    modal.style.display = "none";
+}
+
+function showLightboxSlide(index) {
+    const modalImage = document.getElementById("modalImage");
+    const captionText = document.getElementById("caption");
+
+    if (index >= currentLightboxItems.length) {
+        currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
+    } else if (index < 0) {
+        currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
+    } else {
+        currentIndex = index;
+    }
+
+    const item = currentLightboxItems[currentIndex];
+    const imgElement = item.querySelector('img'); // 이미지 태그
+    const h3Element = item.querySelector('h3'); // H3 태그
+    const overlayLinkElement = item.querySelector('.overlay-link'); 
+
+    const imgSrc = imgElement.src;
+    const imgAlt = imgElement.alt;
+    
+    let captionContent = '';
+    if (overlayLinkElement && overlayLinkElement.hasAttribute(`data-${currentLang}`)) { 
+        captionContent = overlayLinkElement.getAttribute(`data-${currentLang}`);
+    } else if (h3Element) {
+        captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
+    } else {
+        captionContent = imgAlt; 
+    }
+    
+    modalImage.src = imgSrc;
+    modalImage.alt = imgAlt;
+    captionText.innerHTML = captionContent; 
+}
+
+function showNextLightbox() {
+    showLightboxSlide(currentIndex + 1);
+}
+
+function showPrevLightbox() {
+    showLightboxSlide(currentIndex - 1);
+}
+
+// 언어별 텍스트 데이터 (확장 가능)
+const translations = {
+    ko: {
+        logo: "김민겸",
+        navPortfolio: "포트폴리오",
+        navAbout: "소개",
+        navContact: "연락처",
+        portfolioGridHeading: "포트폴리오 갤러리", 
+        filterAll: "전체 보기",
+        filterSwirl: "Swirl", 
+        filterFlowRoll: "Flow Roll", 
+        filterPyeonggang: "Pyeonggang", 
+        filterComission: "Comission", 
+        filterPersonalArt: "Personal Art",
+        aboutHeading: "소개",
+        aboutName: "김민겸",
+        aboutP1: "김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.",
+        aboutP2: "감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다.",
+        aboutP3: "현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.",
+        contactHeading: "연락처",
+        contactP: "문의:gyeom951127@gmail.com",
+        contactNameLabel: "이름",
+        contactEmailLabel: "이메일",
+        contactMessageLabel: "메시지",
+        contactNamePlaceholder: "이름을 입력해주세요",
+        contactEmailPlaceholder: "이메일 주소를 입력해주세요",
+        contactMessagePlaceholder: "자세한 내용을 입력해주세요",
+        sendButton: "메시지 보내기",
+        footerCopy: "&copy; 2025 김민겸. 모든 권리 보유.",
+        footerDesign: "열정과 창의성으로 디자인했습니다.",
+        viewDetails: "자세히 보기", 
+        sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
+        sendErrorMessage: '메시지 전송에 실패했습니다. 다시 시도해주세요.',
+        networkErrorMessage: '메시지 전송 중 네트워크 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'
+    },
+    en: {
+        logo: "MINGYUM KIM",
+        navPortfolio: "PORTFOLIO",
+        navAbout: "ABOUT",
+        navContact: "CONTACT",
+        portfolioGridHeading: "PORTFOLIO GALLERY", 
+        filterAll: "ALL",
+        filterSwirl: "Swirl",
+        filterFlowRoll: "Flow Roll",
+        filterPyeonggang: "Pyeonggang",
+        filterComission: "Comission",
+        filterPersonalArt: "Personal Art",
+        aboutHeading: "ABOUT",
+        aboutName: "MINGYUM KIM",
+        aboutP1: "Kim Min-gyum is an illustrator and concept artist who focuses on the visualization and color in his works.",
+        aboutP2: "He is fascinated by the process of capturing emotions and atmospheres concisely but delicately, and he continues to explore various approaches in animation and illustration projects.",
+        aboutP3: "Currently, he is primarily active in Seoul, Korea, and has participated in various fields, including tvN, Korea Business Corporation, and Seneca College in Canada.",
+        contactHeading: "CONTACT",
+        contactP: "Inquiry:gyeom951127@gmail.com",
+        contactNameLabel: "Name",
+        contactEmailLabel: "Email",
+        contactMessageLabel: "Message",
+        contactNamePlaceholder: "Your Name",
+        contactEmailPlaceholder: "Your Email Address",
+        contactMessagePlaceholder: "Write your message here...",
+        sendButton: "SEND MESSAGE",
+        footerCopy: "&copy; 2025 MINGYUM KIM. All Rights Reserved.",
+        footerDesign: "Designed with passion and creativity.",
+        viewDetails: "View Details", 
+        sendSuccessMessage: 'Message sent successfully!',
+        sendErrorMessage: 'Failed to send message. Please try again.',
+        networkErrorMessage: 'Network error occurred while sending message. Please check your connection.'
+    }
+};
+
+let currentLang = 'en'; // 이 변수는 applyTranslations 함수에서 사용되므로 전역 선언을 유지합니다.
+
+// 언어 적용 함수는 위에서 전역으로 정의된 translations 객체를 사용합니다.
+function applyTranslations(lang) {
+    currentLang = lang;
+
+    document.querySelectorAll('[data-ko], [data-en]').forEach(element => {
+        const koText = element.getAttribute('data-ko');
+        const enText = element.getAttribute('data-en');
+        if (lang === 'ko' && koText) {
+            element.innerHTML = koText;
+        } else if (lang === 'en' && enText) {
+            element.innerHTML = enText;
+        }
+    });
+
+    // 플레이스홀더 및 버튼 텍스트 업데이트
+    document.querySelector('input[name="name"]').setAttribute('placeholder', translations[lang].contactNamePlaceholder);
+    document.querySelector('input[name="email"]').setAttribute('placeholder', translations[lang].contactEmailPlaceholder);
+    document.querySelector('textarea[name="message"]').setAttribute('placeholder', translations[lang].contactMessagePlaceholder);
+    document.querySelector('.contact-form button[type="submit"]').innerHTML = translations[lang].sendButton;
+
+
+    const portfolioGridHeadingElement = document.querySelector('#portfolio-grid-section .section-heading');
+    if (portfolioGridHeadingElement) {
+        portfolioGridHeadingElement.innerHTML = translations[lang].portfolioGridHeading;
+    }
+
+    document.querySelector('.filter-btn[data-filter="all"]').innerHTML = translations[lang].filterAll;
+    document.querySelector('.filter-btn[data-filter="Swirl"]').innerHTML = translations[lang].filterSwirl;
+    document.querySelector('.filter-btn[data-filter="Flow Roll"]').innerHTML = translations[lang].filterFlowRoll;
+    document.querySelector('.filter-btn[data-filter="Pyeonggang"]').innerHTML = translations[lang].filterPyeonggang;
+    document.querySelector('.filter-btn[data-filter="Comission"]').innerHTML = translations[lang].filterComission;
+    document.querySelector('.filter-btn[data-filter="Personal Art"]').innerHTML = translations[lang].filterPersonalArt;
+
+    // 갤러리 카테고리 소제목 업데이트
+    document.querySelectorAll('.portfolio-category-heading').forEach(headingElement => {
+        const koText = headingElement.getAttribute('data-ko');
+        const enText = headingElement.getAttribute('data-en');
+        if (lang === 'ko' && koText) {
+            headingElement.innerHTML = koText;
+        } else if (lang === 'en' && enText) {
+            headingElement.innerHTML = enText;
+        }
+    });
+
+    // overlay-link 업데이트 (슬라이더, 그리드 공통)
+    document.querySelectorAll('.overlay-link').forEach(linkElement => {
+        linkElement.innerHTML = translations[currentLang].viewDetails;
+    });
+    
+    document.getElementById('lang-ko').classList.remove('active');
+    document.getElementById('lang-en').classList.remove('active');
+    document.getElementById(`lang-${lang}`).classList.add('active');
+}
+
+// 슬라이더 초기화 함수 (DOM 조작 및 이벤트 리스너 설정)
+function initializeSlider() {
+    portfolioSlider = document.querySelector('.portfolio-slider');
+    // 클론 제외한 원본 슬라이더 아이템을 정확히 가져옴
+    originalPortfolioItems = Array.from(document.querySelectorAll('#portfolio .portfolio-item:not(.clone)'));
+    const originalLength = originalPortfolioItems.length;
+    
+    // 기존 클론 제거 (재초기화 시 중복 방지)
+    document.querySelectorAll('.portfolio-item.clone').forEach(clone => clone.remove());
+
+    // DOM을 비우고 원본 아이템 재구성
+    portfolioSlider.innerHTML = '';
+    
+    // 클론을 양쪽에 1개씩만 추가 (1개만 보이는 슬라이드이므로)
+    // 맨 뒤 원본을 복제하여 맨 앞에 추가
+    const preClone = originalPortfolioItems[originalLength - 1].cloneNode(true);
+    preClone.classList.add('clone', 'clone-pre');
+    portfolioSlider.appendChild(preClone);
+
+    // 모든 원본 아이템 추가
+    originalPortfolioItems.forEach(item => portfolioSlider.appendChild(item));
+
+    // 맨 앞 원본을 복제하여 맨 뒤에 추가
+    const postClone = originalPortfolioItems[0].cloneNode(true);
+    postClone.classList.add('clone', 'clone-post');
+    portfolioSlider.appendChild(postClone);
+
+    // 클론 포함 모든 아이템을 다시 가져옵니다.
+    allPortfolioItems = Array.from(document.querySelectorAll('#portfolio .portfolio-item')); 
+    
+    // 초기 slideIndex는 실제 첫 번째 원본 아이템 (프리클론 바로 다음)
+    slideIndex = 1; // preClone (인덱스 0) 다음에 첫 번째 원본 아이템 (인덱스 1)
+
+    // 슬라이더 이미지 클릭 이벤트 리스너 (overlay-link에 연결)
+    allPortfolioItems.forEach(item => {
+        if (item.__clickHandler) {
+            item.removeEventListener('click', item.__clickHandler);
         }
 
-        function closeModal() {
-            const modal = document.getElementById("myModal");
-            modal.style.display = "none";
-        }
+        const overlayLink = item.querySelector('.overlay-link');
+        if (overlayLink) {
+            const newClickHandler = function(e) {
+                e.preventDefault();
 
-        function showLightboxSlide(index) {
-            const modalImage = document.getElementById("modalImage");
-            const captionText = document.getElementById("caption");
-
-            if (index >= currentLightboxItems.length) {
-                currentIndex = 0; // 마지막에서 다음으로 가면 처음으로
-            } else if (index < 0) {
-                currentIndex = currentLightboxItems.length - 1; // 처음에서 이전으로 가면 마지막으로
-            } else {
-                currentIndex = index;
-            }
-
-            const item = currentLightboxItems[currentIndex];
-            const imgElement = item.querySelector('img'); // 이미지 태그
-            const h3Element = item.querySelector('h3'); // H3 태그
-            const overlayLinkElement = item.querySelector('.overlay-link'); 
-
-            const imgSrc = imgElement.src;
-            const imgAlt = imgElement.alt;
-            
-            let captionContent = '';
-            if (overlayLinkElement && overlayLinkElement.hasAttribute(`data-${currentLang}`)) { 
-                captionContent = overlayLinkElement.getAttribute(`data-${currentLang}`);
-            } else if (h3Element) {
-                captionContent = h3Element.getAttribute(`data-${currentLang}`) || h3Element.innerHTML;
-            } else {
-                captionContent = imgAlt; 
-            }
-            
-            modalImage.src = imgSrc;
-            modalImage.alt = imgAlt;
-            captionText.innerHTML = captionContent; 
-        }
-
-        function showNextLightbox() {
-            showLightboxSlide(currentIndex + 1);
-        }
-
-        function showPrevLightbox() {
-            showLightboxSlide(currentIndex - 1);
-        }
-
-        // 언어별 텍스트 데이터 (확장 가능)
-        const translations = {
-            ko: {
-                logo: "김민겸",
-                navPortfolio: "포트폴리오",
-                navAbout: "소개",
-                navContact: "연락처",
-                portfolioGridHeading: "포트폴리오 갤러리", 
-                filterAll: "전체 보기",
-                filterSwirl: "Swirl", 
-                filterFlowRoll: "Flow Roll", 
-                filterPyeonggang: "Pyeonggang", 
-                filterComission: "Comission", 
-                filterPersonalArt: "Personal Art",
-                aboutHeading: "소개",
-                aboutName: "김민겸",
-                aboutP1: "김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.",
-                aboutP2: "감정과 분위기를 간결하지만 섬세하게 담아내는 작업에 매력을 느끼며, 애니메이션과 일러스트 프로젝트에서 다양한 시도를 이어가고 있습니다.",
-                aboutP3: "현재는 대한민국 서울을 중심으로 활동 중이며, tvN, 한국회상법인, 캐나다 Seneca college 등 다양한 분야에서의 작업에 참여한 경험이 있습니다.",
-                contactHeading: "연락처",
-                contactP: "문의:gyeom951127@gmail.com",
-                contactNameLabel: "이름",
-                contactEmailLabel: "이메일",
-                contactMessageLabel: "메시지",
-                contactNamePlaceholder: "이름을 입력해주세요",
-                contactEmailPlaceholder: "이메일 주소를 입력해주세요",
-                contactMessagePlaceholder: "자세한 내용을 입력해주세요",
-                sendButton: "메시지 보내기",
-                footerCopy: "&copy; 2025 김민겸. 모든 권리 보유.",
-                footerDesign: "열정과 창의성으로 디자인했습니다.",
-                viewDetails: "자세히 보기", 
-                sendSuccessMessage: '메시지가 성공적으로 전송되었습니다!',
-                sendErrorMessage: '메시지 전송에 실패했습니다. 다시 시도해주세요.',
-                networkErrorMessage: '메시지 전송 중 네트워크 오류가 발생했습니다. 네트워크 연결을 확인해주세요.'
-            },
-            en: {
-                logo: "MINGYUM KIM",
-                navPortfolio: "PORTFOLIO",
-                navAbout: "ABOUT",
-                navContact: "CONTACT",
-                portfolioGridHeading: "PORTFOLIO GALLERY", 
-                filterAll: "ALL",
-                filterSwirl: "Swirl",
-                filterFlowRoll: "Flow Roll",
-                filterPyeonggang: "Pyeonggang",
-                filterComission: "Comission",
-                filterPersonalArt: "Personal Art",
-                aboutHeading: "ABOUT",
-                aboutName: "MINGYUM KIM",
-                aboutP1: "Kim Min-gyum is an illustrator and concept artist who focuses on the visualization and color in his works.",
-                aboutP2: "He is fascinated by the process of capturing emotions and atmospheres concisely but delicately, and he continues to explore various approaches in animation and illustration projects.",
-                aboutP3: "Currently, he is primarily active in Seoul, Korea, and has participated in various fields, including tvN, Korea Business Corporation, and Seneca College in Canada.",
-                contactHeading: "CONTACT",
-                contactP: "Inquiry:gyeom951127@gmail.com",
-                contactNameLabel: "Name",
-                contactEmailLabel: "Email",
-                contactMessageLabel: "Message",
-                contactNamePlaceholder: "Your Name",
-                contactEmailPlaceholder: "Your Email Address",
-                contactMessagePlaceholder: "Write your message here...",
-                sendButton: "SEND MESSAGE",
-                footerCopy: "&copy; 2025 MINGYUM KIM. All Rights Reserved.",
-                footerDesign: "Designed with passion and creativity.",
-                viewDetails: "View Details", 
-                sendSuccessMessage: 'Message sent successfully!',
-                sendErrorMessage: 'Failed to send message. Please try again.',
-                networkErrorMessage: 'Network error occurred while sending message. Please check your connection.'
-            }
-        };
-
-        let currentLang = 'en'; // 이 변수는 applyTranslations 함수에서 사용되므로 전역 선언을 유지합니다.
-
-        // 언어 적용 함수는 위에서 전역으로 정의된 translations 객체를 사용합니다.
-        function applyTranslations(lang) {
-            currentLang = lang;
-
-            document.querySelectorAll('[data-ko], [data-en]').forEach(element => {
-                const koText = element.getAttribute('data-ko');
-                const enText = element.getAttribute('data-en');
-                if (lang === 'ko' && koText) {
-                    element.innerHTML = koText;
-                } else if (lang === 'en' && enText) {
-                    element.innerHTML = enText;
-                }
-            });
-
-            // 플레이스홀더 및 버튼 텍스트 업데이트
-            document.querySelector('input[name="name"]').setAttribute('placeholder', translations[lang].contactNamePlaceholder);
-            document.querySelector('input[name="email"]').setAttribute('placeholder', translations[lang].contactEmailPlaceholder);
-            document.querySelector('textarea[name="message"]').setAttribute('placeholder', translations[lang].contactMessagePlaceholder);
-            document.querySelector('.contact-form button[type="submit"]').innerHTML = translations[lang].sendButton;
-
-
-            const portfolioGridHeadingElement = document.querySelector('#portfolio-grid-section .section-heading');
-            if (portfolioGridHeadingElement) {
-                portfolioGridHeadingElement.innerHTML = translations[lang].portfolioGridHeading;
-            }
-
-            document.querySelector('.filter-btn[data-filter="all"]').innerHTML = translations[lang].filterAll;
-            document.querySelector('.filter-btn[data-filter="Swirl"]').innerHTML = translations[lang].filterSwirl;
-            document.querySelector('.filter-btn[data-filter="Flow Roll"]').innerHTML = translations[lang].filterFlowRoll;
-            document.querySelector('.filter-btn[data-filter="Pyeonggang"]').innerHTML = translations[lang].filterPyeonggang;
-            document.querySelector('.filter-btn[data-filter="Comission"]').innerHTML = translations[lang].filterComission;
-            document.querySelector('.filter-btn[data-filter="Personal Art"]').innerHTML = translations[lang].filterPersonalArt;
-
-            // 갤러리 카테고리 소제목 업데이트
-            document.querySelectorAll('.portfolio-category-heading').forEach(headingElement => {
-                const koText = headingElement.getAttribute('data-ko');
-                const enText = headingElement.getAttribute('data-en');
-                if (lang === 'ko' && koText) {
-                    headingElement.innerHTML = koText;
-                } else if (lang === 'en' && enText) {
-                    headingElement.innerHTML = enText;
-                }
-            });
-
-            // overlay-link 업데이트 (슬라이더, 그리드 공통)
-            document.querySelectorAll('.overlay-link').forEach(linkElement => {
-                linkElement.innerHTML = translations[currentLang].viewDetails;
-            });
-            
-            document.getElementById('lang-ko').classList.remove('active');
-            document.getElementById('lang-en').classList.remove('active');
-            document.getElementById(`lang-${lang}`).classList.add('active');
-        }
-
-        // 슬라이더 초기화 함수 (DOM 조작 및 이벤트 리스너 설정)
-        function initializeSlider() {
-            portfolioSlider = document.querySelector('.portfolio-slider');
-            // 클론 제외한 원본 슬라이더 아이템을 정확히 가져옴
-            originalPortfolioItems = Array.from(document.querySelectorAll('#portfolio .portfolio-item:not(.clone)'));
-            const originalLength = originalPortfolioItems.length;
-            
-            // 기존 클론 제거 (재초기화 시 중복 방지)
-            document.querySelectorAll('.portfolio-item.clone').forEach(clone => clone.remove());
-
-            // DOM을 비우고 원본 아이템 재구성
-            portfolioSlider.innerHTML = '';
-            
-            // 클론을 양쪽에 1개씩만 추가 (1개만 보이는 슬라이드이므로)
-            // 맨 뒤 원본을 복제하여 맨 앞에 추가
-            const preClone = originalPortfolioItems[originalLength - 1].cloneNode(true);
-            preClone.classList.add('clone', 'clone-pre');
-            portfolioSlider.appendChild(preClone);
-
-            // 모든 원본 아이템 추가
-            originalPortfolioItems.forEach(item => portfolioSlider.appendChild(item));
-
-            // 맨 앞 원본을 복제하여 맨 뒤에 추가
-            const postClone = originalPortfolioItems[0].cloneNode(true);
-            postClone.classList.add('clone', 'clone-post');
-            portfolioSlider.appendChild(postClone);
-
-            // 클론 포함 모든 아이템을 다시 가져옵니다.
-            allPortfolioItems = Array.from(document.querySelectorAll('#portfolio .portfolio-item')); 
-            
-            // 초기 slideIndex는 실제 첫 번째 원본 아이템 (프리클론 바로 다음)
-            slideIndex = 1; // preClone (인덱스 0) 다음에 첫 번째 원본 아이템 (인덱스 1)
-
-            // 슬라이더 이미지 클릭 이벤트 리스너 (overlay-link에 연결)
-            allPortfolioItems.forEach(item => {
-                if (item.__clickHandler) {
-                    item.removeEventListener('click', item.__clickHandler);
-                }
-
-                const overlayLink = item.querySelector('.overlay-link');
-                if (overlayLink) {
-                    const newClickHandler = function(e) {
-                        e.preventDefault();
-
-                        const currentTargetImg = item.querySelector('img');
-                        const currentTargetSrc = currentTargetImg.src;
-                        
-                        currentLightboxItems = originalPortfolioItems; 
-                        
-                        const originalIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
-                        
-                        if (originalIndex !== -1) { 
-                            openModal(originalIndex);
-                        }
-                    };
-                    overlayLink.addEventListener('click', newClickHandler);
-                    item.__clickHandler = newClickHandler;
-                }
-            });
-
-            // 슬라이더 오버레이 텍스트 업데이트 (initializeSlider가 실행될 때마다 호출)
-            document.querySelectorAll('#portfolio .portfolio-item .overlay-link').forEach(linkElement => {
-                linkElement.innerHTML = translations[currentLang].viewDetails;
-            });
-
-            // 초기 위치 설정 (애니메이션 없이)
-            updateSliderPosition(false); 
-        }
-
-        // 슬라이더 위치를 업데이트하고 활성 클래스를 적용하는 함수
-        function updateSliderPosition(animate = true) {
-            if (allPortfolioItems.length === 0) return;
-
-            requestAnimationFrame(() => {
-                const sliderWrapperWidth = document.querySelector('.portfolio-slider-wrapper').offsetWidth; 
-                let finalTransformX = -slideIndex * sliderWrapperWidth; 
-
-                if (!animate) {
-                    portfolioSlider.style.transition = 'none';
-                } else {
-                    portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
-                }
+                const currentTargetImg = item.querySelector('img');
+                const currentTargetSrc = currentTargetImg.src;
                 
-                portfolioSlider.style.transform = `translateX(${finalTransformX}px)`;
-
-                isAnimating = false; 
-                // 애니메이션이 'none'으로 설정된 후 다시 원래 트랜지션으로 복원
-                if (!animate) {
-                    setTimeout(() => {
-                        portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
-                    }, 50); // 짧은 딜레이
+                currentLightboxItems = originalPortfolioItems; 
+                
+                const originalIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === currentTargetSrc);
+                
+                if (originalIndex !== -1) { 
+                    openModal(originalIndex);
                 }
-            });
+            };
+            overlayLink.addEventListener('click', newClickHandler);
+            item.__clickHandler = newClickHandler;
         }
+    });
 
-        function showNextSlide() {
-            if (isAnimating) return;
-            isAnimating = true;
-            slideIndex++;
-            updateSliderPosition(true);
+    // 슬라이더 오버레이 텍스트 업데이트 (initializeSlider가 실행될 때마다 호출)
+    document.querySelectorAll('#portfolio .portfolio-item .overlay-link').forEach(linkElement => {
+        linkElement.innerHTML = translations[currentLang].viewDetails;
+    });
+
+    // 초기 위치 설정 (애니메이션 없이)
+    updateSliderPosition(false); 
+}
+
+// 슬라이더 위치를 업데이트하고 활성 클래스를 적용하는 함수
+function updateSliderPosition(animate = true) {
+    if (allPortfolioItems.length === 0) return;
+
+    requestAnimationFrame(() => {
+        const sliderWrapperWidth = document.querySelector('.portfolio-slider-wrapper').offsetWidth; 
+        let finalTransformX = -slideIndex * sliderWrapperWidth; 
+
+        if (!animate) {
+            portfolioSlider.style.transition = 'none';
+        } else {
+            portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
         }
+        
+        portfolioSlider.style.transform = `translateX(${finalTransformX}px)`;
 
-        function showPrevSlide() {
-            if (isAnimating) return;
-            isAnimating = true;
-            slideIndex--;
-            updateSliderPosition(true);
+        isAnimating = false; 
+        // 애니메이션이 'none'으로 설정된 후 다시 원래 트랜지션으로 복원
+        if (!animate) {
+            setTimeout(() => {
+                portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
+            }, 50); // 짧은 딜레이
         }
+    });
+}
+
+function showNextSlide() {
+    if (isAnimating) return;
+    isAnimating = true;
+    slideIndex++;
+    updateSliderPosition(true);
+}
+
+function showPrevSlide() {
+    if (isAnimating) return;
+    isAnimating = true;
+    slideIndex--;
+    updateSliderPosition(true);
+}
 
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // 초기 언어 설정 및 텍스트 적용
-            applyTranslations(currentLang);
+document.addEventListener("DOMContentLoaded", function() {
+    // 초기 언어 설정 및 텍스트 적용
+    applyTranslations(currentLang);
 
-            document.getElementById('lang-ko').addEventListener('click', () => applyTranslations('ko'));
-            document.getElementById('lang-en').addEventListener('click', () => applyTranslations('en'));
+    document.getElementById('lang-ko').addEventListener('click', () => applyTranslations('ko'));
+    document.getElementById('lang-en').addEventListener('click', () => applyTranslations('en'));
 
-            // --- 스크롤 스파이 및 스무스 스크롤 ---
-            const sections = document.querySelectorAll("main section[id]");
-            const navLinks = document.querySelectorAll(".main-nav ul li a");
-            const headerHeight = document.querySelector('header').offsetHeight;
+    // --- 스크롤 스파이 및 스무스 스크롤 ---
+    const sections = document.querySelectorAll("main section[id]");
+    const navLinks = document.querySelectorAll(".main-nav ul li a");
+    const headerHeight = document.querySelector('header').offsetHeight;
 
-            function activateNavLink() {
-                let current = "";
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop - headerHeight - 30; 
-                    const sectionHeight = section.clientHeight;
-                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
-                        current = section.getAttribute("id");
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove("active");
-                    if (current && link.getAttribute("href").includes(current)) {
-                        link.classList.add("active");
-                    } else if (!current && link.getAttribute("href") === "#portfolio") {
-                        link.classList.add("active");
-                    }
-                });
-            }
-
-            window.addEventListener("scroll", activateNavLink);
-            activateNavLink(); // 초기 로드 시 한 번 호출하여 현재 섹션 활성화
-
-            document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault(); // 기본 앵커 동작 방지
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerHeight;
-
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                });
-            });
-
-            // --- 포트폴리오 슬라이더 기능 초기화 ---
-            initializeSlider(); 
-            
-            document.getElementById('prev-slide').addEventListener('click', function() {
-                showPrevSlide();
-                resetAutoSlide();
-            });
-            document.getElementById('next-slide').addEventListener('click', function() {
-                showNextSlide();
-                resetAutoSlide();
-            });
-
-            portfolioSlider.addEventListener('transitionend', () => {
-                const originalLength = originalPortfolioItems.length;
-
-                if (slideIndex === originalLength + 1) { 
-                    portfolioSlider.style.transition = 'none'; 
-                    slideIndex = 1; 
-                    updateSliderPosition(false); 
-                } 
-                else if (slideIndex === 0) {
-                    portfolioSlider.style.transition = 'none'; 
-                    slideIndex = originalLength; 
-                    updateSliderPosition(false); 
-                }
-                isAnimating = false; 
-                // transitionend 이후에 다시 트랜지션 속성 복원
-                setTimeout(() => {
-                    portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
-                }, 0); 
-            });
-
-            // 자동 재생 관련 변수
-            let autoSlideInterval;
-            const autoSlideDelay = 5000; // 5초 (5000ms)
-
-            // 자동 재생 시작 함수
-            function startAutoSlide() {
-                if (autoSlideInterval) {
-                    clearInterval(autoSlideInterval);
-                }
-                autoSlideInterval = setInterval(() => {
-                    showNextSlide();
-                }, autoSlideDelay);
-            }
-
-            // 자동 재생 일시 정지 및 재설정 함수 (사용자 상호작용 시)
-            function resetAutoSlide() {
-                clearInterval(autoSlideInterval); 
-                startAutoSlide(); 
-            }
-
-            // 초기 페이지 로드 시 자동 재생 시작
-            startAutoSlide();
-
-            // 슬라이더 영역에 마우스가 올라가면 자동 재생 일시 정지, 벗어나면 다시 시작
-            const sliderWrapper = document.querySelector('.portfolio-slider-wrapper');
-            sliderWrapper.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-            sliderWrapper.addEventListener('mouseleave', startAutoSlide);
-
-
-            // --- 5열 그리드 포트폴리오의 필터링 기능 ---
-            const filterButtons = document.querySelectorAll('#portfolio-grid-section .filter-btn');
-            // DOMContentLoaded 시점에 모든 그리드 아이템을 초기화합니다.
-            allGridItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid'));
-
-            // 초기 로드 시 모든 카테고리 래퍼와 아이템이 보이도록 설정
-            document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                wrapper.style.display = 'block';
-                wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                    item.style.opacity = '1';
-                    item.style.display = 'block';
-                    item.style.height = ''; 
-                    item.classList.remove('hidden-item');
-                });
-            });
-
-
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-
-                    const filter = this.dataset.filter;
-
-                    // 모든 카테고리 래퍼 순회
-                    document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                        const categoryHeading = wrapper.querySelector('.portfolio-category-heading');
-                        
-                        let wrapperCategoryText = (currentLang === 'ko' ? categoryHeading.getAttribute('data-ko') : categoryHeading.getAttribute('data-en'));
-                        
-                        // 수정된 wrapperCategory 추출 로직: ' 작품' 또는 ' Artworks'를 제거하여 정확한 카테고리 이름을 얻음
-                        // "Personal Artworks" -> "Personal Art" 처럼 정확하게 일치하도록 수정
-                        let wrapperCategory = wrapperCategoryText
-                                                    .replace(' 작품', '')
-                                                    .replace(' Artworks', '');
-                        wrapperCategory = wrapperCategory.trim(); // 혹시 모를 공백 제거
-                        
-                        let hasVisibleItemsInWrapper = false; // 현재 래퍼에 표시될 아이템이 있는지 확인
-
-                        wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                            if (item.__filterTransitionEndHandler) {
-                                item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
-                                delete item.__filterTransitionEndHandler;
-                            }
-
-                            if (filter === 'all' || item.dataset.category === filter) {
-                                // 보여져야 할 아이템
-                                item.style.display = 'block'; 
-                                item.classList.remove('hidden-item'); 
-                                item.style.height = ''; 
-
-                                setTimeout(() => {
-                                    item.style.opacity = '1';
-                                }, 10);
-                                hasVisibleItemsInWrapper = true;
-                            } else {
-                                // 숨겨져야 할 아이템
-                                item.style.opacity = '0'; 
-                                item.style.height = '0px'; 
-
-                                const hideAfterTransition = function() {
-                                    item.style.display = 'none';
-                                    item.classList.add('hidden-item');
-                                    item.removeEventListener('transitionend', hideAfterTransition);
-                                    delete item.__filterTransitionEndHandler;
-                                };
-                                item.addEventListener('transitionend', hideAfterTransition);
-                                item.__filterTransitionEndHandler = hideAfterTransition;
-                            }
-                        });
-
-                        // 래퍼 자체의 display를 조절하여 빈 래퍼를 숨김
-                        if (filter === 'all' || (filter !== 'all' && filter === wrapperCategory)) {
-                            // 'All' 필터이거나 해당 카테고리 필터일 경우, 내용이 있으면 block, 없으면 none
-                            wrapper.style.display = hasVisibleItemsInWrapper ? 'block' : 'none';
-                        } else {
-                            // 다른 카테고리 필터일 경우, 이 래퍼는 무조건 숨김
-                            wrapper.style.display = 'none';
-                        }
-                    });
-                });
-            });
-
-
-            // --- 라이트박스 기능 (슬라이더 이미지와 그리드 이미지 모두 클릭 시) ---
-            const modal = document.getElementById("myModal");
-            const modalImage = document.getElementById("modalImage");
-            const captionText = document.getElementById("caption");
-            const closeBtn = document.querySelector(".close-btn");
-            const prevBtn = document.querySelector(".prev-btn");
-            const nextBtn = document.querySelector(".next-btn");
-            
-            // 갤러리 아이템 클릭 이벤트
-            document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
-                if (item.__clickHandler) {
-                    item.removeEventListener('click', item.__clickHandler);
-                    delete item.__clickHandler; 
-                }
-
-                const newClickHandler = function(e) {
-                    // overlay-link를 직접 클릭했을 때만 실행
-                    if (e.target.classList.contains('overlay-link')) {
-                        e.preventDefault(); 
-
-                        // 현재 필터링되어 보이는 아이템만 가져옴
-                        currentLightboxItems = allGridItems.filter(visibleItem => {
-                            const computedStyle = window.getComputedStyle(visibleItem);
-                            // hidden-item 클래스가 없거나, display가 'none'이 아닌 경우만 포함 (정확한 체크)
-                            return !visibleItem.classList.contains('hidden-item') && computedStyle.display !== 'none' && computedStyle.opacity > '0';
-                        });
-                        
-                        const clickedImgSrc = this.querySelector('img').src;
-                        currentIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === clickedImgSrc);
-
-                        if (currentIndex !== -1) { 
-                            openModal(currentIndex);
-                        }
-                    }
-                };
-                // 오버레이 링크 자체가 아니라, 그리드 아이템 전체에 이벤트 리스너를 붙이고 내부에서 필터링
-                item.addEventListener('click', newClickHandler);
-                item.__clickHandler = newClickHandler; 
-            });
-
-            closeBtn.addEventListener('click', closeModal);
-            prevBtn.addEventListener('click', showPrevLightbox);
-            nextBtn.addEventListener('click', showNextLightbox);
-
-            // keydown 이벤트 리스너
-            document.addEventListener('keydown', function(e) {
-                if (modal.style.display === "flex") {
-                    if (e.key === "ArrowLeft") {
-                        showPrevLightbox();
-                    } else if (e.key === "ArrowRight") {
-                        showNextLightbox();
-                    } else if (e.key === "Escape") {
-                        closeModal();
-                    }
-                }
-            });
-
-            // 메일 버튼 활성화를 위한 JavaScript 코드 추가 (Formspree 연동)
-            const contactForm = document.getElementById('contactForm');
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', async function(e) {
-                    e.preventDefault();
-
-                    const statusMessage = document.createElement('div');
-                    statusMessage.style.marginTop = '15px';
-                    statusMessage.style.padding = '10px';
-                    statusMessage.style.borderRadius = '5px';
-                    statusMessage.style.textAlign = 'center';
-
-                    const existingMessage = contactForm.querySelector('.form-status-message');
-                    if (existingMessage) {
-                        existingMessage.remove();
-                    }
-
-                    try {
-                        const response = await fetch(this.action, {
-                            method: this.method,
-                            body: new FormData(this),
-                            headers: {
-                                'Accept': 'application/json'
-                            }
-                        });
-
-                        if (response.ok) {
-                            statusMessage.textContent = translations[currentLang].sendSuccessMessage || '메시지가 성공적으로 전송되었습니다!';
-                            statusMessage.style.backgroundColor = '#d4edda';
-                            statusMessage.style.color = '#155724';
-                            contactForm.reset();
-                        } else {
-                            let errorMessage = translations[currentLang].sendErrorMessage || '메시지 전송에 실패했습니다. 다시 시도해주세요.';
-                            try {
-                                const errorData = await response.json();
-                                if (errorData.errors && errorData.errors.length > 0) {
-                                    errorMessage = errorData.errors.map(err => err.message).join(', ');
-                                }
-                            } catch (jsonError) {
-                                // JSON 파싱 실패 시 일반 오류 메시지
-                            }
-                            statusMessage.textContent = errorMessage;
-                            statusMessage.style.backgroundColor = '#f8d7da';
-                            statusMessage.style.color = '#721c24';
-                            console.error('Formspree response error:', response.status, errorMessage);
-                        }
-                    } catch (error) {
-                        statusMessage.textContent = translations[currentLang].networkErrorMessage || '메시지 전송 중 네트워크 오류가 발생했습니다. 다시 시도해주세요.';
-                        statusMessage.style.backgroundColor = '#f8d7da';
-                        statusMessage.style.color = '#721c24';
-                        console.error('Fetch error:', error);
-                    }
-                    statusMessage.classList.add('form-status-message');
-                    contactForm.appendChild(statusMessage);
-
-                    setTimeout(() => {
-                        if (statusMessage.parentNode) {
-                            statusMessage.remove();
-                        }
-                    }, 5000);
-                });
+    function activateNavLink() {
+        let current = "";
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - headerHeight - 30; 
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                current = section.getAttribute("id");
             }
         });
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (current && link.getAttribute("href").includes(current)) {
+                link.classList.add("active");
+            } else if (!current && link.getAttribute("href") === "#portfolio") {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", activateNavLink);
+    activateNavLink(); // 초기 로드 시 한 번 호출하여 현재 섹션 활성화
+
+    document.querySelectorAll('.main-nav a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault(); // 기본 앵커 동작 방지
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offsetPosition = elementPosition - headerHeight;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        });
+    });
+
+    // --- 포트폴리오 슬라이더 기능 초기화 ---
+    initializeSlider(); 
+    
+    document.getElementById('prev-slide').addEventListener('click', function() {
+        showPrevSlide();
+        resetAutoSlide();
+    });
+    document.getElementById('next-slide').addEventListener('click', function() {
+        showNextSlide();
+        resetAutoSlide();
+    });
+
+    portfolioSlider.addEventListener('transitionend', () => {
+        const originalLength = originalPortfolioItems.length;
+
+        if (slideIndex === originalLength + 1) { 
+            portfolioSlider.style.transition = 'none'; 
+            slideIndex = 1; 
+            updateSliderPosition(false); 
+        } 
+        else if (slideIndex === 0) {
+            portfolioSlider.style.transition = 'none'; 
+            slideIndex = originalLength; 
+            updateSliderPosition(false); 
+        }
+        isAnimating = false; 
+        // transitionend 이후에 다시 트랜지션 속성 복원
+        setTimeout(() => {
+            portfolioSlider.style.transition = 'transform 0.5s ease-in-out';
+        }, 0); 
+    });
+
+    // 자동 재생 관련 변수
+    let autoSlideInterval;
+    const autoSlideDelay = 5000; // 5초 (5000ms)
+
+    // 자동 재생 시작 함수
+    function startAutoSlide() {
+        if (autoSlideInterval) {
+            clearInterval(autoSlideInterval);
+        }
+        autoSlideInterval = setInterval(() => {
+            showNextSlide();
+        }, autoSlideDelay);
+    }
+
+    // 자동 재생 일시 정지 및 재설정 함수 (사용자 상호작용 시)
+    function resetAutoSlide() {
+        clearInterval(autoSlideInterval); 
+        startAutoSlide(); 
+    }
+
+    // 초기 페이지 로드 시 자동 재생 시작
+    startAutoSlide();
+
+    // 슬라이더 영역에 마우스가 올라가면 자동 재생 일시 정지, 벗어나면 다시 시작
+    const sliderWrapper = document.querySelector('.portfolio-slider-wrapper');
+    sliderWrapper.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    sliderWrapper.addEventListener('mouseleave', startAutoSlide);
+
+
+    // --- 5열 그리드 포트폴리오의 필터링 기능 ---
+    const filterButtons = document.querySelectorAll('#portfolio-grid-section .filter-btn');
+    // DOMContentLoaded 시점에 모든 그리드 아이템을 초기화합니다.
+    allGridItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid'));
+
+    // 초기 로드 시 모든 카테고리 래퍼와 아이템이 보이도록 설정
+    document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+        wrapper.style.display = 'block';
+        wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+            item.style.opacity = '1';
+            item.style.display = 'block';
+            item.style.height = ''; 
+            item.classList.remove('hidden-item');
+        });
+    });
+
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+
+            const filter = this.dataset.filter;
+
+            // 모든 카테고리 래퍼 순회
+            document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                const categoryHeading = wrapper.querySelector('.portfolio-category-heading');
+                
+                let wrapperCategoryText = (currentLang === 'ko' ? categoryHeading.getAttribute('data-ko') : categoryHeading.getAttribute('data-en'));
+                
+                // 수정된 wrapperCategory 추출 로직: ' 작품' 또는 ' Artworks'를 제거하여 정확한 카테고리 이름을 얻음
+                let wrapperCategory = wrapperCategoryText
+                                            .replace(' 작품', '')
+                                            .replace(' Artworks', '');
+                wrapperCategory = wrapperCategory.trim(); // 혹시 모를 앞뒤 공백 제거
+                
+                // 디버깅을 위해 콘솔에 출력
+                console.log("Filter button clicked:", filter);
+                console.log("Wrapper category text:", wrapperCategoryText);
+                console.log("Extracted wrapper category:", wrapperCategory);
+
+
+                let hasVisibleItemsInWrapper = false; // 현재 래퍼에 표시될 아이템이 있는지 확인
+
+                wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                    if (item.__filterTransitionEndHandler) {
+                        item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
+                        delete item.__filterTransitionEndHandler;
+                    }
+
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        // 보여져야 할 아이템
+                        item.style.display = 'block'; 
+                        item.classList.remove('hidden-item'); 
+                        item.style.height = ''; 
+
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                        }, 10);
+                        hasVisibleItemsInWrapper = true;
+                    } else {
+                        // 숨겨져야 할 아이템
+                        item.style.opacity = '0'; 
+                        item.style.height = '0px'; 
+
+                        const hideAfterTransition = function() {
+                            item.style.display = 'none';
+                            item.classList.add('hidden-item');
+                            item.removeEventListener('transitionend', hideAfterTransition);
+                            delete item.__filterTransitionEndHandler;
+                        };
+                        item.addEventListener('transitionend', hideAfterTransition);
+                        item.__filterTransitionEndHandler = hideAfterTransition;
+                    }
+                });
+
+                // 래퍼 자체의 display를 조절하여 빈 래퍼를 숨김
+                if (filter === 'all' || (filter !== 'all' && filter === wrapperCategory)) {
+                    // 'All' 필터이거나 해당 카테고리 필터일 경우, 내용이 있으면 block, 없으면 none
+                    wrapper.style.display = hasVisibleItemsInWrapper ? 'block' : 'none';
+                } else {
+                    // 다른 카테고리 필터일 경우, 이 래퍼는 무조건 숨김
+                    wrapper.style.display = 'none';
+                }
+            });
+        });
+    });
+
+
+    // --- 라이트박스 기능 (슬라이더 이미지와 그리드 이미지 모두 클릭 시) ---
+    const modal = document.getElementById("myModal");
+    const modalImage = document.getElementById("modalImage");
+    const captionText = document.getElementById("caption");
+    const closeBtn = document.querySelector(".close-btn");
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+    
+    // 갤러리 아이템 클릭 이벤트
+    document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid').forEach((item) => {
+        if (item.__clickHandler) {
+            item.removeEventListener('click', item.__clickHandler);
+            delete item.__clickHandler; 
+        }
+
+        const newClickHandler = function(e) {
+            // overlay-link를 직접 클릭했을 때만 실행
+            if (e.target.classList.contains('overlay-link')) {
+                e.preventDefault(); 
+
+                // 현재 필터링되어 보이는 아이템만 가져옴
+                currentLightboxItems = allGridItems.filter(visibleItem => {
+                    const computedStyle = window.getComputedStyle(visibleItem);
+                    // hidden-item 클래스가 없거나, display가 'none'이 아닌 경우만 포함 (정확한 체크)
+                    return !visibleItem.classList.contains('hidden-item') && computedStyle.display !== 'none' && computedStyle.opacity > '0';
+                });
+                
+                const clickedImgSrc = this.querySelector('img').src;
+                currentIndex = currentLightboxItems.findIndex(el => el.querySelector('img').src === clickedImgSrc);
+
+                if (currentIndex !== -1) { 
+                    openModal(currentIndex);
+                }
+            }
+        };
+        // 오버레이 링크 자체가 아니라, 그리드 아이템 전체에 이벤트 리스너를 붙이고 내부에서 필터링
+        item.addEventListener('click', newClickHandler);
+        item.__clickHandler = newClickHandler; 
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    prevBtn.addEventListener('click', showPrevLightbox);
+    nextBtn.addEventListener('click', showNextLightbox);
+
+    // keydown 이벤트 리스너
+    document.addEventListener('keydown', function(e) {
+        if (modal.style.display === "flex") {
+            if (e.key === "ArrowLeft") {
+                showPrevLightbox();
+            } else if (e.key === "ArrowRight") {
+                showNextLightbox();
+            } else if (e.key === "Escape") {
+                closeModal();
+            }
+        }
+    });
+
+    // 메일 버튼 활성화를 위한 JavaScript 코드 추가 (Formspree 연동)
+    const contactForm = document.getElementById('contactForm');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const statusMessage = document.createElement('div');
+            statusMessage.style.marginTop = '15px';
+            statusMessage.style.padding = '10px';
+            statusMessage.style.borderRadius = '5px';
+            statusMessage.style.textAlign = 'center';
+
+            const existingMessage = contactForm.querySelector('.form-status-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+
+            try {
+                const response = await fetch(this.action, {
+                    method: this.method,
+                    body: new FormData(this),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    statusMessage.textContent = translations[currentLang].sendSuccessMessage || '메시지가 성공적으로 전송되었습니다!';
+                    statusMessage.style.backgroundColor = '#d4edda';
+                    statusMessage.style.color = '#155724';
+                    contactForm.reset();
+                } else {
+                    let errorMessage = translations[currentLang].sendErrorMessage || '메시지 전송에 실패했습니다. 다시 시도해주세요.';
+                    try {
+                        const errorData = await response.json();
+                        if (errorData.errors && errorData.errors.length > 0) {
+                            errorMessage = errorData.errors.map(err => err.message).join(', ');
+                        }
+                    } catch (jsonError) {
+                        // JSON 파싱 실패 시 일반 오류 메시지
+                    }
+                    statusMessage.textContent = errorMessage;
+                    statusMessage.style.backgroundColor = '#f8d7da';
+                    statusMessage.style.color = '#721c24';
+                    console.error('Formspree response error:', response.status, errorMessage);
+                }
+            } catch (error) {
+                statusMessage.textContent = translations[currentLang].networkErrorMessage || '메시지 전송 중 네트워크 오류가 발생했습니다. 네트워크 연결을 확인해주세요.';
+                statusMessage.style.backgroundColor = '#f8d7da';
+                statusMessage.style.color = '#721c24';
+                console.error('Fetch error:', error);
+            }
+            statusMessage.classList.add('form-status-message');
+            contactForm.appendChild(statusMessage);
+
+            setTimeout(() => {
+                if (statusMessage.parentNode) {
+                    statusMessage.remove();
+                }
+            }, 5000);
+        });
+    }
+});
     </script>
 </body>
 </html>
