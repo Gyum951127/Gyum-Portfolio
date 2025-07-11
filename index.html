@@ -426,7 +426,6 @@
             font-size: 3.5em; /* 버튼 크기 더 키움 */
             padding: 0 20px; /* 패딩 더 추가 */
             cursor: pointer;
-            z-index: 100;
             transition: color 0.3s, transform 0.3s;
         }
         .slider-nav-btn:hover {
@@ -1740,6 +1739,7 @@
             const imgAlt = imgElement.alt;
             
             let captionContent = '';
+            // 캡션 우선순위: overlay-link의 data-lang, h3의 data-lang, h3의 innerHTML, img의 alt
             if (overlayLinkElement && overlayLinkElement.hasAttribute(`data-${currentLang}`)) { 
                 captionContent = overlayLinkElement.getAttribute(`data-${currentLang}`);
             } else if (h3Element) {
@@ -1775,6 +1775,11 @@
                 filterPyeonggang: "Pyeonggang", 
                 filterComission: "Comission", 
                 filterPersonalArt: "Personal Art",
+                swirlArtworks: "Swirl 작품",
+                flowRollArtworks: "Flow Roll 작품",
+                pyeonggangArtworks: "평강 작품",
+                comissionArtworks: "Comission 작품",
+                personalArtArtworks: "Personal Art 작품",
                 aboutHeading: "소개",
                 aboutName: "김민겸",
                 aboutP1: "김민겸은 작품이 주는 시각화와 색감에 중점을 두는 일러스트레이터이자 컨셉 아티스트입니다.",
@@ -1808,6 +1813,11 @@
                 filterPyeonggang: "Pyeonggang",
                 filterComission: "Comission",
                 filterPersonalArt: "Personal Art",
+                swirlArtworks: "Swirl Artworks",
+                flowRollArtworks: "Flow Roll Artworks",
+                pyeonggangArtworks: "Pyeonggang Artworks",
+                comissionArtworks: "Comission Artworks",
+                personalArtArtworks: "Personal Artworks",
                 aboutHeading: "ABOUT",
                 aboutName: "MINGYUM KIM",
                 aboutP1: "Kim Min-gyum is an illustrator and concept artist who focuses on the visualization and color in his works.",
@@ -1868,12 +1878,15 @@
 
             // 갤러리 카테고리 소제목 업데이트
             document.querySelectorAll('.portfolio-category-heading').forEach(headingElement => {
-                const koText = headingElement.getAttribute('data-ko');
-                const enText = headingElement.getAttribute('data-en');
-                if (lang === 'ko' && koText) {
-                    headingElement.innerHTML = koText;
-                } else if (lang === 'en' && enText) {
-                    headingElement.innerHTML = enText;
+                // headingElement의 data-category 값을 직접 사용하여 translations 객체에서 가져옵니다.
+                // HTML의 headingElement는 이미 data-ko, data-en를 가지고 있으므로 이를 사용
+                const categoryData = headingElement.getAttribute(`data-${currentLang}`);
+                const categoryKey = Object.keys(translations[currentLang]).find(key => translations[currentLang][key] === categoryData);
+
+                if (categoryKey && translations[currentLang][categoryKey]) {
+                    headingElement.innerHTML = translations[currentLang][categoryKey];
+                } else if (categoryData) { // data-lang 속성이 있지만 translations에 없을 경우 fallback
+                    headingElement.innerHTML = categoryData;
                 }
             });
 
@@ -2113,14 +2126,14 @@
             // DOMContentLoaded 시점에 모든 그리드 아이템을 초기화합니다.
             allGridItems = Array.from(document.querySelectorAll('#portfolio-grid-section .portfolio-item-grid'));
 
-            // 초기 로드 시 모든 카테고리 래퍼와 아이템이 보이도록 설정
+            // 초기 로드 시 모든 카테고리 래퍼와 아이템이 보이도록 설정 (ALL 필터와 동일하게)
             document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
                 wrapper.style.display = 'block';
                 wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                    item.style.opacity = '1';
+                    item.classList.remove('hidden-item');
                     item.style.display = 'block';
                     item.style.height = ''; 
-                    item.classList.remove('hidden-item');
+                    item.style.opacity = '1';
                 });
             });
 
@@ -2136,17 +2149,10 @@
                     document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
                         const categoryHeading = wrapper.querySelector('.portfolio-category-heading');
                         
+                        // 현재 언어에 맞는 텍스트를 가져와서 " 작품" 또는 " Artworks"를 제거하고 trim()으로 공백을 확실히 제거
                         let wrapperCategoryText = (currentLang === 'ko' ? categoryHeading.getAttribute('data-ko') : categoryHeading.getAttribute('data-en'));
-                        
-                        // 수정된 부분: 정규표현식을 사용하여 ' 작품' 또는 ' Artworks'를 제거하고 공백을 처리합니다.
                         let wrapperCategory = wrapperCategoryText.replace(/\s*(작품|Artworks)\s*$/i, '').trim();
                         
-                        // 디버깅을 위해 콘솔에 출력
-                        console.log("Filter button clicked:", filter);
-                        console.log("Wrapper category text (original):", wrapperCategoryText);
-                        console.log("Extracted wrapper category (after processing):", wrapperCategory);
-
-
                         let hasVisibleItemsInWrapper = false; // 현재 래퍼에 표시될 아이템이 있는지 확인
 
                         wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
@@ -2183,7 +2189,7 @@
 
                         // 래퍼 자체의 display를 조절하여 빈 래퍼를 숨김
                         if (filter === 'all' || (filter !== 'all' && filter === wrapperCategory)) {
-                            // 'All' 필터이거나 해당 카테고리 필터일 경우, 내용이 있으면 block, 없으면 none
+                             // 'All' 필터이거나, 현재 필터와 카테고리 래퍼의 카테고리가 일치할 경우에만 보임
                             wrapper.style.display = hasVisibleItemsInWrapper ? 'block' : 'none';
                         } else {
                             // 다른 카테고리 필터일 경우, 이 래퍼는 무조건 숨김
@@ -2217,8 +2223,8 @@
                         // 현재 필터링되어 보이는 아이템만 가져옴
                         currentLightboxItems = allGridItems.filter(visibleItem => {
                             const computedStyle = window.getComputedStyle(visibleItem);
-                            // hidden-item 클래스가 없거나, display가 'none'이 아닌 경우만 포함 (정확한 체크)
-                            return !visibleItem.classList.contains('hidden-item') && computedStyle.display !== 'none' && computedStyle.opacity > '0';
+                            // hidden-item 클래스가 없거나, display가 'none'이 아닌 경우, 투명도가 0보다 큰 경우만 포함 (정확한 체크)
+                            return !visibleItem.classList.contains('hidden-item') && computedStyle.display !== 'none' && parseFloat(computedStyle.opacity) > 0;
                         });
                         
                         const clickedImgSrc = this.querySelector('img').src;
