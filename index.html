@@ -1868,14 +1868,19 @@
 
             // 갤러리 카테고리 소제목 업데이트
             document.querySelectorAll('.portfolio-category-heading').forEach(headingElement => {
-                const koText = headingElement.getAttribute('data-ko');
-                const enText = headingElement.getAttribute('data-en');
-                if (lang === 'ko' && koText) {
-                    headingElement.innerHTML = koText;
-                } else if (lang === 'en' && enText) {
-                    headingElement.innerHTML = enText;
-                }
-            });
+                const koText = headingElement.getAttribute('data-ko');
+                const enText = headingElement.getAttribute('data-en');
+                let displayText = '';
+
+                if (lang === 'ko' && koText) {
+                    // ' 작품' 부분을 제거
+                    displayText = koText.replace(/\s*작품\s*$/, '').trim();
+                } else if (lang === 'en' && enText) {
+                    // ' Artworks' 부분을 제거
+                    displayText = enText.replace(/\s*Artworks\s*$/, '').trim();
+                }
+                headingElement.innerHTML = displayText;
+            });
 
             // overlay-link 업데이트 (슬라이더, 그리드 공통)
             document.querySelectorAll('.overlay-link').forEach(linkElement => {
