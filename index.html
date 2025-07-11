@@ -2133,55 +2133,64 @@
                     const filter = this.dataset.filter;
 
                     // 모든 카테고리 래퍼 순회
-                    document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
-                        const categoryHeading = wrapper.querySelector('.portfolio-category-heading');
-                        const wrapperCategory = (currentLang === 'ko' ? categoryHeading.getAttribute('data-ko') : categoryHeading.getAttribute('data-en'))
-                                                .replace(' 작품', '')
-                                                .replace(' Artworks', '');
+                     document.querySelectorAll('.portfolio-category-wrapper').forEach(wrapper => {
+                const categoryHeading = wrapper.querySelector('.portfolio-category-heading');
+                
+                let wrapperCategoryText = (currentLang === 'ko' ? categoryHeading.getAttribute('data-ko') : categoryHeading.getAttribute('data-en'));
+                
+                // 수정된 wrapperCategory 추출 로직: ' 작품' 또는 ' Artworks'를 제거하여 정확한 카테고리 이름을 얻음
+                let wrapperCategory;
+                if (wrapperCategoryText.endsWith(' 작품')) {
+                    wrapperCategory = wrapperCategoryText.replace(' 작품', '');
+                } else if (wrapperCategoryText.endsWith(' Artworks')) {
+                    wrapperCategory = wrapperCategoryText.replace(' Artworks', ''); // 'Personal Artworks' -> 'Personal Art'
+                } else {
+                    wrapperCategory = wrapperCategoryText; // 접미사가 없는 경우 그대로 사용
+                }
+                
+                let hasVisibleItemsInWrapper = false; // 현재 래퍼에 표시될 아이템이 있는지 확인
 
-                        let hasVisibleItemsInWrapper = false; // 현재 래퍼에 표시될 아이템이 있는지 확인
+                wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
+                    if (item.__filterTransitionEndHandler) {
+                        item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
+                        delete item.__filterTransitionEndHandler;
+                    }
 
-                        wrapper.querySelectorAll('.portfolio-item-grid').forEach(item => {
-                            if (item.__filterTransitionEndHandler) {
-                                item.removeEventListener('transitionend', item.__filterTransitionEndHandler);
-                                delete item.__filterTransitionEndHandler;
-                            }
+                    if (filter === 'all' || item.dataset.category === filter) {
+                        // 보여져야 할 아이템
+                        item.style.display = 'block'; 
+                        item.classList.remove('hidden-item'); 
+                        item.style.height = ''; 
 
-                            if (filter === 'all' || item.dataset.category === filter) {
-                                // 보여져야 할 아이템
-                                item.style.display = 'block'; 
-                                item.classList.remove('hidden-item'); 
-                                item.style.height = ''; 
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                        }, 10);
+                        hasVisibleItemsInWrapper = true;
+                    } else {
+                        // 숨겨져야 할 아이템
+                        item.style.opacity = '0'; 
+                        item.style.height = '0px'; 
 
-                                setTimeout(() => {
-                                    item.style.opacity = '1';
-                                }, 10);
-                                hasVisibleItemsInWrapper = true;
-                            } else {
-                                // 숨겨져야 할 아이템
-                                item.style.opacity = '0'; 
-                                item.style.height = '0px'; 
+                        const hideAfterTransition = function() {
+                            item.style.display = 'none';
+                            item.classList.add('hidden-item');
+                            item.removeEventListener('transitionend', hideAfterTransition);
+                            delete item.__filterTransitionEndHandler;
+                        };
+                        item.addEventListener('transitionend', hideAfterTransition);
+                        item.__filterTransitionEndHandler = hideAfterTransition;
+                    }
+                });
 
-                                const hideAfterTransition = function() {
-                                    item.style.display = 'none';
-                                    item.classList.add('hidden-item');
-                                    item.removeEventListener('transitionend', hideAfterTransition);
-                                    delete item.__filterTransitionEndHandler;
-                                };
-                                item.addEventListener('transitionend', hideAfterTransition);
-                                item.__filterTransitionEndHandler = hideAfterTransition;
-                            }
-                        });
-
-                        // 래퍼 자체의 display를 조절하여 빈 래퍼를 숨김
-                        if (filter === 'all' || (filter !== 'all' && filter === wrapperCategory)) {
-                             // 'All' 필터이거나 해당 카테고리 필터일 경우, 내용이 있으면 block, 없으면 none
-                            wrapper.style.display = hasVisibleItemsInWrapper ? 'block' : 'none';
-                        } else {
-                            // 다른 카테고리 필터일 경우, 이 래퍼는 무조건 숨김
-                            wrapper.style.display = 'none';
-                        }
-                    });
+                // 래퍼 자체의 display를 조절하여 빈 래퍼를 숨김
+                if (filter === 'all' || (filter !== 'all' && filter === wrapperCategory)) {
+                     // 'All' 필터이거나 해당 카테고리 필터일 경우, 내용이 있으면 block, 없으면 none
+                    wrapper.style.display = hasVisibleItemsInWrapper ? 'block' : 'none';
+                } else {
+                    // 다른 카테고리 필터일 경우, 이 래퍼는 무조건 숨김
+                    wrapper.style.display = 'none';
+                }
+            });
                 });
             });
 
